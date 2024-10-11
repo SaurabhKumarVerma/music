@@ -1,0 +1,20 @@
+export const color = {
+    green : '#57B660',
+    white: '#FFFFFF',
+    black: '#181414',
+    blueMoon: '#649AED',
+    redWine: '#EB5640',
+    mellowYellow: '#F6C874',
+    pale: '#A7C2D1',
+    evergreen: '#D5F479',
+    prettyPink: '#F7CFD4',
+    submarineYellow: '#F4E357',
+    pinkMoon: '#E57BA1',
+    grey0: '#211D1D',
+    grey1: '#2A2626',
+    grey2: '#343131',
+    grey3: '#464343',
+    grey4: '#5E5B5B',
+    grey5: '#747272',
+    grey6: '#8C8A8A'
+}

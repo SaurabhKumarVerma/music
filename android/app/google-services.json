@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "409902478458",
+    "project_id": "music-e82cc",
+    "storage_bucket": "music-e82cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409902478458:android:a6ba98d320600358f037c3",
+        "android_client_info": {
+          "package_name": "com.anonymous.music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409902478458-kcri65t5odr9ug08lincpabth9col914.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.music",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "409902478458-qqgf8ed3k39sp1m5jco2c3tkpb9jugdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDR2sF11RJ2LBJTqI0Ej6IaDsK3wZv46c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409902478458-qqgf8ed3k39sp1m5jco2c3tkpb9jugdk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "409902478458-kmg9qq13vhg7druji1s7l6f4difshjbj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anonymous.music"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

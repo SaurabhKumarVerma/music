@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "paths": {
+      "@music/*": ["src/*"],
+      "@components/*": ["src/component/*"],
+      "@base/*":["src/base/*"],
+      "@hooks/*": ["src/hook/*"],
+      "@services/*":["src/service/*"],
+      "@themes/*":["src/theme/*"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+      "@screens/*":["src/screen/*"],
+      "@navigations-stack/*": ["src/navigation/StackNavigation/*"],
+      "@store/*": ["src/store/*"],
+      "@navigationTypes/*":["src/navigation/NavigationTypes/types"],
+      "@navigation-taps/*": ["src/navigation/BottomNavigation/*"],
+      "@navigations-drawer/*": ["src/navigation/DrawerNavigation/*"]
+    }
+  },
+  "extends": "expo/tsconfig.base",
+  "exclude": ["node_modules"],
+  "include": [
+    // "next-env.d.ts",
+    // "additional.d.ts",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.tsx",
+    "./App.js",
+    "./src/**/*",
+    "src/**/*",
+    "src/**/*.*"
+  ],
+}
