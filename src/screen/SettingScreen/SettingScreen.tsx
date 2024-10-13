@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Setting from '../../component/Setting/Setting'
+import { color } from '@music/theme/color'
 
 const SettingScreen = () => {
   return (
-    <View>
+    <View style={{flex: 1,  backgroundColor: color.appBackground}}>
       <Setting />
     </View>
   )

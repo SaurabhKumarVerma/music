@@ -1,22 +1,20 @@
 import { Modal, StyleSheet, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LottieView from "lottie-react-native";
-import { useAppDispatch, useAppSelector } from "../hook/hook";
-import { onStopSplash } from "../store/slice/globalSlice";
-import { useNavigation } from "@react-navigation/native";
 import { ESCREEN } from "@music/types/screen";
-import { BottomTabParamList } from "@music/navigation/NavigationTypes/types";
+import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { BottomTabParamList } from "@music/navigation/NavigationTypes/types";
+import { navigationRef } from "@music/navigation/Rootnavigation";
 
 const SplashScreen = () => {
-    const isVisible = useAppSelector((state) => state.globalStore)
-    const dispatch = useAppDispatch()
-    const navigation = useNavigation<NativeStackNavigationProp<BottomTabParamList>>()
+    const [isVisible, setIsVisible] = useState<boolean>(true)
+    // const navigation = useNavigation<NativeStackNavigationProp<BottomTabParamList>>()
 
   const startSplash = () => {
     return setTimeout(() => {
-      dispatch(onStopSplash())
-      navigation.navigate(ESCREEN.HOME_SCREEN)
+      setIsVisible(false)
+      navigationRef.navigate(ESCREEN.HOME_SCREEN as never)
     }, 2000);
   };
 
@@ -27,7 +25,7 @@ const SplashScreen = () => {
   return (
     <Modal
       animationType="fade"
-      visible={isVisible.showSplash}
+      visible={isVisible}
       presentationStyle="fullScreen"
       style={{}}
     >

@@ -1,6 +1,5 @@
 export const color = {
     green : '#57B660',
-    white: '#FFFFFF',
     black: '#181414',
     blueMoon: '#649AED',
     redWine: '#EB5640',
@@ -16,5 +15,23 @@ export const color = {
     grey3: '#464343',
     grey4: '#5E5B5B',
     grey5: '#747272',
-    grey6: '#8C8A8A'
+    grey6: '#8C8A8A',
+    mistyRose: 'rgb(255, 230, 230)',
+    lightSalmonPink: 'rgb(253, 154, 154)',
+    lightCoral: 'rgb(253, 112, 112)',
+    torchRed: 'rgb(252, 50, 50)',
+    electricRed: 'rgb(251, 8, 8)',
+    firebrick: 'rgb(176, 6, 6)',
+    deepRed: 'rgb(153, 5, 5)',
+    gainsboro: 'rgb(239, 239, 239)',
+    silverChalice: 'rgb(191, 190, 190)',
+    dustyGray: 'rgb(164, 163, 163)',
+    grey: 'rgb(125, 124, 124)',
+    charcoalGray: 'rgb(98, 97, 97)',
+    onyx:'rgb(69, 68, 68)',
+    jetGrey:'rgb(60, 59, 59)',
+    white: 'rgb(255, 255, 255)',
+    silver: 'rgb(179, 179, 179)',
+    mediumGray:'rgb(156, 156, 156)',
+    appBackground: '#1C1C1F'
 }

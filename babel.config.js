@@ -21,6 +21,7 @@ module.exports = function(api) {
           '@navigationTypes': "./src/navigation/NavigationTypes",
           '@navigations-taps': "./src/navigation/BottomNavigation",
           '@navigations-drawer': "./src/navigation/DrawerNavigation",
+          '@constant': './src/constant'
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },

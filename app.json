@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#131212"
+      "backgroundColor": "#1C1C1F"
     },
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
@@ -24,7 +24,7 @@
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
-        "backgroundColor": "#131212"
+        "backgroundColor": "#1C1C1F"
       }
     },
     "android": {
@@ -48,7 +48,8 @@
             "useFrameworks": "static"
           }
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }

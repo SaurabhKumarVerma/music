@@ -4,5 +4,7 @@ export const enum ESCREEN  {
     'SEARCH_SCREEN'= 'search',
     'SETTING_SCREEN' = 'setting',
     'LOGIN_SCREEN' = 'login',
-    'SIGNUP_SCREEN' = 'signup'
+    'SIGNUP_SCREEN' = 'signup',
+    'PLAYTRACK_SCREEN' = 'playtrack',
+    'PLAYING_TRACK' = 'playing'
 }

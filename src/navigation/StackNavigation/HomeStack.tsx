@@ -1,20 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ESCREEN } from '@music/types/screen';
-import Login from '@music/component/Login/Login';
-import HomeScreen from '@music/screen/HomeScreen/HomeScreen';
+import PlayingTrack from '@music/component/PlayingTrack/PlayingTrack';
 
 const Stack = createNativeStackNavigator();
 
-const HomeStack = () => {
+const PlayTrackModal = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen  name={ESCREEN.MAIN_SCREEN} component={HomeScreen}/>
+      <Stack.Screen  name={ESCREEN.PLAYTRACK_SCREEN} component={PlayingTrack} />
     </Stack.Navigator>
   )
 }
 
-export default HomeStack
-
-const styles = StyleSheet.create({})
+export default PlayTrackModal;
