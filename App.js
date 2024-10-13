@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import * as Splash from 'expo-splash-screen';
 import { Provider } from 'react-redux';
@@ -12,10 +12,19 @@ import { navigationRef } from '@music/navigation/Rootnavigation';
 import { BOTTOM_BAR_HEIGHT } from '@music/constant/constant';
 import RootNavigator from '@music/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
+import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
 
 
 Splash.preventAutoHideAsync();
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
+export const Icon = createIconSetFromIcoMoon(
+  require("./assets/icons/selection.json"),
+  "IcoMoon",
+  "icomoon.ttf"
+);
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -24,17 +33,38 @@ WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
   // const progress = useProgress();
-  
+  const [loaded, error] = useFonts({
+    IcoMoon: require("./assets/icons/icomoon.ttf"),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      Splash.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-    <Provider store={store}>
-      <NavigationContainer  ref={navigationRef}>
+      <Provider store={store}>
       <SplashScreen />
-      <RootNavigator />
-      <StatusBar style="auto" />
-      <FloatingScreen style={styles.floatingScreen}/>
-    </NavigationContainer>
-    </Provider>
+      <ClerkProvider publishableKey={publishableKey}>
+        <ClerkLoaded>
+          
+            <NavigationContainer ref={navigationRef}>
+              
+              <RootNavigator />
+              <StatusBar style="auto" />
+              <FloatingScreen style={styles.floatingScreen} />
+            </NavigationContainer>
+         
+        </ClerkLoaded>
+      </ClerkProvider>
+      {/* jhfjgfj */}
+      </Provider>
     </GestureHandlerRootView>
   );
 }
@@ -44,7 +74,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: '#131212',
   },
-  floatingScreen : {
+  floatingScreen: {
     position: 'absolute',
     left: 6,
     right: 6,
