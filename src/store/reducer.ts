@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux'
-import globalSlice from './slice/globalSlice';
-
+import { combineReducers } from "redux"
+import globalSlice from "./slice/globalSlice"
 
 const rootReducer = combineReducers({
-    globalStore: globalSlice
+  globalStore: globalSlice,
 })
 
-export default rootReducer;
+export default rootReducer

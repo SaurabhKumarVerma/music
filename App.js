@@ -16,6 +16,7 @@ import { createIconSetFromIcoMoon } from "@expo/vector-icons"
 import { useFonts } from "expo-font"
 import { useEffect } from "react"
 import * as Linking from "expo-linking"
+import { typography } from "@music/theme/typography"
 
 Splash.preventAutoHideAsync()
 export const Icon = createIconSetFromIcoMoon(
@@ -25,17 +26,14 @@ export const Icon = createIconSetFromIcoMoon(
 )
 WebBrowser.maybeCompleteAuthSession()
 export default function App() {
-  const [loaded, error] = useFonts({
-    IcoMoon: require("./assets/icons/icomoon.ttf"),
-  })
-
+  const [loaded, error] = useFonts(typography)
   useEffect(() => {
     if (loaded || error) {
       Splash.hideAsync()
     }
   }, [loaded, error])
 
-  if (!loaded && !error && !navigationRef.isReady) {
+  if (!loaded && !error) {
     return null
   }
 

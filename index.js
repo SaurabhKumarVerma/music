@@ -1,8 +1,6 @@
-
-
-import App from './App';
-import { AppRegistry } from 'react-native';
+import App from "./App"
+import { AppRegistry } from "react-native"
 
 // registerRootComponent(appName, () => App);
 // TrackPlayer.registerPlaybackService(() => PlaybackService);
-AppRegistry.registerComponent('main',() => App);
+AppRegistry.registerComponent("main", () => App)

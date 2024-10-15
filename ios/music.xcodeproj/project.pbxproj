@@ -25,6 +25,7 @@
 		E3E3C449A5224551822478AD /* SFProHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06B8840818A34BFEA10FCE75 /* SFProHeavy.otf */; };
 		E546F75467E34E90992BE689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40E9FE7D29474D3390A58D7D /* GoogleService-Info.plist */; };
 		EDED0182340AC3AFF856290C /* Pods_music.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488709A4272E19B7B1AAE925 /* Pods_music.framework */; };
+		73D7AD2FD3304E28BC7395FE /* SFProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5720637D781549DFB471C912 /* SFProRegular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FA0F767B2E67599529F7BD0D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = music/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-music/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		5720637D781549DFB471C912 /* SFProRegular.otf */ = {isa = PBXFileReference; name = "SFProRegular.otf"; path = "../assets/fonts/SFProRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				B8258D3322604E6C88C03BBC /* SFProThin.otf */,
 				CDBB045AEE7D4DC78754009D /* SFProUltralight.otf */,
 				D7FDA124AE724A74A2672B4F /* icomoon.ttf */,
+				5720637D781549DFB471C912 /* SFProRegular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				D64915D8921F4FE9BC6C643F /* SFProThin.otf in Resources */,
 				AFC4B2C06A9C42B6A01B511B /* SFProUltralight.otf in Resources */,
 				D99D2C66F939435D8793464D /* icomoon.ttf in Resources */,
+				73D7AD2FD3304E28BC7395FE /* SFProRegular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +442,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anonymous.music;
-				PRODUCT_NAME = music;
+				PRODUCT_NAME = "music";
 				SWIFT_OBJC_BRIDGING_HEADER = "music/music-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -472,7 +476,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anonymous.music;
-				PRODUCT_NAME = music;
+				PRODUCT_NAME = "music";
 				SWIFT_OBJC_BRIDGING_HEADER = "music/music-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

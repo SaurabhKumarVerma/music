@@ -1,14 +1,44 @@
 export interface IGlobal {
-  showSplash: boolean;
+  showSplash: boolean
 }
 
 export const enum ESCREENICON {
-  PLAY = "play",
+  PLAY = "play-circle",
+  OUTLINE_PLAY = "play-circle-outline",
   ICON = "Icon",
-  LIB = "lib",
+  SEARCH = "search",
+  OUTLINE_LAYER = "layers-outline",
+  LAYER = "layers",
+  OUTLINE_SETTING = "cog-outline",
+  SETTING = "cog",
+  OUTLINE_LOGIN = "people-outline",
+  LOGIN = "people-sharp",
 }
 export interface ITokenCache {
-  getToken: (key: string) => Promise<string | undefined | null>;
-  saveToken: (key: string, token: string) => Promise<void>;
-  clearToken?: (key: string) => void;
+  getToken: (key: string) => Promise<string | undefined | null>
+  saveToken: (key: string, token: string) => Promise<void>
+  clearToken?: (key: string) => void
+}
+
+export interface ITypography {
+  bold: string
+  extraBold: string
+  light: string
+  medium: string
+  regular: string
+  semibold: string
+  thin: string
+  ultraLight: string
+  icomoon?: string
+}
+
+export const enum ETypography {
+  BOLD = "bold",
+  EXTRA_BOLD = "extraBold",
+  LIGHT = "light",
+  MEDIUM = "medium",
+  REGULAR = "regular",
+  SEMI_BOLD = "semibold",
+  THIN = "thin",
+  ULTRA_LIGHT = "ultraLight",
 }
