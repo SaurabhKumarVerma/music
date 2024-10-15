@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from "react-native"
-import React from "react"
+import { StyleSheet, View } from "react-native"
 import Setting from "../../component/Setting/Setting"
 import { color } from "@music/theme/color"
 
 const SettingScreen = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: color.appBackground }}>
+    <View style={styles.container}>
       <Setting />
     </View>
   )
@@ -13,4 +12,9 @@ const SettingScreen = () => {
 
 export default SettingScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: color.appBackground,
+    flex: 1,
+  },
+})

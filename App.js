@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-native/no-color-literals */
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Text } from "react-native"
 

@@ -1,13 +1,11 @@
-import { color } from "@music/theme/color"
 import {
   ImageContentFit,
   ImageContentPositionObject,
-  ImageLoadEventData,
   ImageSource,
   ImageStyle,
   ImageTransition,
 } from "expo-image"
-import { NativeSyntheticEvent, ViewStyle } from "react-native"
+import { ViewStyle } from "react-native"
 
 export interface IMusicImage {
   source: ImageSource | string | number | ImageSource[] | string[] | null

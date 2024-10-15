@@ -1,8 +1,6 @@
-import { Pressable, StyleSheet, View, ViewProps } from "react-native"
-import React from "react"
+import { Pressable, StyleSheet, ViewProps } from "react-native"
 import Floating from "@music/component/Floating/Floating"
 import { BlurView } from "expo-blur"
-import { DEVICE_WIDTH } from "@music/constant/constant"
 import { useNavigation } from "@react-navigation/native"
 import { ESCREEN } from "@music/types/screen"
 
@@ -10,7 +8,7 @@ interface IFloatingScreen {
   style: ViewProps
 }
 
-const FloatingScreen = (props: ViewProps) => {
+const FloatingScreen = (props: IFloatingScreen) => {
   const navigation = useNavigation<any>()
   const navigationToPlayingScreen = () => {
     navigation.navigate(ESCREEN.PLAYING_TRACK)

@@ -1,8 +1,9 @@
 import { Modal, StyleSheet, View } from "react-native"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import LottieView from "lottie-react-native"
 import { ESCREEN } from "@music/types/screen"
 import { navigationRef } from "@music/navigation/Rootnavigation"
+import { color } from "@music/theme/color"
 
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState<boolean>(true)
@@ -26,7 +27,7 @@ const SplashScreen = () => {
         <LottieView
           source={require("../../assets/lottie/splash.json")}
           autoPlay
-          style={{ height: 100, width: 100 }}
+          style={styles.lottieStyle}
         />
       </View>
     </Modal>
@@ -38,8 +39,9 @@ export default SplashScreen
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "#131212",
+    backgroundColor: color.splashBackgroundColor,
     flex: 1,
     justifyContent: "center",
   },
+  lottieStyle: { height: 100, width: 100 },
 })

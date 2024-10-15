@@ -35,4 +35,5 @@ export const color = {
   mediumGray: "rgb(156, 156, 156)",
   appBackground: "#1C1C1F",
   selectedColor: "#FF375F",
+  splashBackgroundColor: "#131212",
 }

@@ -1,6 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
 import { StyleSheet, View, Pressable } from "react-native"
-import React from "react"
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import BottomIcon from "./BottomIcon"
 import { color } from "@music/theme/color"

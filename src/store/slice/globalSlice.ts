@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { IGlobal } from "../../types/type"
-import { RootState } from "../store"
 
 const initialState: IGlobal = {
   showSplash: true,

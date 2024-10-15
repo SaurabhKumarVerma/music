@@ -1,4 +1,3 @@
-import React from "react"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import BottomNavigation from "./BottomNavigation/BottomNavigation"
 import { ESCREEN } from "@music/types/screen"

@@ -1,6 +1,5 @@
 import { color } from "@music/theme/color"
 import { appFonts } from "@music/theme/typography"
-import React from "react"
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle } from "react-native"
 
 type Sizes = keyof typeof $sizeStyles

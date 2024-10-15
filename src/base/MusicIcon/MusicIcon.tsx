@@ -1,4 +1,3 @@
-import React from "react"
 import Icon from "@music/utils/customIcon"
 import { IIcon } from "@music/types/image.interface"
 

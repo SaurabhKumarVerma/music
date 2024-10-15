@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { Button, Text, View } from "react-native"
+import { useEffect } from "react"
+import { Button, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useWarmUpBrowser } from "@music/hook/useWarmUpBrowser"
 import * as WebBrowser from "expo-web-browser"
