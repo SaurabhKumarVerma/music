@@ -14,7 +14,7 @@ const SplashScreen = () => {
       setIsVisible(false)
       navigationRef.navigate(ESCREEN.HOME_SCREEN as never)
       // navigationRef.navigate(ESCREEN.LOGIN_SCREEN as never)
-    }, 2000)
+    }, 5500)
   }
 
   useEffect(() => {
@@ -43,5 +43,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
-  lottieStyle: { height: 100, width: 100 },
+  lottieStyle: { height: 250, width: 250 },
 })
