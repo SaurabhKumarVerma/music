@@ -12,27 +12,43 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		830AB93EFB7042D6B90F705A /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = E740F8AC0EBE44EEB88F39FC /* noop-file.swift */; };
+		8A802318AB134D9ABD7C2680 /* SFProLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 60069ECF5E034529A3EB1F27 /* SFProLight.otf */; };
+		ABF15EE3104D482DA032C7FE /* SFProBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5DC98D7DCEF94ED1AB5DB547 /* SFProBold.otf */; };
+		AFC4B2C06A9C42B6A01B511B /* SFProUltralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDBB045AEE7D4DC78754009D /* SFProUltralight.otf */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		BE6A56FA520041CDAAF725A9 /* SFProSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CD9E96A08E14999AE7EB44C /* SFProSemibold.otf */; };
+		C2044E6903104A1C9B0F2D68 /* SFProMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 602B77EA6B3B4612AF89DDBE /* SFProMedium.otf */; };
 		C65E086BB232BAF457759AC7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FA0F767B2E67599529F7BD0D /* PrivacyInfo.xcprivacy */; };
+		D64915D8921F4FE9BC6C643F /* SFProThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8258D3322604E6C88C03BBC /* SFProThin.otf */; };
+		D99D2C66F939435D8793464D /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7FDA124AE724A74A2672B4F /* icomoon.ttf */; };
+		E3E3C449A5224551822478AD /* SFProHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06B8840818A34BFEA10FCE75 /* SFProHeavy.otf */; };
 		E546F75467E34E90992BE689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40E9FE7D29474D3390A58D7D /* GoogleService-Info.plist */; };
 		EDED0182340AC3AFF856290C /* Pods_music.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488709A4272E19B7B1AAE925 /* Pods_music.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06B8840818A34BFEA10FCE75 /* SFProHeavy.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProHeavy.otf; path = ../assets/fonts/SFProHeavy.otf; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = music/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = music/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = music/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = music/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = music/main.m; sourceTree = "<group>"; };
+		3CD9E96A08E14999AE7EB44C /* SFProSemibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProSemibold.otf; path = ../assets/fonts/SFProSemibold.otf; sourceTree = "<group>"; };
 		40E9FE7D29474D3390A58D7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "music/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		488709A4272E19B7B1AAE925 /* Pods_music.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_music.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC98D7DCEF94ED1AB5DB547 /* SFProBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProBold.otf; path = ../assets/fonts/SFProBold.otf; sourceTree = "<group>"; };
+		60069ECF5E034529A3EB1F27 /* SFProLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProLight.otf; path = ../assets/fonts/SFProLight.otf; sourceTree = "<group>"; };
+		602B77EA6B3B4612AF89DDBE /* SFProMedium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProMedium.otf; path = ../assets/fonts/SFProMedium.otf; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-music.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-music.debug.xcconfig"; path = "Target Support Files/Pods-music/Pods-music.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-music.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-music.release.xcconfig"; path = "Target Support Files/Pods-music/Pods-music.release.xcconfig"; sourceTree = "<group>"; };
 		8C69D3A4D1C548C09DAED657 /* music-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "music-Bridging-Header.h"; path = "music/music-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = music/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B8258D3322604E6C88C03BBC /* SFProThin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProThin.otf; path = ../assets/fonts/SFProThin.otf; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		CDBB045AEE7D4DC78754009D /* SFProUltralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProUltralight.otf; path = ../assets/fonts/SFProUltralight.otf; sourceTree = "<group>"; };
+		D7FDA124AE724A74A2672B4F /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../assets/icons/icomoon.ttf; sourceTree = "<group>"; };
 		E740F8AC0EBE44EEB88F39FC /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "music/noop-file.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FA0F767B2E67599529F7BD0D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = music/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -78,6 +94,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D50E370CE594076A26558E8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5DC98D7DCEF94ED1AB5DB547 /* SFProBold.otf */,
+				06B8840818A34BFEA10FCE75 /* SFProHeavy.otf */,
+				60069ECF5E034529A3EB1F27 /* SFProLight.otf */,
+				602B77EA6B3B4612AF89DDBE /* SFProMedium.otf */,
+				3CD9E96A08E14999AE7EB44C /* SFProSemibold.otf */,
+				B8258D3322604E6C88C03BBC /* SFProThin.otf */,
+				CDBB045AEE7D4DC78754009D /* SFProUltralight.otf */,
+				D7FDA124AE724A74A2672B4F /* icomoon.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +125,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
+				6D50E370CE594076A26558E8 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -210,6 +242,14 @@
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				E546F75467E34E90992BE689 /* GoogleService-Info.plist in Resources */,
 				C65E086BB232BAF457759AC7 /* PrivacyInfo.xcprivacy in Resources */,
+				ABF15EE3104D482DA032C7FE /* SFProBold.otf in Resources */,
+				E3E3C449A5224551822478AD /* SFProHeavy.otf in Resources */,
+				8A802318AB134D9ABD7C2680 /* SFProLight.otf in Resources */,
+				C2044E6903104A1C9B0F2D68 /* SFProMedium.otf in Resources */,
+				BE6A56FA520041CDAAF725A9 /* SFProSemibold.otf in Resources */,
+				D64915D8921F4FE9BC6C643F /* SFProThin.otf in Resources */,
+				AFC4B2C06A9C42B6A01B511B /* SFProUltralight.otf in Resources */,
+				D99D2C66F939435D8793464D /* icomoon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,10 +550,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -582,10 +619,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

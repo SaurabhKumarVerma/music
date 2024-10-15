@@ -49,6 +49,17 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>UIAppFonts</key>
+    <array>
+      <string>SFProBold.otf</string>
+      <string>SFProHeavy.otf</string>
+      <string>SFProLight.otf</string>
+      <string>SFProMedium.otf</string>
+      <string>SFProSemibold.otf</string>
+      <string>SFProThin.otf</string>
+      <string>SFProUltralight.otf</string>
+      <string>icomoon.ttf</string>
+    </array>
     <key>UIBackgroundModes</key>
     <array>
       <string>audio</string>

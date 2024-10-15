@@ -1,4 +1,3 @@
-// https://docs.expo.dev/guides/using-eslint/
 module.exports = {
   extends: [
     "standard",
@@ -43,9 +42,6 @@ module.exports = {
     ],
     // react-native
     "react-native/no-raw-text": 0,
-    // reactotron
-    "reactotron/no-tron-in-production": "error",
-    // eslint-config-standard overrides
     "comma-dangle": 0,
     "no-global-assign": 0,
     "quotes": 0,

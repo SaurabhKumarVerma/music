@@ -50,7 +50,13 @@
           }
         }
       ],
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/icons/icomoon.ttf","./assets/fonts/SFProBold.otf", "./assets/fonts/SFProHeavy.otf", "./assets/fonts/SFProLight.otf", "./assets/fonts/SFProMedium.otf","./assets/fonts/SFProSemibold.otf", "./assets/fonts/SFProThin.otf", "./assets/fonts/SFProUltralight.otf"
+        ]
+        }
+      ]
     ]
   }
 }
