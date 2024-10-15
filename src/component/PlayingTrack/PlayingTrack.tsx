@@ -18,6 +18,6 @@ export default PlayingTrack
 const styles = StyleSheet.create({
     indicatorStyle: {
         alignSelf: 'center',
-        paddingVertical: 12
+        paddingVertical: 12,
     }
 })

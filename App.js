@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import * as Splash from 'expo-splash-screen';
 import { Provider } from 'react-redux';
@@ -12,25 +12,19 @@ import { navigationRef } from '@music/navigation/Rootnavigation';
 import { BOTTOM_BAR_HEIGHT } from '@music/constant/constant';
 import RootNavigator from '@music/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
+import * as Linking from 'expo-linking';
 
 
 Splash.preventAutoHideAsync();
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 export const Icon = createIconSetFromIcoMoon(
   require("./assets/icons/selection.json"),
   "IcoMoon",
   "icomoon.ttf"
 );
-
 WebBrowser.maybeCompleteAuthSession();
-
-// Endpoint
-
-
 export default function App() {
   // const progress = useProgress();
   const [loaded, error] = useFonts({
@@ -43,27 +37,34 @@ export default function App() {
     }
   }, [loaded, error]);
 
-  if (!loaded && !error) {
+  if (!loaded && !error && !navigationRef.isReady) {
     return null;
   }
 
+  const linking = {
+    prefixes: [Linking.createURL('/'), "music://auth/spotify", "exp://localhost:8081/--/spotify-auth-callback", "myapp://"],
+    config: {
+      // main: {
+        initialRouteName: 'main',
+        screens: {
+          Home: 'home',
+          Setting: 'setting',
+          Search: 'search'
+        }
+      }
+    // }
+  };
+
+  // tokenCache={tokenCache}
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
-      <SplashScreen />
-      <ClerkProvider publishableKey={publishableKey}>
-        <ClerkLoaded>
-          
-            <NavigationContainer ref={navigationRef}>
-              
+            <NavigationContainer ref={navigationRef} linking={linking} fallback={<Text>Loading...</Text>}>
+            <SplashScreen />
               <RootNavigator />
               <StatusBar style="auto" />
               <FloatingScreen style={styles.floatingScreen} />
             </NavigationContainer>
-         
-        </ClerkLoaded>
-      </ClerkProvider>
-      {/* jhfjgfj */}
       </Provider>
     </GestureHandlerRootView>
   );

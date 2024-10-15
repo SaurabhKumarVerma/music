@@ -6,6 +6,7 @@ import SearchScreen from '@music/screen/SearchScreen/SearchScreen';
 import SettingScreen from '@music/screen/SettingScreen/SettingScreen';
 import CustomBottomTabBar from './CustomTabBar';
 import HomeScreen from '@music/screen/HomeScreen/HomeScreen';
+import Login from '@music/component/Login/Login';
 
 const BottomNavigation = () => {
     const Tabs = createBottomTabNavigator<BottomTabParamList>()
@@ -16,6 +17,7 @@ const BottomNavigation = () => {
 
     return (
         <Tabs.Navigator initialRouteName={ESCREEN.HOME_SCREEN} screenOptions={{ headerShown: false, }} tabBar={CustomBottomTabs} >
+            <Tabs.Screen name={ESCREEN.LOGIN_SCREEN} component={Login}/>
             <Tabs.Screen name={ESCREEN.HOME_SCREEN} component={HomeScreen} />
             <Tabs.Screen name={ESCREEN.SEARCH_SCREEN} component={SearchScreen} />
             <Tabs.Screen name={ESCREEN.SETTING_SCREEN} component={SettingScreen} />

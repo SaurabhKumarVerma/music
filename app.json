@@ -13,6 +13,7 @@
       "backgroundColor": "#1C1C1F"
     },
     "ios": {
+      "associatedDomains": ["https://maximum-rat-15.accounts.dev/sign-in", "https://maximum-rat-15.accounts.dev/sign-up"],
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.music",
