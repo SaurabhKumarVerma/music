@@ -39,3 +39,7 @@ yarn-error.*
 
 #IDE
 .idea
+
+#google-service
+.google-services.json
+.GoogleService-Info.plist

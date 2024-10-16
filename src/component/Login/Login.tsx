@@ -1,15 +1,15 @@
-import { useEffect } from "react"
 import { Button, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useWarmUpBrowser } from "@music/hook/useWarmUpBrowser"
 import * as WebBrowser from "expo-web-browser"
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
+import { SCOPES } from "@music/service/api/scope"
 
 WebBrowser.maybeCompleteAuthSession()
 
 const discovery = {
-  authorizationEndpoint: "https://accounts.spotify.com/authorize",
-  tokenEndpoint: "https://accounts.spotify.com/api/token",
+  authorizationEndpoint: process.env.EXPO_PUBLIC_AUTHORIZATION_ENDPOINT!,
+  tokenEndpoint: process.env.EXPO_PUBLIC_TOKEN_ENDPOINT!,
 }
 
 const Login = () => {
@@ -17,29 +17,27 @@ const Login = () => {
   useWarmUpBrowser()
   const [request, response, promptAsync] = useAuthRequest(
     {
-      clientId: "52460fe035aa452385f9d53b7f769e09",
-      scopes: ["user-read-email", "playlist-modify-public"],
+      clientId: process.env.EXPO_PUBLIC_CLIENT_ID!,
+      scopes: SCOPES,
       usePKCE: false,
       redirectUri: makeRedirectUri({ native: "myapp://" }),
     },
     discovery,
   )
 
-  useEffect(() => {
-    if (response?.type === "success") {
-      const { code } = response.params
-    }
-  }, [response])
-
-  console.log("response ==>", response)
-
   const onPress = () => {
     promptAsync()
+      .then((response) => {
+        console.log(" this", response)
+      })
+      .catch((error) => {
+        console.log("Error", error)
+      })
   }
 
   return (
     <View style={{ top: insets.top }}>
-      <Button onPress={onPress} title="Sign in with apple" />
+      <Button disabled={!request} onPress={onPress} title="Sign in with apple" />
     </View>
   )
 }

@@ -56,8 +56,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
     "@react-native/js-polyfills": "^0.75.4",
     "@react-native/metro-babel-transformer": "^0.75.4",
+    "@types/react": "~18.2.14",
     "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8.57.0",
     "eslint-config-expo": "^7.1.2",
@@ -72,11 +75,9 @@
     "prettier": "^3.1.0",
     "prettier-eslint": "^16.1.2",
     "react-native-svg-transformer": "^1.5.0",
+    "react-native-url-polyfill": "^2.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "~5.3.3",
-    "@types/react": "~18.2.14",
-    "@babel/preset-env": "^7.20.0",
-    "@babel/runtime": "^7.20.0"
+    "typescript": "~5.3.3"
   },
   "private": true
 }

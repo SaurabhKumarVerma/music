@@ -1,3 +1,4 @@
+import Header from "@music/base/Header/Header"
 import { StyleSheet, Text, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
   return (
     <View style={{ top: insets.top }}>
       <Text>Home</Text>
+      
       {/* <MusicIcon name='play' size={30} color={color.torchRed as string}/> */}
     </View>
   )

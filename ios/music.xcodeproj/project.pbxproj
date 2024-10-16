@@ -11,6 +11,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		73D7AD2FD3304E28BC7395FE /* SFProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5720637D781549DFB471C912 /* SFProRegular.otf */; };
 		830AB93EFB7042D6B90F705A /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = E740F8AC0EBE44EEB88F39FC /* noop-file.swift */; };
 		8A802318AB134D9ABD7C2680 /* SFProLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 60069ECF5E034529A3EB1F27 /* SFProLight.otf */; };
 		ABF15EE3104D482DA032C7FE /* SFProBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5DC98D7DCEF94ED1AB5DB547 /* SFProBold.otf */; };
@@ -25,7 +26,6 @@
 		E3E3C449A5224551822478AD /* SFProHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06B8840818A34BFEA10FCE75 /* SFProHeavy.otf */; };
 		E546F75467E34E90992BE689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40E9FE7D29474D3390A58D7D /* GoogleService-Info.plist */; };
 		EDED0182340AC3AFF856290C /* Pods_music.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488709A4272E19B7B1AAE925 /* Pods_music.framework */; };
-		73D7AD2FD3304E28BC7395FE /* SFProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5720637D781549DFB471C912 /* SFProRegular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +39,7 @@
 		3CD9E96A08E14999AE7EB44C /* SFProSemibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProSemibold.otf; path = ../assets/fonts/SFProSemibold.otf; sourceTree = "<group>"; };
 		40E9FE7D29474D3390A58D7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "music/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		488709A4272E19B7B1AAE925 /* Pods_music.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_music.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5720637D781549DFB471C912 /* SFProRegular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SFProRegular.otf; path = ../assets/fonts/SFProRegular.otf; sourceTree = "<group>"; };
 		5DC98D7DCEF94ED1AB5DB547 /* SFProBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProBold.otf; path = ../assets/fonts/SFProBold.otf; sourceTree = "<group>"; };
 		60069ECF5E034529A3EB1F27 /* SFProLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProLight.otf; path = ../assets/fonts/SFProLight.otf; sourceTree = "<group>"; };
 		602B77EA6B3B4612AF89DDBE /* SFProMedium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SFProMedium.otf; path = ../assets/fonts/SFProMedium.otf; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FA0F767B2E67599529F7BD0D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = music/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-music/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		5720637D781549DFB471C912 /* SFProRegular.otf */ = {isa = PBXFileReference; name = "SFProRegular.otf"; path = "../assets/fonts/SFProRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,7 +554,10 @@
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -623,7 +626,10 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

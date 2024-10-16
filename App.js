@@ -67,7 +67,7 @@ export default function App() {
           linking={linking}
           fallback={<Text>Loading...</Text>}
         >
-          <SplashScreen />
+          {/* <SplashScreen /> */}
           <RootNavigator />
           <StatusBar style="auto" />
           <FloatingScreen style={styles.floatingScreen} />
