@@ -1,11 +1,11 @@
-import { Pressable, StyleSheet, ViewProps } from "react-native"
+import { Pressable, StyleSheet, ViewStyle } from "react-native"
 import Floating from "@music/component/Floating/Floating"
 import { BlurView } from "expo-blur"
 import { useNavigation } from "@react-navigation/native"
 import { ESCREEN } from "@music/types/screen"
 
 interface IFloatingScreen {
-  style: ViewProps
+  style: ViewStyle
 }
 
 const FloatingScreen = (props: IFloatingScreen) => {
