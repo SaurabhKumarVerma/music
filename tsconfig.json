@@ -47,7 +47,7 @@
     "src/**/*.ts",
     "src/**/*.js",
     "src/**/*.tsx",
-    "./App.js",
+    "./App.tsx",
     "./src/**/*",
     "src/**/*",
     "src/**/*.*"

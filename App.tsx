@@ -18,6 +18,7 @@ import { useFonts } from "expo-font"
 import * as Linking from "expo-linking"
 import { typography } from "@music/theme/typography"
 import { useEffect } from "react"
+import React from "react"
 
 Splash.preventAutoHideAsync()
 export const Icon = createIconSetFromIcoMoon(
