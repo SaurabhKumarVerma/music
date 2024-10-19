@@ -16,7 +16,7 @@ import { useFonts } from "expo-font"
 import * as Linking from "expo-linking"
 import { typography } from "@music/theme/typography"
 import { useEffect } from "react"
-import LoginScreen from "@music/screen/LoginScreen/LoginScreen"
+import { appTheme } from "@music/theme/appTheme"
 
 Splash.preventAutoHideAsync()
 export const Icon = createIconSetFromIcoMoon(
@@ -63,7 +63,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#131212" }}>
       <Provider store={store}>
-        <NavigationContainer ref={navigationRef} linking={linking}>
+        <NavigationContainer ref={navigationRef} linking={linking} theme={appTheme}>
           <SplashScreen />
           <RootNavigator />
         </NavigationContainer>
