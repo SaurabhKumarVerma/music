@@ -1,11 +1,11 @@
-import { View } from "react-native"
+import { ScrollView } from "react-native"
 import Login from "../../component/Login/Login"
 
 const LoginScreen = () => {
   return (
-    <View>
+    <ScrollView>
       <Login />
-    </View>
+    </ScrollView>
   )
 }
 

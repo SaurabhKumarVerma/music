@@ -2,9 +2,9 @@ import { color } from "@music/theme/color"
 import { appFonts } from "@music/theme/typography"
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle } from "react-native"
 
-type Sizes = keyof typeof $sizeStyles
-type Weights = keyof typeof appFonts.primary
-type Presets =
+export type Sizes = keyof typeof $sizeStyles
+export type Weights = keyof typeof appFonts.primary
+export type Presets =
   | "default"
   | "bold"
   | "heading"

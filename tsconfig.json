@@ -31,7 +31,8 @@
       "@navigationTypes/*":["src/navigation/NavigationTypes/types"],
       "@navigation-taps/*": ["src/navigation/BottomNavigation/*"],
       "@navigations-drawer/*": ["src/navigation/DrawerNavigation/*"],
-      "@constant/*":["src/constant/*"]
+      "@constant/*":["src/constant/*"],
+      "@music-image/*": ["./assets/*"]
     }
   },
   "extends": "expo/tsconfig.base",
@@ -50,6 +51,10 @@
     "./App.tsx",
     "./src/**/*",
     "src/**/*",
-    "src/**/*.*"
+    "src/**/*.*",
+    "./assets/*",
+    "./assets/**/*",
+    "./assets/**/*.*",
+    "./images.d.ts"
   ],
 }

@@ -1,44 +1,50 @@
-import { Button, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { Button, View, StyleSheet } from "react-native"
 import { useWarmUpBrowser } from "@music/hook/useWarmUpBrowser"
 import * as WebBrowser from "expo-web-browser"
-import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
-import { SCOPES } from "@music/service/api/scope"
+
+import LoginBackgroundImage from "./LoginBackgroundImage"
+import LoginBody from "./LoginBody"
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
+import LoginHeaderImage from "./LoginHeaderImage"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 WebBrowser.maybeCompleteAuthSession()
 
-const discovery = {
-  authorizationEndpoint: process.env.EXPO_PUBLIC_AUTHORIZATION_ENDPOINT!,
-  tokenEndpoint: process.env.EXPO_PUBLIC_TOKEN_ENDPOINT!,
-}
+
 
 const Login = () => {
-  const insets = useSafeAreaInsets()
-  useWarmUpBrowser()
-  const [request, response, promptAsync] = useAuthRequest(
-    {
-      clientId: process.env.EXPO_PUBLIC_CLIENT_ID!,
-      scopes: SCOPES,
-      usePKCE: false,
-      redirectUri: makeRedirectUri({ native: "myapp://" }),
-    },
-    discovery,
-  )
+    useWarmUpBrowser()
+    // const insets = useSafeAreaInsets()
+    
 
-  const onPress = () => {
-    promptAsync()
-      .then((response) => {
-        console.log(" this", response)
-      })
-      .catch((error) => {
-        console.log("Error", error)
-      })
-  }
+    return (
+        <View >
+            {/* <Button title="Sign in with apple" /> */}
+            <View>
+                <LoginBackgroundImage />
+            </View>
 
-  return (
-    <View style={{ top: insets.top }}>
-      <Button disabled={!request} onPress={onPress} title="Sign in with apple" />
-    </View>
-  )
+            <View style={styles.img}>
+                <LoginHeaderImage />
+            </View>
+
+            <View style={styles.body}>
+                <LoginBody />
+            </View>
+        </View>
+    )
 }
 export default Login
+
+const styles = StyleSheet.create({
+    body: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        zIndex: 10
+    },
+    img: {
+        position: 'absolute',
+        alignSelf: "flex-end",
+    }
+})

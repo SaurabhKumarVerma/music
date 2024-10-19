@@ -1,7 +1,7 @@
 import { deleteAppToken, getAppToken, saveAppToken } from "@music/service/token/token"
 
 const tokenCache = {
-  async getToken(key: string) {
+  async getToken(key: string): Promise<string | null> {
     try {
       const item = await getAppToken(key)
       if (item) {
@@ -9,17 +9,24 @@ const tokenCache = {
       } else {
         console.log("No values stored under key: " + key)
       }
-      return item
+      return item as string
     } catch (error) {
       console.error("SecureStore get item error: ", error)
-      await deleteAppToken(key)
       return null
     }
   },
-  async saveToken(key: string, value: string) {
+  async saveToken(key: string, value: string): Promise<void> {
     try {
-      return saveAppToken(key, value)
+      saveAppToken(key, value)
     } catch (err) {}
+  },
+
+  async deleteSaveToken(key: string): Promise<void> {
+    try {
+      await deleteAppToken(key)
+    } catch (error) {
+      console.error("SecureStore deleting error: ", error)
+    }
   },
 }
 

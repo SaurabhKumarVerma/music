@@ -42,3 +42,21 @@ export const enum ETypography {
   THIN = "thin",
   ULTRA_LIGHT = "ultraLight",
 }
+
+export interface Color {
+  offset: string
+  color: string
+  opacity: string
+}
+
+export interface IAuthenticationResponse {
+  authentication: string | null
+  error: string | null
+  errorCode: string | null
+  params: {
+    code: string
+    state: string
+  }
+  type: "success" | "failure"
+  url: string
+}

@@ -36,4 +36,5 @@ export const color = {
   appBackground: "#1C1C1F",
   selectedColor: "#FF375F",
   splashBackgroundColor: "#131212",
+  spotifyGreen: "#1ED760",
 }
