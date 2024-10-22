@@ -9,30 +9,48 @@ import Spotify from "../../../assets/svg/spotify.svg"
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
 import { SCOPES } from "@music/service/api/scope"
 import { discovery } from "@music/lib/servicepath"
-import tokenCache from "@music/utils/tokenCache"
-import { keys } from "@music/utils/pckeVerifier"
+import { useDispatch } from "react-redux"
+import { storeUserToken } from "@music/store/slice/userSlice"
+import { AuthResponse } from "@music/types/type"
+import { useEffect } from "react"
 
 const LoginBody = () => {
+  const dispatch = useDispatch()
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: process.env.EXPO_PUBLIC_CLIENT_ID!,
       scopes: SCOPES,
       usePKCE: false,
       redirectUri: makeRedirectUri({ native: "myapp://" }),
+      extraParams: {
+        nonce: "nonce",
+      },
     },
     discovery,
   )
 
+  useEffect(() => {
+    console.log(" this hs response", response)
+  },[response])
+
   const onPress = () => {
     promptAsync()
       .then((response) => {
-        console.log(" this", response?.params?.code as string)
+        // console.log(" this", response)
         // tokenCache.saveToken(keys.storeKey, response?.params?.code)
+        if (response.type === "success") {
+            dispatch(storeUserToken(response?.params?.code))
+        } else {
+            dispatch(storeUserToken(null))
+        }
       })
       .catch((error) => {
         console.log("Error", error)
       })
+
+    
   }
+
   return (
     <BlurView style={styles.container} intensity={25}>
       <View style={styles.spotifyLogoContainer}>

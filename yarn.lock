@@ -8382,6 +8382,11 @@ react-native-app-auth@^8.0.0:
     invariant "2.2.4"
     react-native-base64 "0.0.2"
 
+react-native-awesome-slider@1:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-awesome-slider/-/react-native-awesome-slider-1.4.0.tgz#866fb44c6b379cb1c511e258724dfeca124d4367"
+  integrity sha512-asK/bUaY0NEr0qKcG1zm4azyZcE3i/4UXmra3/CWvLJtkBgRirpNxJI3K1bi2D51o3RF5G3SrL5hap+zi/Bslg==
+
 react-native-base64@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/react-native-base64/-/react-native-base64-0.0.2.tgz#c28463c2c6779ac3ec5fdd12979ebc8c5f9b410a"

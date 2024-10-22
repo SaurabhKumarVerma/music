@@ -5,11 +5,9 @@ import { StatusBar } from "expo-status-bar"
 import * as Splash from "expo-splash-screen"
 import { Provider } from "react-redux"
 import * as WebBrowser from "expo-web-browser"
-import { NavigationContainer } from "@react-navigation/native"
 import { store } from "@music/store/store"
 import SplashScreen from "@music/screen/SplashScreen"
 import { navigationRef } from "@music/navigation/Rootnavigation"
-import RootNavigator from "@music/navigation/RootNavigator"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { createIconSetFromIcoMoon } from "@expo/vector-icons"
 import { useFonts } from "expo-font"
@@ -17,6 +15,11 @@ import * as Linking from "expo-linking"
 import { typography } from "@music/theme/typography"
 import { useEffect } from "react"
 import { appTheme } from "@music/theme/appTheme"
+import Main from "@music/app"
+import AppleMusicUI from "@music/screen/FloatingScreen/Test"
+import FloatingScreen from "@music/screen/FloatingScreen/FloatingScreen"
+import { View } from "react-native"
+import { BOTTOM_BAR_HEIGHT } from "@music/constant/constant"
 
 Splash.preventAutoHideAsync()
 export const Icon = createIconSetFromIcoMoon(
@@ -36,9 +39,16 @@ export default function App() {
     }
   }, [loaded, error])
 
-  if (!loaded && !error) {
+  if (!loaded && !error && !navigationRef.isReady()) {
     return null
   }
+
+  // if () {
+  //   return null
+  // }
+
+  console.log("navigationRef.isReady()", navigationRef.isReady())
+  
 
   const linking = {
     prefixes: [
@@ -59,14 +69,13 @@ export default function App() {
     // }
   }
 
-  // tokenCache={tokenCache}
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#131212" }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
-        <NavigationContainer ref={navigationRef} linking={linking} theme={appTheme}>
-          <SplashScreen />
-          <RootNavigator />
-        </NavigationContainer>
+        {/* <SplashScreen /> */}
+
+        <Main appTheme={appTheme} linking={linking} navigationRef={navigationRef} />
+        {/*  */}
       </Provider>
       <StatusBar style="auto" />
     </GestureHandlerRootView>

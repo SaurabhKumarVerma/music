@@ -1,8 +1,6 @@
 import { Modal, StyleSheet, View } from "react-native"
 import { useEffect, useState } from "react"
 import LottieView from "lottie-react-native"
-import { ESCREEN } from "@music/types/screen"
-import { navigationRef } from "@music/navigation/Rootnavigation"
 import { color } from "@music/theme/color"
 
 const SplashScreen = () => {
@@ -12,8 +10,6 @@ const SplashScreen = () => {
   const startSplash = () => {
     return setTimeout(() => {
       setIsVisible(false)
-      navigationRef.navigate(ESCREEN.HOME_SCREEN as never)
-      // navigationRef.navigate(ESCREEN.LOGIN_SCREEN as never)
     }, 5500)
   }
 

@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator()
 
 const PlayTrackModal = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: true }}>
       <Stack.Screen name={ESCREEN.PLAYTRACK_SCREEN} component={PlayingTrack} />
     </Stack.Navigator>
   )

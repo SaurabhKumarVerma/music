@@ -20,7 +20,7 @@ const BottomNavigation = () => {
       screenOptions={{ headerShown: false }}
       tabBar={CustomBottomTabs}
     >
-      <Tabs.Screen name={ESCREEN.LOGIN_SCREEN} component={LoginScreen} />
+      {/* <Tabs.Screen name={ESCREEN.LOGIN_SCREEN} component={LoginScreen} /> */}
       <Tabs.Screen name={ESCREEN.HOME_SCREEN} component={HomeScreen} />
       <Tabs.Screen name={ESCREEN.SEARCH_SCREEN} component={SearchScreen} />
       <Tabs.Screen name={ESCREEN.SETTING_SCREEN} component={SettingScreen} />

@@ -8,4 +8,7 @@ export const enum ESCREEN {
   "PLAYTRACK_SCREEN" = "playtrack",
   "PLAYING_TRACK" = "playing",
   "LIBRARY_SCREEN" = "library",
+  BOTTOM_MAIN = "BOTTOM_MAIN",
+  BOTTOM_SEARCH = "BOTTOM_SEARCH",
+  BOTTOM_SETTING = "BOTTOM_SETTING",
 }

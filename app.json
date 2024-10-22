@@ -1,7 +1,7 @@
 {
   "expo": {
     "scheme": "myapp://",
-    "name": "music",
+    "name": "Music",
     "slug": "music",
     "version": "1.0.0",
     "orientation": "portrait",

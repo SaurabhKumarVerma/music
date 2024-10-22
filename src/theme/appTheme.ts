@@ -5,6 +5,6 @@ export const appTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: color.splashBackgroundColor,
+    background: color.black,
   },
 }

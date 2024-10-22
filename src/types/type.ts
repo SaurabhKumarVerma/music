@@ -1,3 +1,5 @@
+import { TokenResponse } from "expo-auth-session"
+
 export interface IGlobal {
   showSplash: boolean
 }
@@ -58,5 +60,43 @@ export interface IAuthenticationResponse {
     state: string
   }
   type: "success" | "failure"
+  url: string
+}
+
+export const enum ERESPONSESTATUSCODE {
+  SUCCESS = 200,
+  FULLFILL = 201,
+  PROCESSING = 202,
+  NO_CONTENT = 204,
+  NOT_MODIFIED = 304,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  TOO_MANY_REQUEST = 429,
+  INTERNAL_SERVER_ERROR = 500,
+  BAD_GATEWAY = 502,
+  SERVICE_UNAVAILBLE = 503,
+}
+
+interface IAuthEvent {
+  type: "cancel" | "dismiss" | "opened" | "locked"
+}
+
+interface IAuthError {
+  errorCode: string | null | undefined
+}
+
+interface IAuthParams {
+  code: string
+  state: string
+}
+
+export interface AuthResponse {
+  authentication: TokenResponse | null
+  error: IAuthError | null | undefined
+  errorCode: string | null
+  params: IAuthParams
+  type: "success" | "error" | IAuthEvent
   url: string
 }

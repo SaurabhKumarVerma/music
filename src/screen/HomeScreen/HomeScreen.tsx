@@ -6,7 +6,7 @@ import Header from "@music/base/Header/Header"
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Header title="Brower" />
+      {/* <Header title="Brower" /> */}
       <Home />
     </View>
   )
