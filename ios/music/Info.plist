@@ -51,6 +51,8 @@
     </dict>
     <key>UIAppFonts</key>
     <array>
+      <string>icomoon.ttf</string>
+      <string>SFProRegular.otf</string>
       <string>SFProBold.otf</string>
       <string>SFProHeavy.otf</string>
       <string>SFProLight.otf</string>
@@ -58,8 +60,6 @@
       <string>SFProSemibold.otf</string>
       <string>SFProThin.otf</string>
       <string>SFProUltralight.otf</string>
-      <string>icomoon.ttf</string>
-      <string>SFProRegular.otf</string>
     </array>
     <key>UIBackgroundModes</key>
     <array>
@@ -88,7 +88,7 @@
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
+    <string>Dark</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
   </dict>

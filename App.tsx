@@ -47,9 +47,6 @@ export default function App() {
   //   return null
   // }
 
-  console.log("navigationRef.isReady()", navigationRef.isReady())
-  
-
   const linking = {
     prefixes: [
       Linking.createURL("/"),

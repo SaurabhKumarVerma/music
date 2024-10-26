@@ -8,7 +8,7 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator initialRouteName={ESCREEN.MAIN_SCREEN} screenOptions={{ headerShown: false }}>
       <Stack.Screen component={BottomNavigation} name={ESCREEN.MAIN_SCREEN} />
-      {/* <Stack.Screen
+      <Stack.Screen
         name={ESCREEN.PLAYING_TRACK}
         component={PlayTrackModal}
         options={{
@@ -23,7 +23,7 @@ const RootNavigator = () => {
           fullScreenGestureShadowEnabled: true,
           sheetCornerRadius: 20
         }}
-      /> */}
+      />
     </Stack.Navigator>
   )
 }

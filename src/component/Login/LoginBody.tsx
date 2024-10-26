@@ -31,7 +31,7 @@ const LoginBody = () => {
 
   useEffect(() => {
     console.log(" this hs response", response)
-  },[response])
+  }, [response])
 
   const onPress = () => {
     promptAsync()
@@ -39,16 +39,14 @@ const LoginBody = () => {
         // console.log(" this", response)
         // tokenCache.saveToken(keys.storeKey, response?.params?.code)
         if (response.type === "success") {
-            dispatch(storeUserToken(response?.params?.code))
+          dispatch(storeUserToken(response?.params?.code))
         } else {
-            dispatch(storeUserToken(null))
+          dispatch(storeUserToken(null))
         }
       })
       .catch((error) => {
         console.log("Error", error)
       })
-
-    
   }
 
   return (

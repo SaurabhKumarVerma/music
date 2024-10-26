@@ -7,7 +7,7 @@ import { StyleSheet, Text, View } from "react-native"
 
 const LoginBackgroundImage = () => {
   return (
-      <MusicImage source={images.bg.loginbg}  style={styles.image}/>
+      <MusicImage source={require("../../../assets/images/bgLogin.png")}  style={styles.image}/>
   )
 }
 

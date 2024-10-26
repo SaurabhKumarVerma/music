@@ -6,16 +6,15 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1C1C1F"
+      "backgroundColor": "#000000"
     },
     "ios": {
-      "associatedDomains": ["https://maximum-rat-15.accounts.dev/sign-in", "https://maximum-rat-15.accounts.dev/sign-up"],
       "googleServicesFile": "./GoogleService-Info.plist",
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.anonymous.music",
       "infoPlist": {
         "UIBackgroundModes": [
@@ -25,7 +24,7 @@
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
-        "backgroundColor": "#1C1C1F"
+        "backgroundColor": "#000000"
       }
     },
     "android": {

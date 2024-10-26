@@ -23,7 +23,7 @@ const Main = (props: IMain) => {
 
   if (auth.isLoading) {
     return (
-      <View style={{ justifyContent: "center", flex: 1 , backgroundColor: color.appBackground}}>
+      <View style={{ justifyContent: "center", flex: 1, backgroundColor: color.appBackground }}>
         <ActivityIndicator size={"large"} />
       </View>
     )
