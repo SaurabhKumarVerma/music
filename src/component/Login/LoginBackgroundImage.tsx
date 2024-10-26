@@ -6,16 +6,14 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { StyleSheet, Text, View } from "react-native"
 
 const LoginBackgroundImage = () => {
-  return (
-      <MusicImage source={require("../../../assets/images/bgLogin.png")}  style={styles.image}/>
-  )
+  return <MusicImage source={require("../../../assets/images/bgLogin.png")} style={styles.image} />
 }
 
 export default LoginBackgroundImage
 
 const styles = StyleSheet.create({
-    image: {
-        width: DEVICE_WIDTH,
-        height: DEVICE_HEIGHT,
-    }
+  image: {
+    height: DEVICE_HEIGHT,
+    width: DEVICE_WIDTH,
+  },
 })

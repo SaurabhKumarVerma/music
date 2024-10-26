@@ -21,7 +21,7 @@ const RootNavigator = () => {
           gestureDirection: "vertical",
           fullScreenGestureEnabled: true,
           fullScreenGestureShadowEnabled: true,
-          sheetCornerRadius: 20
+          sheetCornerRadius: 20,
         }}
       />
     </Stack.Navigator>
