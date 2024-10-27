@@ -7,7 +7,8 @@ PODS:
     - AppAuth/Core
   - boost (1.83.0)
   - DoubleConversion (1.1.6)
-  - EXApplication (5.9.1):
+  - EXAppAuth (11.1.1):
+    - AppAuth (~> 1.2)
     - ExpoModulesCore
   - EXConstants (16.0.2):
     - ExpoModulesCore
@@ -1465,9 +1466,10 @@ PODS:
   - Yoga (0.0.0)
 
 DEPENDENCIES:
+  - AppAuth
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - EXApplication (from `../node_modules/expo-application/ios`)
+  - EXAppAuth (from `../node_modules/expo-app-auth/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - Expo (from `../node_modules/expo`)
   - ExpoAsset (from `../node_modules/expo-asset/ios`)
@@ -1583,8 +1585,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
-  EXApplication:
-    :path: "../node_modules/expo-application/ios"
+  EXAppAuth:
+    :path: "../node_modules/expo-app-auth/ios"
   EXConstants:
     :path: "../node_modules/expo-constants/ios"
   Expo:
@@ -1755,7 +1757,7 @@ SPEC CHECKSUMS:
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
-  EXApplication: c08200c34daca7af7fd76ac4b9d606077410e8ad
+  EXAppAuth: 7dd6417aaf6e147ce4cee768977cbca29bd59066
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
   Expo: 67b60b3b80a3c8e9f3bcaaa84d06d140229a246d
   ExpoAsset: 323700f291684f110fb55f0d4022a3362ea9f875
@@ -1860,6 +1862,6 @@ SPEC CHECKSUMS:
   SwiftAudioEx: f6aa653770f3a0d3851edaf8d834a30aee4a7646
   Yoga: 33622183a85805e12703cd618b2c16bfd18bfffb
 
-PODFILE CHECKSUM: 833038b3ae25d70fc6a6470f3b17d82131123e4b
+PODFILE CHECKSUM: f0e7f41a682059ced57d46cb6129067679957609
 
 COCOAPODS: 1.15.2
