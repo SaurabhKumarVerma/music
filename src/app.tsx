@@ -4,7 +4,7 @@ import RootNavigator from "./navigation/RootNavigator"
 import { useAppDispatch, useAppSelector } from "./hook/hook"
 import AuthNavigator from "./navigation/AuthNavigator/AuthNavigator"
 import { useEffect } from "react"
-import { getStoreToken } from "./store/slice/userSlice"
+import { getRefreshToken, getStoreToken } from "./store/slice/userSlice"
 import { color } from "./theme/color"
 import MusicTrack from "./component/PlayingTrack/MusicTrack"
 
@@ -20,19 +20,20 @@ const Main = (props: IMain) => {
 
   useEffect(() => {
     dispatch(getStoreToken())
+    dispatch(getRefreshToken())
   }, [])
 
   if (auth.isLoading) {
     return (
-      <View style={{ justifyContent: "center", flex: 1, backgroundColor: color.appBackground }}>
-        <ActivityIndicator size={"large"} />
+      <View style={styles.activityIndicatorStyle}>
+        <ActivityIndicator size={"large"} color={color.selectedColor} />
       </View>
     )
   }
 
   return (
     <NavigationContainer ref={props.navigationRef} linking={props.linking} theme={props.appTheme}>
-      {auth.token === null ? (
+      {auth.access_token === null ? (
         <>
           <AuthNavigator />
         </>
@@ -52,11 +53,15 @@ const Main = (props: IMain) => {
 export default Main
 
 const styles = StyleSheet.create({
-  floatingScreen: {
-    left: 6,
-    // position: "absolute",
-    right: 6,
-    overflow: "visible",
-    zIndex: 1,
+  activityIndicatorStyle: {
+    flex: 1,
+    justifyContent: "center",
   },
+  //   floatingScreen: {
+  //     left: 6,
+  //     // position: "absolute",
+  //     right: 6,
+  //     overflow: "visible",
+  //     zIndex: 1,
+  //   },
 })

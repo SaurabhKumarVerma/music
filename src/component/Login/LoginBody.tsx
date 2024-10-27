@@ -6,43 +6,32 @@ import { Pressable, StyleSheet, View } from "react-native"
 import Left from "../../../assets/svg/leftLine.svg"
 import Right from "../../../assets/svg/rightLine.svg"
 import Spotify from "../../../assets/svg/spotify.svg"
-import { makeRedirectUri, useAuthRequest } from "expo-auth-session"
-import { SCOPES } from "@music/service/api/scope"
-import { discovery } from "@music/lib/servicepath"
-import { useDispatch } from "react-redux"
-import { storeUserToken } from "@music/store/slice/userSlice"
 import { useEffect } from "react"
+import AUTH_CONFIG from "@music/config/config"
+import { AuthConfiguration, authorize } from "react-native-app-auth"
+import { useAppDispatch } from "@music/hook/hook"
+import { saveRefreshToken, storeUserToken } from "@music/store/slice/userSlice"
 
 const LoginBody = () => {
-  const dispatch = useDispatch()
-  const [request, response, promptAsync] = useAuthRequest(
-    {
-      clientId: process.env.EXPO_PUBLIC_CLIENT_ID!,
-      scopes: SCOPES,
-      usePKCE: false,
-      redirectUri: makeRedirectUri({ native: "myapp://" }),
-    },
-    discovery,
-  )
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    console.log(" this hs response", response)
-  }, [response])
+    console.log(" this hs response")
+  }, [])
 
-  const onPress = () => {
-    promptAsync()
-      .then((response) => {
-        // console.log(" this", response)
-        // tokenCache.saveToken(keys.storeKey, response?.params?.code)
-        if (response.type === "success") {
-          dispatch(storeUserToken(response?.params?.code))
-        } else {
-          dispatch(storeUserToken(null))
-        }
-      })
-      .catch((error) => {
-        console.log("Error", error)
-      })
+  const onPress = async () => {
+    const config = {
+      warmAndPrefetchChrome: true,
+      ...AUTH_CONFIG,
+    }
+
+    try {
+      const authState = await authorize(config as AuthConfiguration)
+      dispatch(storeUserToken(authState.accessToken))
+      dispatch(saveRefreshToken(authState.refreshToken))
+    } catch (error) {
+      console.log("Error ===>", error)
+    }
   }
 
   return (
@@ -70,7 +59,7 @@ const LoginBody = () => {
         <MusicText text="Signing with" preset="semiBold" size="xxs" style={styles.loginText} />
         <Right width={150} height={2} />
       </View>
-      <Pressable disabled={!request} onPress={onPress} style={styles.buttonContainer}>
+      <Pressable onPress={onPress} style={styles.buttonContainer}>
         <View>
           <MusicText
             preset="bold"

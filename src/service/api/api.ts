@@ -1,6 +1,6 @@
-import { navigationRef } from "@music/navigation/Rootnavigation"
+import { navigate } from "@music/navigation/Rootnavigation"
 import { ESCREEN } from "@music/types/screen"
-import { keys } from "@music/utils/pckeVerifier"
+import { ACCESS_TOKEN } from "@music/utils/pckeVerifier"
 import tokenCache from "@music/utils/tokenCache"
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 
@@ -9,7 +9,7 @@ class ApiService {
 
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: "https://jsonplaceholder.typicode.com/todos/",
+      baseURL: process.env.EXPO_PUBLIC_API_KEY,
     })
 
     this.axiosInstance.interceptors.request.use(
@@ -57,13 +57,13 @@ class ApiService {
   }
 
   private async getAccessToken(): Promise<string | null> {
-    const token = await tokenCache.getToken(keys)
+    const token = await tokenCache.getToken(ACCESS_TOKEN)
     return token ? (token as unknown as string) : null
   }
 
   private async logout(): Promise<void> {
-    await tokenCache.deleteSaveToken(keys)
-    navigationRef.navigate(ESCREEN.LOGIN_SCREEN)
+    await tokenCache.deleteSaveToken(ACCESS_TOKEN)
+    navigate(ESCREEN.LOGIN_SCREEN)
   }
 
   public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {

@@ -1,10 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import { FlatList, StyleSheet, View } from "react-native"
-import { MusicText } from "@music/base/MusicText/MusicText"
 import Card from "@music/base/Card/TopPicksCard"
 import topPicksData from "@music/service/topPickdummydata"
 import { ITrack } from "@music/models/toptrack.interface"
-// import topPicksData from "../../service/api/topPicksData.ts"
 const TopPick = () => {
   const renderItem = (item: ITrack) => {
     return (
