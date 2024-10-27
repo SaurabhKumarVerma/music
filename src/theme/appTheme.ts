@@ -2,9 +2,8 @@ import { DefaultTheme } from "@react-navigation/native"
 import { color } from "./color"
 
 export const appTheme = {
-  ...DefaultTheme,
+  dark: true,
   colors: {
-    ...DefaultTheme.colors,
-    background: color.black,
+    background: color.deepBlack,
   },
 }

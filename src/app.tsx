@@ -6,6 +6,7 @@ import AuthNavigator from "./navigation/AuthNavigator/AuthNavigator"
 import { useEffect } from "react"
 import { getStoreToken } from "./store/slice/userSlice"
 import { color } from "./theme/color"
+import MusicTrack from "./component/PlayingTrack/MusicTrack"
 
 interface IMain {
   navigationRef: any
@@ -40,6 +41,7 @@ const Main = (props: IMain) => {
           {/* <View style={{overflow: 'visible', zIndex: 1}}>
             <FloatingScreen />
           </View> */}
+          <MusicTrack />
           <RootNavigator />
         </>
       )}

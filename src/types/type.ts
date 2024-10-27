@@ -1,7 +1,11 @@
 import { TokenResponse } from "expo-auth-session"
+import { StatusBarProps, StatusBarStyle } from "expo-status-bar"
+import { ReactNode } from "react"
+import { ViewStyle } from "react-native"
 
 export interface IGlobal {
   showSplash: boolean
+  isDarkMode: boolean
 }
 
 export const enum ESCREENICON {
@@ -99,4 +103,11 @@ export interface AuthResponse {
   params: IAuthParams
   type: "success" | "error" | IAuthEvent
   url: string
+}
+
+export interface IMusicScreen {
+  statusBarStyle?: StatusBarStyle
+  statusBarProps?: StatusBarProps
+  style?: ViewStyle
+  children: ReactNode
 }

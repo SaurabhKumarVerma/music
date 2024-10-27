@@ -1,6 +1,5 @@
 export const images = {
-  bg: {
-    loginbg: require("./images/bgLogin.png"),
-  },
-  svg: {},
+  loginbg: require("./images/bgLogin.png"),
+  variousArtisit: require("./images/VA.png"),
+  variousArtisit1: require("./images/VA1.png"),
 }

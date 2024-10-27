@@ -32,7 +32,6 @@
       "@navigation-taps/*": ["src/navigation/BottomNavigation/*"],
       "@navigations-drawer/*": ["src/navigation/DrawerNavigation/*"],
       "@constant/*":["src/constant/*"],
-      "@music-image/*": ["./assets/*"]
     }
   },
   "extends": "expo/tsconfig.base",
@@ -52,9 +51,5 @@
     "./src/**/*",
     "src/**/*",
     "src/**/*.*",
-    "./assets/*",
-    "./assets/**/*",
-    "./assets/**/*.*",
-    "./images.d.ts"
   ],
 }

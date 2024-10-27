@@ -11,7 +11,6 @@ import { SCOPES } from "@music/service/api/scope"
 import { discovery } from "@music/lib/servicepath"
 import { useDispatch } from "react-redux"
 import { storeUserToken } from "@music/store/slice/userSlice"
-import { AuthResponse } from "@music/types/type"
 import { useEffect } from "react"
 
 const LoginBody = () => {
@@ -22,9 +21,6 @@ const LoginBody = () => {
       scopes: SCOPES,
       usePKCE: false,
       redirectUri: makeRedirectUri({ native: "myapp://" }),
-      extraParams: {
-        nonce: "nonce",
-      },
     },
     discovery,
   )

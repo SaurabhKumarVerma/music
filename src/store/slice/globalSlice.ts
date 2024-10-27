@@ -3,6 +3,7 @@ import { IGlobal } from "../../types/type"
 
 const initialState: IGlobal = {
   showSplash: true,
+  isDarkMode: true,
 }
 
 const wait = (ms: number) =>
@@ -24,8 +25,11 @@ const globalSlice = createSlice({
     onStopSplash: (state) => {
       state.showSplash = false
     },
+    setDarkMode: (state) => {
+      state.isDarkMode = !state.isDarkMode
+    },
   },
 })
 
-export const { onStartSplash, onStopSplash } = globalSlice.actions
+export const { onStartSplash, onStopSplash, setDarkMode } = globalSlice.actions
 export default globalSlice.reducer

@@ -1,3 +1,5 @@
+import { navigationRef } from "@music/navigation/Rootnavigation"
+import { ESCREEN } from "@music/types/screen"
 import { keys } from "@music/utils/pckeVerifier"
 import tokenCache from "@music/utils/tokenCache"
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
@@ -7,54 +9,61 @@ class ApiService {
 
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: process.env.EXPO_PUBLIC_API_KEY,
+      baseURL: "https://jsonplaceholder.typicode.com/todos/",
     })
 
-    // this.axiosInstance.interceptors.request.use(
-    //   async (config: AxiosRequestConfig) => {
-    //     const accessToken = await this.getAccessToken()
-    //     console.log(" this is access token", accessToken)
-    //     if (accessToken) {
-    //       config.headers.Authorization = `Bearer ${accessToken}`
-    //     }
-    //     return config
-    //   },
-    //   (error) => {
-    //     console.log(" No api token", error)
+    this.axiosInstance.interceptors.request.use(
+      async (config: AxiosRequestConfig) => {
+        const accessToken = await this.getAccessToken()
+        if (accessToken) {
+          config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${accessToken}`,
+          }
+        }
+        return config
+      },
+      (error) => {
+        console.error("No API token:", error)
+        this.logout()
+        return Promise.reject(error)
+      },
+    )
 
-    //     this.logout()
-    //     return Promise.reject(error)
-    //   },
-    // )
+    this.axiosInstance.interceptors.response.use(
+      (response: AxiosResponse) => response,
+      async (error) => {
+        const originalRequest = error.config
+        if (error.response?.status === 401 && !originalRequest._retry) {
+          originalRequest._retry = true
+          const accessToken = await this.getAccessToken()
 
-    // this.axiosInstance.interceptors.response.use(
-    //   (response: AxiosResponse) => {
-    //     return response
-    //   },
-    //   async (error) => {
-    //     const originalRequest = error.config
-    //     if (error.response.status === 401 && !originalRequest._retry) {
-    //       originalRequest._retry = true
-    //       const accessToken = await this.getAccessToken()
-    //       return accessToken
-    //     } else if (error.response.status === 403) {
-    //       this.logout()
-    //     }
-    //     return Promise.reject(error)
-    //   },
-    // )
+          if (accessToken) {
+            // Set the Authorization header with the new token
+            originalRequest.headers.Authorization = `Bearer ${accessToken}`
+
+            // Retry the original request with the new token
+            return this.axiosInstance(originalRequest)
+          }
+        } else if (error.response?.status === 403) {
+          // Handle logout if status is 403 (Forbidden)
+          this.logout()
+        }
+
+        // Reject the error if it's not handled
+        return Promise.reject(error)
+      },
+    )
   }
 
   private async getAccessToken(): Promise<string | null> {
     const token = await tokenCache.getToken(keys)
-    if (token) {
-      return token as unknown as string
-    }
-    return null
+    return token ? (token as unknown as string) : null
   }
 
   private async logout(): Promise<void> {
     await tokenCache.deleteSaveToken(keys)
+    navigationRef.navigate(ESCREEN.LOGIN_SCREEN)
   }
 
   public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {

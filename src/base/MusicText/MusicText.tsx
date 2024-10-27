@@ -55,7 +55,7 @@ export function MusicText(props: TextProps) {
     styles.filter(Boolean) as StyleProp<TextStyle>
 
   const $styles = combineStyles(
-    $presets[preset],
+    ...$presets[preset],
     weight ? $fontWeightStyles[weight] : undefined,
     size ? $sizeStyles[size] : undefined,
     $styleOverride,

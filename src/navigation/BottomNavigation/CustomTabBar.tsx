@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: color.appBackground,
+    backgroundColor: color.deepBlack,
     borderTopColor: color.mediumGray,
     borderTopWidth: 0.2,
     flexDirection: "row",

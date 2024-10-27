@@ -22,6 +22,6 @@ export interface IMusicImage {
 export interface IIcon {
   name: string
   size: number
-  color: string
+  color?: string
   style?: ViewStyle
 }

@@ -37,4 +37,7 @@ export const color = {
   selectedColor: "#FF375F",
   splashBackgroundColor: "#131212",
   spotifyGreen: "#1ED760",
+  dividerColor: "#646468",
+  deepBlack: "#000000",
+  background: ["#000000", "#FFFFFF"],
 }

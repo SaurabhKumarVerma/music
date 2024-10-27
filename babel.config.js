@@ -23,7 +23,6 @@ module.exports = function (api) {
             "@navigations-taps": "./src/navigation/BottomNavigation",
             "@navigations-drawer": "./src/navigation/DrawerNavigation",
             "@constant": "./src/constant/",
-            "@music-image": "./assets/*",
           },
         },
       ],

@@ -14,7 +14,6 @@ export default SearchScreen
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: color.appBackground,
     flex: 1,
   },
 })
