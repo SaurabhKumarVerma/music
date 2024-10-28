@@ -1,6 +1,7 @@
 import { navigate } from "@music/navigation/Rootnavigation"
 import { ESCREEN } from "@music/types/screen"
-import { ACCESS_TOKEN } from "@music/utils/pckeVerifier"
+import { ERESPONSESTATUSCODE, IAuthRefreshTokenResponse } from "@music/types/type"
+import { ACCESS_TOKEN, RESFRESH_TOKEN } from "@music/utils/pckeVerifier"
 import tokenCache from "@music/utils/tokenCache"
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 
@@ -34,18 +35,21 @@ class ApiService {
       (response: AxiosResponse) => response,
       async (error) => {
         const originalRequest = error.config
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (
+          error.response?.status === ERESPONSESTATUSCODE.UNAUTHORIZED &&
+          !originalRequest._retry
+        ) {
           originalRequest._retry = true
-          const accessToken = await this.getAccessToken()
+          const token = await this.getRefreshToken()
 
-          if (accessToken) {
+          if (token) {
             // Set the Authorization header with the new token
-            originalRequest.headers.Authorization = `Bearer ${accessToken}`
+            originalRequest.headers.Authorization = `Bearer ${token.access_token}`
 
             // Retry the original request with the new token
             return this.axiosInstance(originalRequest)
           }
-        } else if (error.response?.status === 403) {
+        } else if (error.response?.status === ERESPONSESTATUSCODE.FORBIDDEN) {
           // Handle logout if status is 403 (Forbidden)
           this.logout()
         }
@@ -64,6 +68,34 @@ class ApiService {
   private async logout(): Promise<void> {
     await tokenCache.deleteSaveToken(ACCESS_TOKEN)
     navigate(ESCREEN.LOGIN_SCREEN)
+  }
+
+  private async getRefreshToken(): Promise<IAuthRefreshTokenResponse> {
+    const refreshToken = await tokenCache.getToken(RESFRESH_TOKEN)
+    const clientId = process.env.EXPO_PUBLIC_CLIENT_ID
+    const grantType = "refresh_token"
+
+    const data = new URLSearchParams({
+      grant_type: grantType,
+      refresh_token: refreshToken,
+      client_id: clientId,
+    })
+    const response: IAuthRefreshTokenResponse = await axios.post(
+      process.env.EXPO_PUBLIC_REFRESH_TOKEN_API as string,
+      {
+        data,
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    )
+    if (response) {
+      await tokenCache.saveToken(ACCESS_TOKEN, response?.access_token)
+      await tokenCache.saveToken(RESFRESH_TOKEN, response?.refresh_token)
+    }
+    return response
   }
 
   public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
