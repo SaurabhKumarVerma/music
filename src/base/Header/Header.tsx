@@ -1,6 +1,5 @@
 import { BlurView } from "expo-blur"
 import { StyleSheet, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { MusicText } from "../MusicText/MusicText"
 import { AntDesign } from "@expo/vector-icons"
 import { color } from "@music/theme/color"
@@ -10,7 +9,6 @@ interface IHeader {
 }
 
 const Header = (props: IHeader) => {
-  const insets = useSafeAreaInsets()
   return (
     <View style={styles.container}>
       <BlurView intensity={100} style={styles.blurContainer}>

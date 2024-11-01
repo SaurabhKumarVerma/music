@@ -1,5 +1,6 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { ESCREEN } from "../../types/screen"
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
 
 export type BottomTabParamList = {
   [ESCREEN.BOTTOM_MAIN]: undefined
@@ -15,3 +16,17 @@ export type PlaceHomeTabProps = BottomTabScreenProps<BottomTabParamList, ESCREEN
 export type PlaceSearchTabProps = BottomTabScreenProps<BottomTabParamList, ESCREEN.BOTTOM_SEARCH>
 
 export type PlaceSettingTabProps = BottomTabScreenProps<BottomTabParamList, ESCREEN.BOTTOM_SETTING>
+
+export type RootStackParamList = {
+  [ESCREEN.MAIN_SCREEN]: undefined
+  [ESCREEN.SONG_LIST_DETAIL]: { artistId: string }
+  [ESCREEN.PLAYTRACK_SCREEN]: { songId: string }
+  [ESCREEN.PLAYING_TRACK]: undefined
+}
+
+export type PlaceSongListProps = NativeStackScreenProps<
+  RootStackParamList,
+  ESCREEN.SONG_LIST_DETAIL
+>
+
+export type PlayTrack = NativeStackScreenProps<RootStackParamList, ESCREEN.PLAYTRACK_SCREEN>

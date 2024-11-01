@@ -1,34 +1,59 @@
-/* eslint-disable react-native/no-inline-styles */
-import { FlatList, StyleSheet, View } from "react-native"
+import { FlatList, Pressable, StyleSheet, View } from "react-native"
 import Card from "@music/base/Card/TopPicksCard"
-import topPicksData from "@music/service/topPickdummydata"
 import { ITrack } from "@music/models/toptrack.interface"
+import { useAppSelector } from "@music/hook/hook"
+import { MusicText } from "@music/base/MusicText/MusicText"
+import { color } from "@music/theme/color"
+import { useNavigation } from "@react-navigation/native"
+import { PlaceSongListProps } from "@music/navigation/NavigationTypes/types"
+import { ESCREEN } from "@music/types/screen"
+
 const TopPick = () => {
+  const topTrackItems = useAppSelector((state) => state.topPicks.topTracks)
+  const { navigate } = useNavigation<PlaceSongListProps>()
+
   const renderItem = (item: ITrack) => {
+    console.log(" this is", item.artists[0].id)
+
     return (
-      <View style={{ marginRight: 20 }}>
+      <Pressable
+        onPress={() => navigate(ESCREEN.SONG_LIST_DETAIL, { artistId: item.artists[0].id })}
+        style={styles.cardContainer}
+      >
+        <MusicText
+          text={`More from ${item.album.artists[0].name}`}
+          preset="light"
+          size="sm"
+          style={styles.textStyles}
+        />
         <Card track={item} />
-      </View>
+      </Pressable>
     )
   }
 
   return (
-    <View style={{ paddingTop: 20 }}>
+    <View style={styles.container}>
       <FlatList
         horizontal
-        contentContainerStyle={{  marginTop: 20, }}
         showsHorizontalScrollIndicator={false}
-        data={topPicksData[0]?.items as any}
+        data={topTrackItems}
         renderItem={({ item }) => renderItem(item)}
       />
     </View>
   )
 }
 
-export default TopPick
-
 const styles = StyleSheet.create({
-  moreTextStyle: {
-    marginTop: 4,
+  cardContainer: {
+    marginRight: 20,
+  },
+  container: {
+    paddingTop: 20,
+  },
+  textStyles: {
+    color: color.grey4,
+    marginBottom: 10,
+    marginLeft: 8,
   },
 })
+export default TopPick

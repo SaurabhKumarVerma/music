@@ -4,7 +4,7 @@ import RootNavigator from "./navigation/RootNavigator"
 import { useAppDispatch, useAppSelector } from "./hook/hook"
 import AuthNavigator from "./navigation/AuthNavigator/AuthNavigator"
 import { useEffect } from "react"
-import { getRefreshToken, getStoreToken } from "./store/slice/userSlice"
+import { getRefreshToken, getStoreToken } from "./store/slice/authSlice"
 import { color } from "./theme/color"
 import MusicTrack from "./component/PlayingTrack/MusicTrack"
 

@@ -26,7 +26,7 @@ class ApiService {
       },
       (error) => {
         console.error("No API token:", error)
-        this.logout()
+        // this.logout()
         return Promise.reject(error)
       },
     )
@@ -43,23 +43,18 @@ class ApiService {
           const token = await this.getRefreshToken()
 
           if (token) {
-            // Set the Authorization header with the new token
             originalRequest.headers.Authorization = `Bearer ${token.access_token}`
-
-            // Retry the original request with the new token
             return this.axiosInstance(originalRequest)
           }
         } else if (error.response?.status === ERESPONSESTATUSCODE.FORBIDDEN) {
-          // Handle logout if status is 403 (Forbidden)
           this.logout()
         }
-
-        // Reject the error if it's not handled
         return Promise.reject(error)
       },
     )
   }
 
+  
   private async getAccessToken(): Promise<string | null> {
     const token = await tokenCache.getToken(ACCESS_TOKEN)
     return token ? (token as unknown as string) : null
@@ -67,23 +62,18 @@ class ApiService {
 
   private async logout(): Promise<void> {
     await tokenCache.deleteSaveToken(ACCESS_TOKEN)
+    await tokenCache.deleteSaveToken(RESFRESH_TOKEN)
     navigate(ESCREEN.LOGIN_SCREEN)
   }
 
   private async getRefreshToken(): Promise<IAuthRefreshTokenResponse> {
     const refreshToken = await tokenCache.getToken(RESFRESH_TOKEN)
-    const clientId = process.env.EXPO_PUBLIC_CLIENT_ID
-    const grantType = "refresh_token"
-
-    const data = new URLSearchParams({
-      grant_type: grantType,
-      refresh_token: refreshToken,
-      client_id: clientId,
-    })
-    const response: IAuthRefreshTokenResponse = await axios.post(
+    const response = await axios.post(
       process.env.EXPO_PUBLIC_REFRESH_TOKEN_API as string,
       {
-        data,
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+        client_id: process.env.EXPO_PUBLIC_CLIENT_ID,
       },
       {
         headers: {
@@ -91,11 +81,11 @@ class ApiService {
         },
       },
     )
-    if (response) {
+    if (response.data) {
       await tokenCache.saveToken(ACCESS_TOKEN, response?.access_token)
       await tokenCache.saveToken(RESFRESH_TOKEN, response?.refresh_token)
     }
-    return response
+    return response as unknown as IAuthRefreshTokenResponse
   }
 
   public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {

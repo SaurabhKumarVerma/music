@@ -1,4 +1,3 @@
-import { TokenResponse } from "expo-auth-session"
 import { StatusBarProps, StatusBarStyle } from "expo-status-bar"
 import { ReactNode } from "react"
 import { ViewStyle } from "react-native"
@@ -97,7 +96,7 @@ interface IAuthParams {
 }
 
 export interface AuthResponse {
-  authentication: TokenResponse | null
+  authentication: string | null
   error: IAuthError | null | undefined
   errorCode: string | null
   params: IAuthParams

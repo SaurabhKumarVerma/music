@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { StyleSheet, View } from "react-native"
 import MusicImage from "../MusicImage/MusicImage"
 import { DEVICE_WIDTH } from "@music/constant/constant"
@@ -7,6 +8,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import { color } from "@music/theme/color"
 import { ITrack } from "@music/models/toptrack.interface"
 import { images } from "../../../assets/index"
+import { extractDate } from "@music/utils/extractDate"
 interface ICard {
   track: ITrack
 }
@@ -23,39 +25,34 @@ const Card = (props: ICard) => {
         source={props.track.album?.images[0]?.url || images.variousArtisit}
         style={styles.imageStyle}
         contentFit="fill"
+        placeholder={images.defaultMusicImage}
       />
       <LinearGradient
-        colors={
-          imageColors
-            ? [
-                imageColors?.background,
-                // imageColors?.primary,
-                // imageColors?.detail,
-                imageColors.secondary,
-              ]
-            : [color.background]
-        }
+        colors={imageColors ? [imageColors?.background, imageColors.secondary] : [color.background]}
         style={styles.textContainerStyle}
       >
         <MusicText
-          text="Escape of the phoenix"
+          numberOfLines={1}
+          text={props.track.album.name}
           preset="largeHeading"
           size="lg"
-          style={{ fontWeight: "500" }}
+          style={{ fontWeight: "600", fontSize: 22 }}
         />
         <MusicText
-          text={props.track.album.name}
+          numberOfLines={1}
+          text={props.track.album.artists[0].name}
           weight="thin"
           size="xs"
           preset="thin"
           style={{ fontWeight: "500" }}
         />
         <MusicText
-          text="2021"
+          numberOfLines={1}
+          text={extractDate(props.track.album.release_date)}
           weight="thin"
           size="xs"
-          preset="thin"
-          style={{ fontWeight: "500" }}
+          preset="light"
+          style={{ fontWeight: "500", fontSize: 12 }}
         />
       </LinearGradient>
     </View>

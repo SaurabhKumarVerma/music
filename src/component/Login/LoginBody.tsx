@@ -6,18 +6,13 @@ import { Pressable, StyleSheet, View } from "react-native"
 import Left from "../../../assets/svg/leftLine.svg"
 import Right from "../../../assets/svg/rightLine.svg"
 import Spotify from "../../../assets/svg/spotify.svg"
-import { useEffect } from "react"
 import AUTH_CONFIG from "@music/config/config"
 import { AuthConfiguration, authorize } from "react-native-app-auth"
 import { useAppDispatch } from "@music/hook/hook"
-import { saveRefreshToken, storeUserToken } from "@music/store/slice/userSlice"
+import { saveRefreshToken, storeUserToken } from "@music/store/slice/authSlice"
 
 const LoginBody = () => {
   const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    console.log(" this hs response")
-  }, [])
 
   const onPress = async () => {
     const config = {
