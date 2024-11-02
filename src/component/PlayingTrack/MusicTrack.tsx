@@ -2,14 +2,13 @@
 /* eslint-disable prettier/prettier */
 import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT } from "@music/constant/constant"
 import { color } from "@music/theme/color"
-import { LinearGradient } from "expo-linear-gradient"
-import { Alert, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text } from "react-native"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
-import Animated, { clamp, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
+import Animated, { clamp, ReduceMotion, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
 
 
 const BASE_HEIGHT = BOTTOM_BAR_HEIGHT + 10
-const THRESHOLD = 10
+const THRESHOLD = 80
 const MusicTrack = () => {
     const translateY = useSharedValue(BASE_HEIGHT);
   const startTranslateY = useSharedValue(BASE_HEIGHT);
@@ -17,37 +16,64 @@ const MusicTrack = () => {
 
   const pan = Gesture.Pan()
         .onBegin(() => {
-            // Capture initial translation when scroll begins
             startTranslateY.value = translateY.value;
         })
         .onUpdate((event) => {
             const newHeight = startTranslateY.value - event.translationY;
-
-            // Ensure height doesn't exceed boundaries
-            translateY.value = Math.max(BASE_HEIGHT, Math.min(DEVICE_HEIGHT, newHeight));
+            translateY.value = clamp(newHeight, BASE_HEIGHT, DEVICE_HEIGHT);
           //   
             
         })
-        // .onEnd(() => {
-        //     // Snap back if close to base height, else keep current height
-        //     if (translateY.value < BASE_HEIGHT + 50) {
-        //         translateY.value = withSpring(BASE_HEIGHT);
-        //     } else if (translateY.value > DEVICE_HEIGHT - 50) {
-        //         translateY.value = withSpring(DEVICE_HEIGHT);
-        //     }
-        // })
-      .onTouchesMove(event => {
-        
-        if(event.allTouches[0].absoluteY < BASE_HEIGHT + 10){
-          startTranslateY.value = (DEVICE_HEIGHT - BASE_HEIGHT) 
-        } 
-        
-        else {
-          console.log('"startTranslateY', event.allTouches[0].absoluteY);
-          startTranslateY.value = event.allTouches[0].absoluteY
+        .onEnd(() => {
+          const halfHeight = DEVICE_HEIGHT * 0.50;
+          const secnodHalfHeight = DEVICE_HEIGHT * 0.4999
+          if (translateY.value > halfHeight) {
+            translateY.value = withSpring(DEVICE_HEIGHT - THRESHOLD, {
+              damping: 8,
+              reduceMotion: ReduceMotion.System,
+              mass: 1,
+              stiffness: 20,
+              overshootClamping: false,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 2,
+            });
+          } else if(translateY.value < secnodHalfHeight){
+            translateY.value = withSpring(clamp(translateY.value, DEVICE_HEIGHT, BASE_HEIGHT), {
+              damping: 6,
+              reduceMotion: ReduceMotion.System,
+              mass: 1,
+              stiffness: 20,
+              overshootClamping: false,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 2,
+            });
+          }
+           else {
+          translateY.value = withSpring(clamp(translateY.value, BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD), {
+            damping: 8,
+            reduceMotion: ReduceMotion.System,
+            mass: 1,
+            stiffness: 20,
+            overshootClamping: false,
+            restDisplacementThreshold: 0.01,
+            restSpeedThreshold: 2,
+          });
         }
+          // if()
+        })
+      // .onTouchesMove(event => {
         
-      })
+      //   if(event.allTouches[0].absoluteY < DEVICE_HEIGHT - 50){
+      //     console.log('"startTranslateY if con', event.allTouches[0].absoluteY);
+      //     startTranslateY.value = event.allTouches[0].absoluteY
+      //   } 
+        
+      //   else {
+      //     console.log('"startTranslateY else', event.allTouches[0].absoluteY);
+      //     translateY.value = (DEVICE_HEIGHT - BASE_HEIGHT) 
+      //   }
+        
+      // })
       .runOnJS(true);
 
     const boxAnimatedStyles = useAnimatedStyle(() => ({
