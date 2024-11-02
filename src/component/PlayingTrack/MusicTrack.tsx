@@ -126,7 +126,7 @@ const MusicTrack = () => {
   
     const width = interpolate(
       translateY.value,
-      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
+      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
       [200, 100, 50]
     );
   
