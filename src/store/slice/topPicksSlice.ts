@@ -33,7 +33,7 @@ const topPicksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(topPicks.pending, (state) => {
-      //   state.isLoading = true
+      state.isLoading = true
     })
     builder.addCase(topPicks.fulfilled, (state, action) => {
       state.topTracks = action.payload?.items

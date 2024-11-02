@@ -54,7 +54,6 @@ class ApiService {
     )
   }
 
-  
   private async getAccessToken(): Promise<string | null> {
     const token = await tokenCache.getToken(ACCESS_TOKEN)
     return token ? (token as unknown as string) : null

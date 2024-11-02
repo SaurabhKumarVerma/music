@@ -13,7 +13,7 @@ const HomeHeader = () => {
     <View style={styles.container}>
       <MusicText preset="bold" weight="extraBold" text="Listen Now" />
       {!profile ? (
-        <Animated.View entering={FadeInDown.duration(3000).delay(1000).damping(100)}>
+        <Animated.View>
           <MusicIcon name="user" size={30} color={color.selectedColor} />
         </Animated.View>
       ) : (
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginRight: 16,
   },
   profileStyle: {
     borderRadius: 20,

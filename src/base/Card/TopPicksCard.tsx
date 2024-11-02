@@ -22,7 +22,7 @@ const Card = (props: ICard) => {
     <View style={styles.container}>
       <MusicImage
         cachePolicy="memory"
-        source={props.track.album?.images[0]?.url || images.variousArtisit}
+        source={props.track.album?.images[0]?.url || images.variousArtist}
         style={styles.imageStyle}
         contentFit="fill"
         placeholder={images.defaultMusicImage}

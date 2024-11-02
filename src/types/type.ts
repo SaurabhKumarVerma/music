@@ -118,3 +118,8 @@ export interface IAuthRefreshTokenResponse {
   expires_in: number
   refresh_token: string
 }
+
+export const enum ETITLE_NAME {
+  TOP_PICKS = "Top Picks",
+  RECENTLY_PLAYED = "Recently Played",
+}
