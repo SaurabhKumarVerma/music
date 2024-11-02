@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
+import MediumCard from "@music/base/MediumCard/MediumCard"
 import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import { color } from "@music/theme/color"
@@ -20,122 +21,164 @@ const MusicTrack = () => {
   const { imageColors } = usePlayerBackground("https://picsum.photos/id/237/200/300") // testing adding this image
 
   const pan = Gesture.Pan()
-        .onBegin(() => {
-            startTranslateY.value = translateY.value;
-        })
-        .onUpdate((event) => {
-            const newHeight = startTranslateY.value - event.translationY;
-            translateY.value = clamp(newHeight, BASE_HEIGHT, DEVICE_HEIGHT);
-            
-        })
-        .onEnd(() => {
-          const halfHeight = DEVICE_HEIGHT * 0.50;
-          const secnodHalfHeight = DEVICE_HEIGHT * 0.4999
-          if (translateY.value > halfHeight) {
-            setShowGradient(true)
-            translateY.value = withSpring(DEVICE_HEIGHT - THRESHOLD, {
-              damping: 8,
-              reduceMotion: ReduceMotion.System,
-              mass: 1,
-              stiffness: 20,
-              overshootClamping: false,
-              restDisplacementThreshold: 0.01,
-              restSpeedThreshold: 2,
-            });
-          } else if(translateY.value < secnodHalfHeight){
-            setShowGradient(false)
-            translateY.value = withSpring(clamp(translateY.value, DEVICE_HEIGHT, BASE_HEIGHT), {
-              damping: 6,
-              reduceMotion: ReduceMotion.System,
-              mass: 1,
-              stiffness: 20,
-              overshootClamping: false,
-              restDisplacementThreshold: 0.01,
-              restSpeedThreshold: 2,
-            });
-          }
-           else {
-          translateY.value = withSpring(clamp(translateY.value, BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD), {
-            damping: 8,
-            reduceMotion: ReduceMotion.System,
-            mass: 1,
-            stiffness: 20,
-            overshootClamping: false,
-            restDisplacementThreshold: 0.01,
-            restSpeedThreshold: 2,
-          });
-        }
-        })
-      .runOnJS(true);
+    .onBegin(() => {
+      startTranslateY.value = translateY.value;
+    })
+    .onUpdate((event) => {
+      const newHeight = startTranslateY.value - event.translationY;
+      translateY.value = clamp(newHeight, BASE_HEIGHT, DEVICE_HEIGHT);
 
-      const boxAnimatedStyles = useAnimatedStyle(() => {
-        const backgroundColor = interpolateColor(
-          translateY.value,
-          [1, DEVICE_HEIGHT],
-          imageColors ? [imageColors.background, imageColors.primary, imageColors.secondary]:['rgba(0,0,0,0.8)', 'rgb(255, 255, 255)'] ,
-          'RGB',
-        {
-          gamma: 3.2,
-        }
-        );
-      
-        return {
-          height: translateY.value,
-          backgroundColor,
-          opacity: interpolate(
-            translateY.value,
-            [0, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
-            [0.5, 0.8, 1]
-          ),
-        };
-      });
+    })
+    .onEnd(() => {
+      const halfHeight = DEVICE_HEIGHT * 0.50;
+      const secnodHalfHeight = DEVICE_HEIGHT * 0.4999
+      if (translateY.value > halfHeight) {
+        setShowGradient(true)
+        translateY.value = withSpring(DEVICE_HEIGHT - THRESHOLD, {
+          damping: 8,
+          reduceMotion: ReduceMotion.System,
+          mass: 1,
+          stiffness: 20,
+          overshootClamping: false,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 2,
+        });
+      } else if (translateY.value < secnodHalfHeight) {
+        setShowGradient(false)
+        translateY.value = withSpring(clamp(translateY.value, DEVICE_HEIGHT, BASE_HEIGHT), {
+          damping: 6,
+          reduceMotion: ReduceMotion.System,
+          mass: 1,
+          stiffness: 20,
+          overshootClamping: false,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 2,
+        });
+      }
+      else {
+        translateY.value = withSpring(clamp(translateY.value, BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD), {
+          damping: 8,
+          reduceMotion: ReduceMotion.System,
+          mass: 1,
+          stiffness: 20,
+          overshootClamping: false,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 2,
+        });
+      }
+    })
+    .runOnJS(true);
 
-      const animateIndicator = useAnimatedStyle(() => {
-        const height = interpolate(
-          translateY.value,
-          [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
-          [0, 10,10]
-        );
-      
-        const marginTop = interpolate(
-          translateY.value,
-          [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
-          [0, 25, 50]
-        );
-      
-        const opacity = interpolate(
-          translateY.value,
-          [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
-          [0, 1]
-        );
-      
-        return {
-          height,
-          marginTop,
-          opacity,
-        };
-      });
-       
+  const boxAnimatedStyles = useAnimatedStyle(() => {
+    const backgroundColor = interpolateColor(
+      translateY.value,
+      [1, DEVICE_HEIGHT],
+      imageColors ? [imageColors.background, imageColors.primary, imageColors.secondary] : ['rgba(0,0,0,0.8)', 'rgb(255, 255, 255)'],
+      'RGB',
+      {
+        gamma: 3.2,
+      }
+    );
+
+    return {
+      height: translateY.value,
+      backgroundColor,
+      opacity: interpolate(
+        translateY.value,
+        [0, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
+        [0.5, 0.8, 1]
+      ),
+    };
+  });
+
+  const animateIndicator = useAnimatedStyle(() => {
+    const height = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
+      [0, 10, 10]
+    );
+
+    const marginTop = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
+      [0, 25, 50]
+    );
+
+    const opacity = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
+      [0, 1]
+    );
+
+    return {
+      height,
+      marginTop,
+      opacity,
+    };
+  });
+
+  const animateHeightWidth = useAnimatedStyle(() => {
+    const height = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
+      [200, 100, 50]
+    );
+  
+    const width = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
+      [200, 100, 50]
+    );
+  
+    const opacity = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
+      [0, 1]
+    );
+  
+    const translateX = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT],
+      [0, (DEVICE_HEIGHT - width) / 8]
+    );
+  
+    return {
+      height,
+      width,
+      opacity,
+      transform: [{ translateX }],
+    };
+  });
+  
+
 
   return (
     <GestureDetector gesture={pan}>
-    <Animated.View style={[styles.container,  boxAnimatedStyles,]}>
-      <Animated.View  style={[styles.music, boxAnimatedStyles]}>
-     
-      {showGradient && (
-        <LinearGradient
-          colors={imageColors ? [imageColors.background, imageColors.primary, imageColors.secondary]: color.background}
-          style={{ ...StyleSheet.absoluteFillObject }}
-        />
-      )}
-      <Animated.View>
-      <Text style={{ color: 'white'}} >MusicTrack</Text>
-      <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]}/>
+      <Animated.View style={[styles.container, boxAnimatedStyles,]}>
+        <Animated.View style={[styles.music, boxAnimatedStyles]}>
+
+          {showGradient && (
+            <LinearGradient
+              colors={imageColors ? [imageColors.background, imageColors.primary, imageColors.secondary] : color.background}
+              style={{ ...StyleSheet.absoluteFillObject }}
+            />
+          )}
+          <Animated.View>
+            {/* <Text style={{ color: 'white' }} >MusicTrack</Text> */}
+            <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]} />
+            <Animated.View style={animateHeightWidth}>
+              <MediumCard
+                imageUrl="https://picsum.photos/seed/picsum/200/300"
+                songOrAlbumName="I'm Someone New "
+                imageHeight={animateHeightWidth.height}
+                imageWidth={animateHeightWidth.width}
+              />
+            </Animated.View>
+          </Animated.View>
+
+
+        </Animated.View>
       </Animated.View>
-       
-        
-      </Animated.View>
-    </Animated.View>
     </GestureDetector>
   )
 }
@@ -146,21 +189,21 @@ const styles = StyleSheet.create({
   bottomSheetIndicator: {
     alignSelf: 'center',
     backgroundColor: color.selectedColor,
-    borderRadius: 10, 
+    borderRadius: 10,
     overflow: "visible",
     width: DEVICE_WIDTH * 0.14,
   },
   container: {
+    borderRadius: 10,
     bottom: BOTTOM_BAR_HEIGHT + 2,
     left: 1,
     overflow: "hidden",
     position: "absolute",
     right: 1,
-    zIndex: 1,
-    borderRadius: 10
-    
+    zIndex: 1
+
   },
-  music : {
+  music: {
     backgroundColor: color.spotifyGreen,
   }
 })
