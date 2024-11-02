@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT } from "@music/constant/constant"
+import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import { color } from "@music/theme/color"
 import { LinearGradient } from "expo-linear-gradient"
@@ -8,6 +8,7 @@ import { useState } from "react"
 import { StyleSheet, Text } from "react-native"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import Animated, { clamp, interpolate, interpolateColor, ReduceMotion, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 
 const BASE_HEIGHT = 50 + 10
@@ -89,17 +90,50 @@ const MusicTrack = () => {
         };
       });
 
+      const animateIndicator = useAnimatedStyle(() => {
+        const height = interpolate(
+          translateY.value,
+          [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
+          [0, 10,10]
+        );
+      
+        const marginTop = interpolate(
+          translateY.value,
+          [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - 90],
+          [0, 25, 50]
+        );
+      
+        const opacity = interpolate(
+          translateY.value,
+          [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
+          [0, 1]
+        );
+      
+        return {
+          height,
+          marginTop,
+          opacity,
+        };
+      });
+       
+
   return (
     <GestureDetector gesture={pan}>
-    <Animated.View style={[styles.container, boxAnimatedStyles,]}>
+    <Animated.View style={[styles.container,  boxAnimatedStyles,]}>
       <Animated.View  style={[styles.music, boxAnimatedStyles]}>
+     
       {showGradient && (
         <LinearGradient
           colors={imageColors ? [imageColors.background, imageColors.primary, imageColors.secondary]: color.background}
           style={{ ...StyleSheet.absoluteFillObject }}
         />
       )}
-        <Text >MusicTrack</Text>
+      <Animated.View>
+      <Text style={{ color: 'white'}} >MusicTrack</Text>
+      <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]}/>
+      </Animated.View>
+       
+        
       </Animated.View>
     </Animated.View>
     </GestureDetector>
@@ -109,6 +143,13 @@ const MusicTrack = () => {
 export default MusicTrack
 
 const styles = StyleSheet.create({
+  bottomSheetIndicator: {
+    alignSelf: 'center',
+    backgroundColor: color.selectedColor,
+    borderRadius: 10, 
+    width: DEVICE_WIDTH * 0.14,
+    overflow: "visible",
+  },
   container: {
     bottom: BOTTOM_BAR_HEIGHT + 2,
     left: 1,
