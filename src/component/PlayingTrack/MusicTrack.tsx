@@ -72,7 +72,7 @@ const MusicTrack = () => {
         const backgroundColor = interpolateColor(
           translateY.value,
           [1, DEVICE_HEIGHT],
-          ['rgba(0,0,0,0.8)', 'rgb(255, 255, 255)'],
+          imageColors ? [imageColors.background, imageColors.primary, imageColors.secondary]:['rgba(0,0,0,0.8)', 'rgb(255, 255, 255)'] ,
           'RGB',
         {
           gamma: 3.2,
@@ -147,16 +147,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: color.selectedColor,
     borderRadius: 10, 
-    width: DEVICE_WIDTH * 0.14,
     overflow: "visible",
+    width: DEVICE_WIDTH * 0.14,
   },
   container: {
     bottom: BOTTOM_BAR_HEIGHT + 2,
     left: 1,
-    overflow: "visible",
+    overflow: "hidden",
     position: "absolute",
     right: 1,
     zIndex: 1,
+    borderRadius: 10
     
   },
   music : {
