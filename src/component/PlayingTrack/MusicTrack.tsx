@@ -1,24 +1,27 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import MediumCard from "@music/base/MediumCard/MediumCard"
 import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import { color } from "@music/theme/color"
+import { Image } from "expo-image"
 import { LinearGradient } from "expo-linear-gradient"
 import { useState } from "react"
-import { StyleSheet, Text } from "react-native"
+import { StyleSheet } from "react-native"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import Animated, { clamp, interpolate, interpolateColor, ReduceMotion, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 
 const BASE_HEIGHT = 50 + 10
 const THRESHOLD = 80
+
+const AnimatedImage = Animated.createAnimatedComponent(Image)
 const MusicTrack = () => {
   const translateY = useSharedValue(BASE_HEIGHT);
+  const animatedHeight = useSharedValue(50)
+  const animatedWidth = useSharedValue(50)
   const startTranslateY = useSharedValue(BASE_HEIGHT);
   const [showGradient, setShowGradient] = useState(false)
-  const { imageColors } = usePlayerBackground("https://picsum.photos/id/237/200/300") // testing adding this image
+  const { imageColors } = usePlayerBackground("https://picsum.photos/200/300?grayscale") // testing adding this image
 
   const pan = Gesture.Pan()
     .onBegin(() => {
@@ -101,7 +104,7 @@ const MusicTrack = () => {
     const marginTop = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
-      [0, 25, 50]
+      [0, 30, 60]
     );
 
     const opacity = interpolate(
@@ -119,27 +122,30 @@ const MusicTrack = () => {
 
   const animateHeightWidth = useAnimatedStyle(() => {
     const height = interpolate(
-      translateY.value,
+      animatedHeight.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
-      [200, 100, 50]
+      [200, 100, 50],
+      "clamp"
     );
   
     const width = interpolate(
-      translateY.value,
+      animatedWidth.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
-      [200, 100, 50]
+      [200, 100, 50],
+       "clamp"
     );
   
     const opacity = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
-      [0, 1]
+      [0, 1],
+       "clamp"
     );
   
     const translateX = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT],
-      [0, (DEVICE_HEIGHT - width) / 8]
+      [0, (DEVICE_HEIGHT - width) / 6]
     );
   
     return {
@@ -150,7 +156,47 @@ const MusicTrack = () => {
     };
   });
   
+  const animatedImageStyle = useAnimatedStyle(() => {
+    const height = interpolate(
+      animatedHeight.value,
+      [50, DEVICE_HEIGHT - 90],
+      [200, 50],
+    );
 
+   const width = interpolate(
+    animatedWidth.value,
+    [50, DEVICE_HEIGHT - 90],
+      [200, 50],
+   )
+
+   const marginTop = interpolate(
+    animatedHeight.value,
+    [0, DEVICE_HEIGHT - 90],
+    [20, 0]
+   )
+
+   const opacity = interpolate(
+    translateY.value,
+    [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
+    [0, 1]
+  );
+
+  const borderRadius = interpolate(
+    animatedHeight.value,
+    [10, DEVICE_HEIGHT - 90],
+    [4, 10]
+  )
+
+    return {
+      height,
+      width,
+      marginTop,
+      opacity,
+      borderRadius
+    };
+  });
+
+  
 
   return (
     <GestureDetector gesture={pan}>
@@ -167,12 +213,8 @@ const MusicTrack = () => {
             {/* <Text style={{ color: 'white' }} >MusicTrack</Text> */}
             <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]} />
             <Animated.View style={animateHeightWidth}>
-              <MediumCard
-                imageUrl="https://picsum.photos/seed/picsum/200/300"
-                songOrAlbumName="I'm Someone New "
-                imageHeight={animateHeightWidth.height}
-                imageWidth={animateHeightWidth.width}
-              />
+              <AnimatedImage cachePolicy="memory" style={[styles.imageStyle, animatedImageStyle]}
+              source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
             </Animated.View>
           </Animated.View>
 
@@ -202,6 +244,9 @@ const styles = StyleSheet.create({
     right: 1,
     zIndex: 1
 
+  },
+  imageStyle: {
+    flex: 1
   },
   music: {
     backgroundColor: color.spotifyGreen,
