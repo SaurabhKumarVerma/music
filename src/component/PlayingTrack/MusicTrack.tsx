@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
+import MusicImage from "@music/base/MusicImage/MusicImage"
 import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import { color } from "@music/theme/color"
@@ -14,14 +15,11 @@ import Animated, { clamp, interpolate, interpolateColor, ReduceMotion, useAnimat
 const BASE_HEIGHT = 50 + 10
 const THRESHOLD = 80
 
-const AnimatedImage = Animated.createAnimatedComponent(Image)
 const MusicTrack = () => {
   const translateY = useSharedValue(BASE_HEIGHT);
-  const animatedHeight = useSharedValue(50)
-  const animatedWidth = useSharedValue(50)
   const startTranslateY = useSharedValue(BASE_HEIGHT);
   const [showGradient, setShowGradient] = useState(false)
-  const { imageColors } = usePlayerBackground("https://picsum.photos/200/300?grayscale") // testing adding this image
+  const { imageColors } = usePlayerBackground("https://img.icons8.com/fluency/48/music-library.png") // testing adding this image
 
   const pan = Gesture.Pan()
     .onBegin(() => {
@@ -89,7 +87,7 @@ const MusicTrack = () => {
       opacity: interpolate(
         translateY.value,
         [0, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
-        [0.5, 0.8, 1]
+        [1, 0.5, 1]
       ),
     };
   });
@@ -120,82 +118,88 @@ const MusicTrack = () => {
     };
   });
 
+  
   const animateHeightWidth = useAnimatedStyle(() => {
     const height = interpolate(
-      animatedHeight.value,
-      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
-      [200, 100, 50],
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [50, 200],
       "clamp"
     );
   
     const width = interpolate(
-      animatedWidth.value,
-      [BASE_HEIGHT, DEVICE_HEIGHT - 500, DEVICE_HEIGHT - THRESHOLD],
-      [200, 100, 50],
-       "clamp"
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [50, 200],
+      "clamp"
     );
   
     const opacity = interpolate(
       translateY.value,
-      [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
-      [0, 1],
-       "clamp"
+      [BASE_HEIGHT, DEVICE_HEIGHT * 0.3],
+      [1, 0],
+      "clamp"
     );
   
     const translateX = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT],
-      [0, (DEVICE_HEIGHT - width) / 6]
+      [0, (DEVICE_WIDTH - 200) / 2],
+      "clamp"
     );
   
-    return {
-      height,
-      width,
-      opacity,
-      transform: [{ translateX }],
-    };
-  });
+    // Maintain border radius during animation
+    const borderRadius = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [10, 20],
+      "clamp"
+    );
   
-  const animatedImageStyle = useAnimatedStyle(() => {
-    const height = interpolate(
-      animatedHeight.value,
-      [50, DEVICE_HEIGHT - 90],
-      [200, 50],
+    const marginTop = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [6, 20],
+      "clamp"
     );
 
-   const width = interpolate(
-    animatedWidth.value,
-    [50, DEVICE_HEIGHT - 90],
-      [200, 50],
-   )
+    const marginLeft = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [10, 0],
+      "clamp"
+    );
 
-   const marginTop = interpolate(
-    animatedHeight.value,
-    [0, DEVICE_HEIGHT - 90],
-    [20, 0]
-   )
-
-   const opacity = interpolate(
-    translateY.value,
-    [BASE_HEIGHT, DEVICE_HEIGHT * 0.1],
-    [0, 1]
-  );
-
-  const borderRadius = interpolate(
-    animatedHeight.value,
-    [10, DEVICE_HEIGHT - 90],
-    [4, 10]
-  )
-
+    const marginBottom = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [10, 0],
+      "clamp"
+    )
+  
     return {
       height,
       width,
       marginTop,
-      opacity,
-      borderRadius
+      borderRadius,
+      marginLeft,
+      marginBottom,
+      transform: [{ translateX }],
     };
   });
 
+  const animatedImageMarginLeft = useAnimatedStyle(() => {
+    const marginLeft = interpolate(
+      translateY.value,
+      [0, DEVICE_HEIGHT - 90],
+      [DEVICE_WIDTH / 2 - 100, 10],
+      "clamp"
+    );
+  
+    return {
+      marginLeft,
+    };
+  });
   
 
   return (
@@ -212,10 +216,14 @@ const MusicTrack = () => {
           <Animated.View>
             {/* <Text style={{ color: 'white' }} >MusicTrack</Text> */}
             <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]} />
-            <Animated.View style={animateHeightWidth}>
+            {/* <Animated.View style={animateHeightWidth}>
               <AnimatedImage cachePolicy="memory" style={[styles.imageStyle, animatedImageStyle]}
               source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
-            </Animated.View>
+            </Animated.View> */}
+            <Animated.View style={[{marginLeft: animatedImageMarginLeft.marginLeft},styles.imageStyle,animateHeightWidth]}>
+            <MusicImage cachePolicy="memory" style={{ flex: 1, width: null, height: null }}
+              source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
+          </Animated.View>
           </Animated.View>
 
 
@@ -246,7 +254,12 @@ const styles = StyleSheet.create({
 
   },
   imageStyle: {
-    flex: 1
+    // flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    overflow: 'hidden',
+    // alignItems: 'center',
+    // alignSelf: 'center'
   },
   music: {
     backgroundColor: color.spotifyGreen,
