@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
+import { AntDesign } from "@expo/vector-icons"
 import MusicImage from "@music/base/MusicImage/MusicImage"
 import { BOTTOM_BAR_HEIGHT, DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import { color } from "@music/theme/color"
-import { Image } from "expo-image"
 import { LinearGradient } from "expo-linear-gradient"
 import { useState } from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
+import { Slider } from "react-native-awesome-slider"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import Animated, { clamp, interpolate, interpolateColor, ReduceMotion, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
 
@@ -18,6 +19,9 @@ const THRESHOLD = 80
 const MusicTrack = () => {
   const translateY = useSharedValue(BASE_HEIGHT);
   const startTranslateY = useSharedValue(BASE_HEIGHT);
+  const progress = useSharedValue(50);
+  const min = useSharedValue(0);
+  const max = useSharedValue(100);
   const [showGradient, setShowGradient] = useState(false)
   const { imageColors } = usePlayerBackground("https://img.icons8.com/fluency/48/music-library.png") // testing adding this image
 
@@ -118,44 +122,36 @@ const MusicTrack = () => {
     };
   });
 
-  
+
   const animateHeightWidth = useAnimatedStyle(() => {
     const height = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
-      [50, 200],
+      [50, 250],
       "clamp"
     );
-  
+
     const width = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
-      [50, 200],
+      [50, 250],
       "clamp"
     );
-  
-    const opacity = interpolate(
-      translateY.value,
-      [BASE_HEIGHT, DEVICE_HEIGHT * 0.3],
-      [1, 0],
-      "clamp"
-    );
-  
+
     const translateX = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT],
-      [0, (DEVICE_WIDTH - 200) / 2],
+      [0, (DEVICE_WIDTH - 200) / 2.2],
       "clamp"
     );
-  
-    // Maintain border radius during animation
+
     const borderRadius = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
       [10, 20],
       "clamp"
     );
-  
+
     const marginTop = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
@@ -176,7 +172,7 @@ const MusicTrack = () => {
       [10, 0],
       "clamp"
     )
-  
+
     return {
       height,
       width,
@@ -195,12 +191,84 @@ const MusicTrack = () => {
       [DEVICE_WIDTH / 2 - 100, 10],
       "clamp"
     );
-  
+
     return {
       marginLeft,
     };
   });
-  
+
+  const animatedSongTitle = useAnimatedStyle(() => {
+
+    const translateX = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [0, (DEVICE_HEIGHT - THRESHOLD) * 0.14],
+      "clamp"
+    );
+
+    const opacity = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT * 0.3, DEVICE_HEIGHT - THRESHOLD],
+      [1, 0, 0],
+      "clamp"
+    );
+
+    const marginTop = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD, DEVICE_HEIGHT],
+      [0, 50, 0],
+      "clamp"
+    );
+
+    return {
+      opacity,
+      marginTop,
+      transform: [{ translateY: translateX }],
+    }
+  })
+
+  const animatedController = useAnimatedStyle(() => {
+
+    const translateX = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
+      [0, (DEVICE_HEIGHT - THRESHOLD) * 0.00001],
+      "clamp"
+    );
+
+    const opacity = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT * 0.3, DEVICE_HEIGHT - THRESHOLD],
+      [0, 0.5, 1],
+      "clamp"
+    );
+
+    const marginTop = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD, DEVICE_HEIGHT],
+      [0, 50, 50],
+      "clamp"
+    );
+
+    return {
+      opacity,
+      marginTop,
+      transform: [{ translateY: translateX }],
+    }
+  })
+
+  const animateOpacity= useAnimatedStyle(() => {
+    const opacity = interpolate(
+      translateY.value,
+      [BASE_HEIGHT, DEVICE_HEIGHT * 0.3, DEVICE_HEIGHT - THRESHOLD],
+      [0, 0, 1],
+      "clamp"
+    );
+
+    return {
+      opacity
+    }
+  })
 
   return (
     <GestureDetector gesture={pan}>
@@ -213,17 +281,52 @@ const MusicTrack = () => {
               style={{ ...StyleSheet.absoluteFillObject }}
             />
           )}
-          <Animated.View>
-            {/* <Text style={{ color: 'white' }} >MusicTrack</Text> */}
+          <Animated.View style={{ width: '100%', }}>
             <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]} />
-            {/* <Animated.View style={animateHeightWidth}>
-              <AnimatedImage cachePolicy="memory" style={[styles.imageStyle, animatedImageStyle]}
-              source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
-            </Animated.View> */}
-            <Animated.View style={[{marginLeft: animatedImageMarginLeft.marginLeft},styles.imageStyle,animateHeightWidth]}>
-            <MusicImage cachePolicy="memory" style={{ flex: 1, width: null, height: null }}
-              source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
-          </Animated.View>
+
+            <Animated.View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', alignItems: 'center', }}>
+              <Animated.View style={[{ marginLeft: animatedImageMarginLeft.marginLeft }, styles.imageStyle, animateHeightWidth]}>
+                <MusicImage cachePolicy="memory" style={{ flex: 1, width: null, height: null }}
+                  source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
+              </Animated.View>
+
+              <Animated.View>
+                <Animated.Text numberOfLines={1} style={[{ marginLeft: 10, }, animatedSongTitle]}>Bayaan</Animated.Text>
+              </Animated.View>
+
+              <Animated.View style={[{ flexDirection: "row", marginRight: 20, }, animatedSongTitle]}>
+                <AntDesign name="caretright" size={28} color={color.white} />
+                <AntDesign name="forward" size={28} color={color.white} style={{ marginLeft: 18 }} />
+              </Animated.View>
+
+
+            </Animated.View>
+
+            <Animated.View style={[styles.songTitleStyle, animatedController]}>
+              <Animated.Text numberOfLines={1} style={[{ marginLeft: 10, alignSelf: 'center', marginBottom: 50, marginTop: 20 }, animateOpacity]}>Various</Animated.Text>
+
+              <Animated.View style={[{ marginTop: 10, alignItems: 'center', marginBottom: 50 }, animateOpacity]}>
+                <Slider
+                  style={{ width: DEVICE_WIDTH - 100 }}
+                  progress={progress}
+                  minimumValue={min}
+                  maximumValue={max}
+
+                />
+              </Animated.View>
+              <Animated.View style={[{ alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row' }, animateOpacity]}>
+
+                <View style={{ flexDirection: 'row', width: '90%', alignItems: 'center', justifyContent: 'space-around', }}>
+                  <AntDesign name="banckward" size={34} color={color.white} />
+                  <AntDesign name="play" size={34} color={color.white} />
+                  <AntDesign name="forward" size={34} color={color.white} />
+                </View>
+
+              </Animated.View>
+            </Animated.View>
+
+
+
           </Animated.View>
 
 
@@ -263,5 +366,9 @@ const styles = StyleSheet.create({
   },
   music: {
     backgroundColor: color.spotifyGreen,
+  },
+  songTitleStyle: {
+    width: '90%',
+    alignSelf: 'center'
   }
 })
