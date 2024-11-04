@@ -2,17 +2,21 @@ import { IRecentPlayedTrack } from "@music/models/recentlyPlayed.interface"
 import apiService from "@music/service/api/api"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
-  data: [],
+interface IRecentPlayed {
+  data: IRecentPlayedTrack[] | null
+  isRecentlyPlayedLoading: boolean
+}
+
+const initialState: IRecentPlayed = {
+  data: null,
   isRecentlyPlayedLoading: false,
 }
 
 export const recentlyPlayed = createAsyncThunk("song/recently-played", async (param, thunkAPI) => {
   try {
-    const response = await apiService.get("me/player/recently-played")
-    console.log(" thi sis response", response)
+    const response = await apiService.get("me/player/recently-played?limit=5")
 
-    return response as unknown as IRecentPlayedTrack
+    return response.data as unknown as IRecentPlayedTrack
   } catch (error) {
     thunkAPI.rejectWithValue("Error")
   }

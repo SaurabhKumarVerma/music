@@ -127,21 +127,21 @@ const MusicTrack = () => {
     const height = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
-      [50, 250],
+      [50, 400],
       "clamp"
     );
 
     const width = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT - THRESHOLD],
-      [50, 250],
+      [50, 400],
       "clamp"
     );
 
     const translateX = interpolate(
       translateY.value,
       [BASE_HEIGHT, DEVICE_HEIGHT],
-      [0, (DEVICE_WIDTH - 200) / 2.2],
+      [0, 22],
       "clamp"
     );
 
@@ -285,7 +285,7 @@ const MusicTrack = () => {
             <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]} />
 
             <Animated.View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', alignItems: 'center', }}>
-              <Animated.View style={[{ marginLeft: animatedImageMarginLeft.marginLeft }, styles.imageStyle, animateHeightWidth]}>
+              <Animated.View style={[{ marginLeft: animatedImageMarginLeft.marginLeft , }, styles.imageStyle, animateHeightWidth,]}>
                 <MusicImage cachePolicy="memory" style={{ flex: 1, width: null, height: null }}
                   source={{ uri: "https://picsum.photos/seed/picsum/200/300" }} />
               </Animated.View>
@@ -357,7 +357,6 @@ const styles = StyleSheet.create({
 
   },
   imageStyle: {
-    // flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
     overflow: 'hidden',

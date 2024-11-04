@@ -16,4 +16,5 @@ export const SCOPES: string[] = [
   "user-library-read",
   "user-read-email",
   "user-read-private",
+  "user-read-recently-played",
 ]
