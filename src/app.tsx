@@ -7,6 +7,7 @@ import { useEffect } from "react"
 import { getRefreshToken, getStoreToken } from "./store/slice/authSlice"
 import { color } from "./theme/color"
 import MusicTrack from "./component/PlayingTrack/MusicTrack"
+import FloatingScreen from "./screen/FloatingScreen/FloatingScreen"
 
 interface IMain {
   navigationRef: any
@@ -33,7 +34,7 @@ const Main = (props: IMain) => {
 
   return (
     <NavigationContainer ref={props.navigationRef} linking={props.linking} theme={props.appTheme}>
-      {auth.access_token === null ? (
+      {!auth.access_token === null ? (
         <>
           <AuthNavigator />
         </>
@@ -65,3 +66,5 @@ const styles = StyleSheet.create({
   //     zIndex: 1,
   //   },
 })
+
+

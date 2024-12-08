@@ -10,6 +10,7 @@ import { listen } from "@music/store/slice/listenStore"
 import TopPick from "./TopPick"
 import Loading from "@music/base/Loading/Loading"
 import { recentlyPlayed } from "@music/store/slice/recentlyPlayedSlice"
+import { ETITLE_NAME } from "@music/types/type"
 
 export default function Home() {
   const insets = useSafeAreaInsets()
@@ -18,6 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(listen())
+    dispatch(recentlyPlayed())
   }, [])
 
   if (isLoading) {
@@ -26,6 +28,23 @@ export default function Home() {
         <Loading isVisible={isLoading} />
       </View>
     )
+  }
+
+
+  console.log(" listenData", listenData);
+  
+
+  const showData = (section: any) => {
+    console.log(" this is show Data", section.data);
+    
+    if (section === ETITLE_NAME.TOP_PICKS) {
+      return (
+        <>
+          <MusicText text={section.title} preset="bold" style={styles.titleStyle} />
+          {/* <TopPick data={section.data} /> */}
+        </>
+      )
+    }
   }
 
   return (
@@ -44,12 +63,7 @@ export default function Home() {
           return null
         }}
         showsHorizontalScrollIndicator={false}
-        renderSectionHeader={({ section }) => (
-          <>
-            <MusicText text={section.title} preset="bold" style={styles.titleStyle} />
-            <TopPick data={section.data} />
-          </>
-        )}
+        renderSectionHeader={({ section }) => <>{showData(section)}</>}
       />
 
       {/* <View style={styles.topPicsContainer}>

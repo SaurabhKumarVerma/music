@@ -11,6 +11,7 @@ import { StyleSheet, View } from "react-native"
 import { Slider } from "react-native-awesome-slider"
 import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import Animated, { clamp, interpolate, interpolateColor, ReduceMotion, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
+import Volume from "../Volume/Volume"
 
 
 const BASE_HEIGHT = 50 + 10
@@ -281,7 +282,7 @@ const MusicTrack = () => {
               style={{ ...StyleSheet.absoluteFillObject }}
             />
           )}
-          <Animated.View style={{ width: '100%', }}>
+          <Animated.ScrollView scrollEnabled={false} style={{ width: '100%', }}>
             <Animated.View style={[styles.bottomSheetIndicator, animateIndicator]} />
 
             <Animated.View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', alignItems: 'center', }}>
@@ -305,7 +306,7 @@ const MusicTrack = () => {
             <Animated.View style={[styles.songTitleStyle, animatedController]}>
               <Animated.Text numberOfLines={1} style={[{ marginLeft: 10, alignSelf: 'center', marginBottom: 50, marginTop: 20 }, animateOpacity]}>Various</Animated.Text>
 
-              <Animated.View style={[{ marginTop: 10, alignItems: 'center', marginBottom: 50 }, animateOpacity]}>
+              {/* <Animated.View style={[{ marginTop: 10, alignItems: 'center', marginBottom: 50 }, animateOpacity]}>
                 <Slider
                   style={{ width: DEVICE_WIDTH - 100 }}
                   progress={progress}
@@ -313,7 +314,7 @@ const MusicTrack = () => {
                   maximumValue={max}
 
                 />
-              </Animated.View>
+              </Animated.View> */}
               <Animated.View style={[{ alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row' }, animateOpacity]}>
 
                 <View style={{ flexDirection: 'row', width: '90%', alignItems: 'center', justifyContent: 'space-around', }}>
@@ -324,10 +325,13 @@ const MusicTrack = () => {
 
               </Animated.View>
             </Animated.View>
+            
+            <Animated.View>
+              <Volume opacityProps={animateOpacity} />
+            </Animated.View>
 
 
-
-          </Animated.View>
+          </Animated.ScrollView>
 
 
         </Animated.View>
@@ -364,7 +368,7 @@ const styles = StyleSheet.create({
     // alignSelf: 'center'
   },
   music: {
-    backgroundColor: color.spotifyGreen,
+    // backgroundColor: color.spotifyGreen,
   },
   songTitleStyle: {
     width: '90%',

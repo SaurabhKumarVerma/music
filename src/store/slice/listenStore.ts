@@ -23,6 +23,7 @@ export const listen = createAsyncThunk(
 
       const state = getState() as RootState
       const topTracksData = state.topPicks?.topTracks || []
+      const recentlyPlayedData = state.recentlyPlayedStore.data || []
       //   const userData = state.userStore?.profile || []
 
       return [
