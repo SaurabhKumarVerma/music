@@ -19,14 +19,15 @@ export type PlaceSettingTabProps = BottomTabScreenProps<BottomTabParamList, ESCR
 
 export type RootStackParamList = {
   [ESCREEN.MAIN_SCREEN]: undefined
-  [ESCREEN.SONG_LIST_DETAIL]: { artistId: string }
+  [ESCREEN.SONG_LIST_DETAIL]: { artistId: string; artistName: string }
   [ESCREEN.PLAYTRACK_SCREEN]: { songId: string }
   [ESCREEN.PLAYING_TRACK]: undefined
 }
 
-export type PlaceSongListProps = NativeStackScreenProps<
-  RootStackParamList,
-  ESCREEN.SONG_LIST_DETAIL
->
+export type SongParamList = {
+  [ESCREEN.SONG_LIST_DETAIL]: { artistId: string; artistName: string }
+}
+
+export type PlaceSongListProps = NativeStackScreenProps<SongParamList, ESCREEN.SONG_LIST_DETAIL>
 
 export type PlayTrack = NativeStackScreenProps<RootStackParamList, ESCREEN.PLAYTRACK_SCREEN>

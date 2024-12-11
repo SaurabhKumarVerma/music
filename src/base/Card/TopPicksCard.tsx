@@ -64,12 +64,12 @@ export default Card
 const styles = StyleSheet.create({
   container: {
     overflow: "hidden",
-    width: DEVICE_WIDTH * 0.6,
+    width: DEVICE_WIDTH * 0.5,
   },
   imageStyle: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 280,
+    height: 220,
     width: DEVICE_WIDTH * 0.6,
   },
   textContainerStyle: {

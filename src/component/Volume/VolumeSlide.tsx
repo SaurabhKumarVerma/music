@@ -22,7 +22,7 @@ const springConfig = {
   stiffness: 50,
 }
 
-const sideWidth = 250
+const SIDE_WIDTH = 250
 const VolumeSlide = () => {
   const innerWidth = useSharedValue(0)
   const startWidth = useSharedValue(0)
@@ -38,8 +38,8 @@ const VolumeSlide = () => {
     .onEnd(() => {
       if (innerWidth.value < 0) {
         innerWidth.value = 0
-      } else if (innerWidth.value >= sideWidth) {
-        innerWidth.value = sideWidth
+      } else if (innerWidth.value >= SIDE_WIDTH) {
+        innerWidth.value = SIDE_WIDTH
       }
 
       startWidth.value = innerWidth.value
@@ -49,14 +49,14 @@ const VolumeSlide = () => {
     })
 
   const barProps = useAnimatedProps(() => ({
-    width: interpolate(innerWidth.value, [0, sideWidth], [0, sideWidth], {
+    width: interpolate(innerWidth.value, [0, SIDE_WIDTH], [0, SIDE_WIDTH], {
       extrapolateLeft: Extrapolation.CLAMP,
       extrapolateRight: Extrapolation.CLAMP,
     }),
   }))
 
   const volPercentage = useDerivedValue(() => {
-    return interpolate(innerWidth.value, [0, 140], [0, 100], {
+    return interpolate(innerWidth.value, [0, SIDE_WIDTH], [0, 100], {
       extrapolateLeft: Extrapolation.CLAMP,
       extrapolateRight: Extrapolation.CLAMP,
     })
@@ -75,6 +75,14 @@ const VolumeSlide = () => {
     height: onVolumeBarPressed.value ? onVolumeBarPressed.value : 10,
   }))
 
+  const interpolatedInnerWidth = useDerivedValue(() => {
+    const value = interpolate(innerWidth.value, [0, SIDE_WIDTH], [0, 240], {
+      extrapolateLeft: Extrapolation.CLAMP,
+      extrapolateRight: Extrapolation.CLAMP,
+    })
+    return value
+  })
+
   return (
     <GestureDetector gesture={gesture}>
       <View
@@ -90,16 +98,16 @@ const VolumeSlide = () => {
         </View>
 
         <Svg
-          width={sideWidth}
+          width={SIDE_WIDTH}
           height="14"
-          viewBox={`0 0 ${sideWidth} 10`}
+          viewBox={`0 0 ${SIDE_WIDTH} 10`}
           fill="#000000"
           xmlns="http://www.w3.org/2000/svg"
           color={"#000000"}
         >
           <Rect
             y="0.5"
-            width={`${sideWidth}`}
+            width={`${SIDE_WIDTH}`}
             height="12"
             rx="8"
             fill={color.grey}
@@ -109,7 +117,7 @@ const VolumeSlide = () => {
         </Svg>
 
         <View style={{ marginLeft: 20 }}>
-          <Volumeup animatedProps={innerWidth.value} outerBar={outerBar} />
+          <Volumeup innerWidth={interpolatedInnerWidth.value} />
         </View>
       </View>
     </GestureDetector>

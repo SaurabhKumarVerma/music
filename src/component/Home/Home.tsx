@@ -30,18 +30,12 @@ export default function Home() {
     )
   }
 
-
-  console.log(" listenData", listenData);
-  
-
   const showData = (section: any) => {
-    console.log(" this is show Data", section.data);
-    
-    if (section === ETITLE_NAME.TOP_PICKS) {
+    if (section.title === ETITLE_NAME.TOP_PICKS) {
       return (
         <>
           <MusicText text={section.title} preset="bold" style={styles.titleStyle} />
-          {/* <TopPick data={section.data} /> */}
+          <TopPick data={section.data} />
         </>
       )
     }

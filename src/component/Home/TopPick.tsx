@@ -18,11 +18,16 @@ const TopPick = (props: ITopPick) => {
   const renderItem = (item: ITrack) => {
     return (
       <Pressable
-        onPress={() => navigate(ESCREEN.SONG_LIST_DETAIL, { artistId: item.artists[0].id })}
+        onPress={() =>
+          navigate(ESCREEN.SONG_LIST_DETAIL, {
+            artist: item.artists[0],
+            artistName: item?.album?.artists[0].name,
+          })
+        }
         style={styles.cardContainer}
       >
         <MusicText
-          text={`More from ${item?.album?.artists[0]?.name}` || ""}
+          text={`${item?.album?.artists[0]?.name}` || ""}
           preset="light"
           size="sm"
           style={styles.textStyles}
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   textStyles: {
-    color: color.grey4,
+    color: color.gainsboro,
     marginBottom: 10,
     marginLeft: 8,
   },

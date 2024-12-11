@@ -34,7 +34,7 @@ const Main = (props: IMain) => {
 
   return (
     <NavigationContainer ref={props.navigationRef} linking={props.linking} theme={props.appTheme}>
-      {!auth.access_token === null ? (
+      {auth.access_token === null ? (
         <>
           <AuthNavigator />
         </>
