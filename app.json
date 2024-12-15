@@ -52,10 +52,25 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/icons/icomoon.ttf","./assets/fonts/SFProRegular.otf","./assets/fonts/SFProBold.otf", "./assets/fonts/SFProHeavy.otf", "./assets/fonts/SFProLight.otf", "./assets/fonts/SFProMedium.otf","./assets/fonts/SFProSemibold.otf", "./assets/fonts/SFProThin.otf", "./assets/fonts/SFProUltralight.otf"
-        ]
+          "fonts": [
+            "./assets/icons/icomoon.ttf",
+            "./assets/fonts/SFProRegular.otf",
+            "./assets/fonts/SFProBold.otf",
+            "./assets/fonts/SFProHeavy.otf",
+            "./assets/fonts/SFProLight.otf",
+            "./assets/fonts/SFProMedium.otf",
+            "./assets/fonts/SFProSemibold.otf",
+            "./assets/fonts/SFProThin.otf",
+            "./assets/fonts/SFProUltralight.otf"
+          ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a821b92a-fed7-4078-a050-bb94e34c6adf"
+      }
+    },
+    "owner": "saurabh7071"
   }
 }
