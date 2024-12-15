@@ -43,3 +43,4 @@ yarn-error.*
 #google-service
 .google-services.json
 .GoogleService-Info.plist
+eas.json
