@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 
 interface IHeader {
   title: string
+  subtitle?: string
 }
 
 const Header = (props: IHeader) => {
@@ -19,16 +20,19 @@ const Header = (props: IHeader) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={goBack}>
-        <AntDesign name="left" size={18} color={color.white} />
+        <AntDesign name="left" size={20} color={color.white} />
       </Pressable>
 
-      <MusicText
-        size="xs"
-        preset="bold"
-        weight="bold"
-        text={props.title}
-        style={styles.textStyle}
-      />
+      <View style={styles.titleContainer}>
+        <MusicText preset="subheading" weight="bold" text={props.title} style={styles.textStyle} />
+        <MusicText
+          size="xxs"
+          preset="subHeading"
+          weight="bold"
+          text={props.subtitle}
+          style={[styles.textStyle, { color: color.grey6, marginTop: 4 }]}
+        />
+      </View>
     </View>
   )
 }
@@ -44,5 +48,12 @@ const styles = StyleSheet.create({
   textStyle: {
     color: color.white,
     marginLeft: 8,
+    textAlign: "center",
+  },
+  titleContainer: {
+    alignItems: "center",
+    alignSelf: "center",
+    flex: 1,
+    textAlign: "center",
   },
 })

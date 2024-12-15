@@ -40,4 +40,5 @@ export const color = {
   dividerColor: "#646468",
   deepBlack: "#000000",
   background: ["#000000", "#FFFFFF"],
+  rippleColor: "rgba(31, 31, 31, 0.5)",
 }

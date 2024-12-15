@@ -18,7 +18,7 @@ export const topPicks = createAsyncThunk(
   async (param: EUSER_TOP_ITEM = EUSER_TOP_ITEM.TRACKS, thunkAPI: GetThunkAPI<any>) => {
     try {
       const response = await apiService.get<ISpotifyTopTracksResponse>(
-        `me/top/${param}?time_range=${EUSER_TOP_ITEM_TIME_RANGE.LONG_TERM}&limit=5`,
+        `me/top/${param}?time_range=${EUSER_TOP_ITEM_TIME_RANGE.LONG_TERM}&limit=10`,
       )
       return response.data
     } catch (error) {
