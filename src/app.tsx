@@ -43,7 +43,7 @@ const Main = (props: IMain) => {
           {/* <View style={{overflow: 'visible', zIndex: 1}}>
             <FloatingScreen />
           </View> */}
-          <MusicTrack />
+          {/* <MusicTrack /> */}
           <RootNavigator />
         </>
       )}

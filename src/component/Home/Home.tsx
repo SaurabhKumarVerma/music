@@ -11,13 +11,35 @@ import TopPick from "./TopPick"
 import Loading from "@music/base/Loading/Loading"
 import { recentlyPlayed } from "@music/store/slice/recentlyPlayedSlice"
 import { ETITLE_NAME } from "@music/types/type"
+import TrackPlayer from "react-native-track-player"
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 
 export default function Home() {
   const insets = useSafeAreaInsets()
   const dispatch = useAppDispatch()
   const { listenData, isLoading } = useAppSelector((state) => state.listenStore)
 
+  const start = async () => {
+    // Set up the player
+    await TrackPlayer.setupPlayer()
+
+    // Add a track to the queue
+    await TrackPlayer.add({
+      id: "trackId",
+      url: "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+      title: "Track Title",
+      artist: "Track Artist",
+      artwork: "https://picsum.photos/200/300?grayscale",
+    })
+
+    // Start playing it
+    await TrackPlayer.play()
+  }
+
   useEffect(() => {
+    // start()
+    console.log('DeviceHeight', DEVICE_HEIGHT)
+    console.log('DeviceWidth', DEVICE_WIDTH)
     dispatch(listen())
     dispatch(recentlyPlayed())
   }, [])

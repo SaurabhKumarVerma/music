@@ -1,7 +1,7 @@
-import { StyleSheet, View } from "react-native"
+import { Pressable, StyleSheet, View } from "react-native"
 import { MusicText } from "../MusicText/MusicText"
 import MusicImage from "../MusicImage/MusicImage"
-import AntDesign from "@expo/vector-icons/AntDesign"
+import Entypo from "@expo/vector-icons/Entypo"
 import { color } from "@music/theme/color"
 import { formatString } from "@music/utils/utils"
 import LoaderKit from "react-native-loader-kit"
@@ -15,6 +15,11 @@ interface ISmallCard {
 }
 
 const SmallCard = (props: ISmallCard) => {
+
+  const showMenuToggle = (event) => {
+    console.log(event.nativeEvent.pageY)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.imagePlaceholderContainer}>
@@ -35,7 +40,9 @@ const SmallCard = (props: ISmallCard) => {
           </View>
         </View>
       </View>
-      <AntDesign name="right" size={20} color={color.grey5} />
+      <Pressable onPress={showMenuToggle}>
+        <Entypo name="dots-three-vertical" size={20} color={color.grey5} />
+      </Pressable>
     </View>
   )
 }
@@ -47,6 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
+    position: 'relative'
   },
   iconStyle: {
     marginLeft: 12,
