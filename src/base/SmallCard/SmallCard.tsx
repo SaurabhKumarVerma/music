@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from "react-native"
+import { GestureResponderEvent, Pressable, StyleSheet, View } from "react-native"
 import { MusicText } from "../MusicText/MusicText"
 import MusicImage from "../MusicImage/MusicImage"
 import Entypo from "@expo/vector-icons/Entypo"
@@ -12,12 +12,14 @@ interface ISmallCard {
   isPlaying?: string
   artistName?: string
   // artist: string
+  showMenuToggle?: (data: GestureResponderEvent | undefined) => void
 }
 
 const SmallCard = (props: ISmallCard) => {
+  const onClickThreeDot = (data: GestureResponderEvent) => {
+    console.log("data", data.nativeEvent.touches)
 
-  const showMenuToggle = (event) => {
-    console.log(event.nativeEvent.pageY)
+    props.showMenuToggle && props.showMenuToggle(data)
   }
 
   return (
@@ -40,7 +42,7 @@ const SmallCard = (props: ISmallCard) => {
           </View>
         </View>
       </View>
-      <Pressable onPress={showMenuToggle}>
+      <Pressable onPress={onClickThreeDot} hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
         <Entypo name="dots-three-vertical" size={20} color={color.grey5} />
       </Pressable>
     </View>
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    position: 'relative'
+    position: "relative",
   },
   iconStyle: {
     marginLeft: 12,

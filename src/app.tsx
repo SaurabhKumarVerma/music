@@ -8,6 +8,7 @@ import { getRefreshToken, getStoreToken } from "./store/slice/authSlice"
 import { color } from "./theme/color"
 import MusicTrack from "./component/PlayingTrack/MusicTrack"
 import FloatingScreen from "./screen/FloatingScreen/FloatingScreen"
+import MusicMenu from "./base/MusicMenu/MusicMenu"
 
 interface IMain {
   navigationRef: any
@@ -17,6 +18,7 @@ interface IMain {
 
 const Main = (props: IMain) => {
   const auth = useAppSelector((state) => state.authStore)
+  const {isActive} = useAppSelector((state) => state.menuStore)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -47,6 +49,7 @@ const Main = (props: IMain) => {
           <RootNavigator />
         </>
       )}
+      {isActive ? <MusicMenu /> : null}
     </NavigationContainer>
   )
 }

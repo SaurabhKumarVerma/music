@@ -123,3 +123,10 @@ export const enum ETITLE_NAME {
   TOP_PICKS = "Top Picks",
   RECENTLY_PLAYED = "Recently Played",
 }
+
+export interface IMenuData {
+  id: number
+  icon: string
+  title: string
+  onClick: () => void
+}

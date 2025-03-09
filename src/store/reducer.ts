@@ -6,6 +6,7 @@ import userSlice from "./slice/userSlice"
 import listenStore from "./slice/listenStore"
 import recentlyPlayedSlice from "./slice/recentlyPlayedSlice"
 import artistStore from "./slice/artistSlice"
+import menuStore from "./slice/menuSlice"
 
 const rootReducer = combineReducers({
   globalStore: globalSlice,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   listenStore,
   recentlyPlayedStore: recentlyPlayedSlice,
   artist: artistStore,
+  menuStore,
 })
 
 export default rootReducer

@@ -40,11 +40,7 @@ const Header = (props: IHeader) => {
           style={[styles.textStyle, { color: color.grey6, marginTop: 4 }]}
         />
       </View>
-      <BlurView
-        // tint={"light"}
-        intensity={80}
-        style={{ ...StyleSheet.absoluteFillObject, backgroundColor: "transparent", opacity: 1 ,}}
-      />
+      {/* <BlurView intensity={46} tint="dark" style={styles.blurStyle} /> */}
     </View>
   )
 }
@@ -52,9 +48,13 @@ const Header = (props: IHeader) => {
 export default Header
 
 const styles = StyleSheet.create({
+  blurStyle: {
+    ...StyleSheet.absoluteFillObject,
+    overflow: "hidden",
+  },
   container: {
     alignItems: "center",
-    // backgroundColor: "transparent",
+    backgroundColor: "transparent",
     flexDirection: "row",
     // backgroundColor: "rgba(0, 0, 0, 0.9)",
     // opacity: 1
