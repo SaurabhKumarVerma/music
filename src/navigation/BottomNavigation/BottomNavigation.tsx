@@ -6,6 +6,7 @@ import SettingScreen from "@music/screen/SettingScreen/SettingScreen"
 import CustomBottomTabBar from "./CustomTabBar"
 import HomeScreen from "@music/screen/HomeScreen/HomeScreen"
 import LoginScreen from "@music/screen/LoginScreen/LoginScreen"
+import { BlurView } from "expo-blur"
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator<BottomTabParamList>()
@@ -17,7 +18,20 @@ const BottomNavigation = () => {
   return (
     <Tabs.Navigator
       initialRouteName={ESCREEN.HOME_SCREEN}
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        tabBarBackground: () => (
+          <BlurView
+            intensity={100}
+            tint="systemChromeMaterialLight"
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              overflow: "hidden",
+              // backgroundColor: "transparent",
+            }}
+          />
+        ),
+      }}
       tabBar={CustomBottomTabs}
     >
       {/* <Tabs.Screen name={ESCREEN.LOGIN_SCREEN} component={LoginScreen} /> */}

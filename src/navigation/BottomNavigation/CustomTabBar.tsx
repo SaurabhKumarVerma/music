@@ -13,9 +13,9 @@ const BlurAnimatedView = Animated.createAnimatedComponent(BlurView)
 const CustomBottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const MARGIN = 0
   return (
-    <BlurAnimatedView
-      tint="regular"
-      intensity={100}
+    <View
+      // tint="regular"
+      // intensity={100}
       style={[styles.container, { width: "100%", bottom: MARGIN }]}
     >
       {state.routes.map((route, index) => {
@@ -61,7 +61,7 @@ const CustomBottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProp
           </Pressable>
         )
       })}
-    </BlurAnimatedView>
+    </View>
     // </Shadow>
   )
 }
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: color.deepBlack,
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
     borderTopColor: color.mediumGray,
     borderTopWidth: 0.2,
     flexDirection: "row",

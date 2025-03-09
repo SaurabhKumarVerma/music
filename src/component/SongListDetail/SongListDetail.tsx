@@ -49,15 +49,15 @@ const SongListDetail = () => {
   }
 
   return (
-    <View style={{ top: insets.top, flex: 1 }}>
-      <View>
-        <Header title={`Browser Top Tracks`} subtitle={props.params?.artist?.name} />
-      </View>
+    <View style={{ flex: 1 }}>
+      <Header title={`Browser Top Tracks`} subtitle={props.params?.artist?.name} />
 
       <FlatList
         data={artistData.tracks as IArtistSpotifyTrack}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => renderItem(item)}
+        style={styles.flatListStyle}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   )
@@ -69,5 +69,8 @@ const styles = StyleSheet.create({
   cardStyle: {
     marginHorizontal: 16,
     marginVertical: 12,
+  },
+  flatListStyle: {
+    paddingTop: 10,
   },
 })

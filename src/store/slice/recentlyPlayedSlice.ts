@@ -31,7 +31,7 @@ const recentlyPlayedSlice = createSlice({
       state.isRecentlyPlayedLoading = true
     })
     builder.addCase(recentlyPlayed.fulfilled, (state, action) => {
-      state.data = action.payload
+      state.data = action.payload || undefined
       state.isRecentlyPlayedLoading = false
     })
     builder.addCase(recentlyPlayed.rejected, (state, action) => {

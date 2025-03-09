@@ -34,7 +34,7 @@
         "backgroundColor": "#000000"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.anonymous.music"
+      "package": "com.anonymous.music",
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -73,6 +73,5 @@
       }
     },
     "owner": "saurabh7071",
-    "experiments": true
   }
 }

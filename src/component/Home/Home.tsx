@@ -37,9 +37,6 @@ export default function Home() {
   }
 
   useEffect(() => {
-    // start()
-    console.log('DeviceHeight', DEVICE_HEIGHT)
-    console.log('DeviceWidth', DEVICE_WIDTH)
     dispatch(listen())
     dispatch(recentlyPlayed())
   }, [])
@@ -53,9 +50,19 @@ export default function Home() {
   }
 
   const showData = (section: any) => {
+    if (section.title === ETITLE_NAME.RECENTLY_PLAYED) {
+      return (
+        <>
+            <MusicText text={section.title} preset="bold" style={styles.titleStyle} />
+            <TopPick data={section.data} />
+        </>
+      )
+    }
     if (section.title === ETITLE_NAME.TOP_PICKS) {
       return (
         <>
+          <MusicText text={section.title} preset="bold" style={styles.titleStyle} />
+          <TopPick data={section.data} />
           <MusicText text={section.title} preset="bold" style={styles.titleStyle} />
           <TopPick data={section.data} />
         </>

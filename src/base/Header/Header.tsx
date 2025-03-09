@@ -3,6 +3,8 @@ import { MusicText } from "../MusicText/MusicText"
 import { AntDesign } from "@expo/vector-icons"
 import { color } from "@music/theme/color"
 import { useNavigation } from "@react-navigation/native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { BlurView } from "expo-blur"
 
 interface IHeader {
   title: string
@@ -11,6 +13,7 @@ interface IHeader {
 
 const Header = (props: IHeader) => {
   const navigation = useNavigation()
+  const insets = useSafeAreaInsets()
 
   const goBack = () => {
     if (navigation.canGoBack()) {
@@ -18,8 +21,12 @@ const Header = (props: IHeader) => {
     }
   }
   return (
-    <View style={styles.container}>
-      <Pressable onPress={goBack}>
+    <View style={[styles.container, { paddingTop: insets.top, paddingLeft: 14 }]}>
+      <Pressable
+        onPress={goBack}
+        hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
+        style={{ zIndex: 10 }}
+      >
         <AntDesign name="left" size={20} color={color.white} />
       </Pressable>
 
@@ -33,6 +40,11 @@ const Header = (props: IHeader) => {
           style={[styles.textStyle, { color: color.grey6, marginTop: 4 }]}
         />
       </View>
+      <BlurView
+        // tint={"light"}
+        intensity={80}
+        style={{ ...StyleSheet.absoluteFillObject, backgroundColor: "transparent", opacity: 1 ,}}
+      />
     </View>
   )
 }
@@ -42,18 +54,23 @@ export default Header
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    // backgroundColor: "transparent",
     flexDirection: "row",
-    marginLeft: 10,
+    // backgroundColor: "rgba(0, 0, 0, 0.9)",
+    // opacity: 1
   },
   textStyle: {
     color: color.white,
     marginLeft: 8,
     textAlign: "center",
+    zIndex: 10,
   },
   titleContainer: {
     alignItems: "center",
     alignSelf: "center",
     flex: 1,
+    paddingBottom: 10,
     textAlign: "center",
+    zIndex: 10,
   },
 })
