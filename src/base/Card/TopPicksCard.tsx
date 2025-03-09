@@ -9,6 +9,7 @@ import { color } from "@music/theme/color"
 import { ITrack } from "@music/models/toptrack.interface"
 import { images } from "../../../assets/index"
 import { extractDate } from "@music/utils/extractDate"
+import { BLUR_HASH } from "@music/types/type"
 interface ICard {
   track: ITrack
 }
@@ -25,7 +26,9 @@ const Card = (props: ICard) => {
         source={props.track.album?.images[0]?.url || images.variousArtist}
         style={styles.imageStyle}
         contentFit="fill"
-        placeholder={images.defaultMusicImage}
+        placeholder={BLUR_HASH}
+        priority={"high"}
+        transition={2000}
       />
       <LinearGradient
         colors={imageColors ? [imageColors?.background, imageColors.secondary] : [color.background]}
