@@ -6,5 +6,4 @@
 
 @interface AppDelegate : EXAppDelegateWrapper <RNAppAuthAuthorizationFlowManager>
 @property(nonatomic, weak) id<RNAppAuthAuthorizationFlowManagerDelegate> authorizationFlowManagerDelegate;
-
 @end
