@@ -35,6 +35,7 @@
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.anonymous.music",
+      "experimentalblurmethod": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
