@@ -54,7 +54,7 @@ const TopPick = (props: ITopPick) => {
 const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 20,
-    zIndex: -10
+    zIndex: -10,
   },
   container: {
     marginLeft: 16,

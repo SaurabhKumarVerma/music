@@ -6,16 +6,13 @@ import { color } from "@music/theme/color"
 import * as Haptics from "expo-haptics"
 import { BOTTOM_BAR_HEIGHT } from "@music/constant/constant"
 import { BlurView } from "expo-blur"
-import Animated from "react-native-reanimated"
-
-const BlurAnimatedView = Animated.createAnimatedComponent(BlurView)
 
 const CustomBottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const MARGIN = 0
   return (
-    <View
-      // tint="regular"
-      // intensity={100}
+    <BlurView
+      tint="dark"
+      intensity={20}
       style={[styles.container, { width: "100%", bottom: MARGIN }]}
     >
       {state.routes.map((route, index) => {
@@ -61,7 +58,7 @@ const CustomBottomTabBar = ({ state, descriptors, navigation }: BottomTabBarProp
           </Pressable>
         )
       })}
-    </View>
+    </BlurView>
     // </Shadow>
   )
 }
@@ -72,14 +69,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    // backgroundColor: "rgba(0, 0, 0, 0.8)",
     borderTopColor: color.mediumGray,
     borderTopWidth: 0.2,
     flexDirection: "row",
     flex: 1,
     height: BOTTOM_BAR_HEIGHT,
     justifyContent: "space-around",
-    overflow: "hidden",
+    // overflow: "hidden",
     position: "absolute",
   },
   content: {

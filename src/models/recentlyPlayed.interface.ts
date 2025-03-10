@@ -6,7 +6,7 @@ export interface IRecentPlayedTrack {
   href: string
 }
 
-interface RecentlyPlayedItem {
+export interface RecentlyPlayedItem {
   track: Track
   played_at: string
   context: Context | null

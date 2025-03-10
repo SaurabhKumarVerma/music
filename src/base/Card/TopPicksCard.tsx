@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { StyleSheet, View } from "react-native"
 import MusicImage from "../MusicImage/MusicImage"
-import { DEVICE_WIDTH } from "@music/constant/constant"
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { MusicText } from "../MusicText/MusicText"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import { LinearGradient } from "expo-linear-gradient"
@@ -67,13 +67,13 @@ export default Card
 const styles = StyleSheet.create({
   container: {
     overflow: "hidden",
-    width: DEVICE_WIDTH * 0.5,
+    width: DEVICE_WIDTH * 0.5
   },
   imageStyle: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: 220,
-    width: DEVICE_WIDTH * 0.6,
+    height: DEVICE_HEIGHT * 0.2,
+    width: DEVICE_WIDTH * 0.5,
   },
   textContainerStyle: {
     alignItems: "center",

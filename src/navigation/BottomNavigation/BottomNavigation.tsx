@@ -5,8 +5,6 @@ import SearchScreen from "@music/screen/SearchScreen/SearchScreen"
 import SettingScreen from "@music/screen/SettingScreen/SettingScreen"
 import CustomBottomTabBar from "./CustomTabBar"
 import HomeScreen from "@music/screen/HomeScreen/HomeScreen"
-import { BlurView } from "expo-blur"
-import { StyleSheet } from "react-native"
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator<BottomTabParamList>()
@@ -20,9 +18,6 @@ const BottomNavigation = () => {
       initialRouteName={ESCREEN.HOME_SCREEN}
       screenOptions={{
         headerShown: false,
-        tabBarBackground: () => (
-          <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.container} />
-        ),
       }}
       tabBar={CustomBottomTabs}
     >
@@ -32,11 +27,4 @@ const BottomNavigation = () => {
     </Tabs.Navigator>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    overflow: "hidden",
-  },
-})
 export default BottomNavigation

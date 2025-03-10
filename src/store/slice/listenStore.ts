@@ -19,16 +19,21 @@ export const listen = createAsyncThunk(
   "listen/song",
   async (_, { dispatch, getState, rejectWithValue }) => {
     try {
-      await Promise.all([dispatch(userProfile()), dispatch(topPicks()), dispatch(recentlyPlayed())])
+      await Promise.allSettled([
+        dispatch(userProfile()),
+        dispatch(topPicks()),
+        dispatch(recentlyPlayed()),
+      ])
 
       const state = getState() as RootState
       const topTracksData = state.topPicks?.topTracks || []
       const recentlyPlayedData = state.recentlyPlayedStore || []
+      // console.log('recentlyPlayedData.data', recentlyPlayedData.data);
       //   const userData = state.userStore?.profile || []
 
       return [
         { title: ETITLE_NAME.TOP_PICKS, data: topTracksData },
-        { title: ETITLE_NAME.RECENTLY_PLAYED, data: [] },
+        { title: ETITLE_NAME.RECENTLY_PLAYED, data: recentlyPlayedData.data },
       ]
     } catch (error) {
       return rejectWithValue("Failed To Fetch Value")

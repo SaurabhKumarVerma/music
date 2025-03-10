@@ -16,7 +16,7 @@ export const recentlyPlayed = createAsyncThunk("song/recently-played", async (pa
   try {
     const response = await apiService.get("me/player/recently-played?limit=5")
 
-    return response.data as unknown as IRecentPlayedTrack
+    return response.data.items as unknown as IRecentPlayedTrack
   } catch (error) {
     thunkAPI.rejectWithValue("Error")
   }
