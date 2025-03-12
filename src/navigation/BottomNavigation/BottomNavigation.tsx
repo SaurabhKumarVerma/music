@@ -5,6 +5,7 @@ import SearchScreen from "@music/screen/SearchScreen/SearchScreen"
 import SettingScreen from "@music/screen/SettingScreen/SettingScreen"
 import CustomBottomTabBar from "./CustomTabBar"
 import HomeScreen from "@music/screen/HomeScreen/HomeScreen"
+import AudioBooksScreen from "@music/screen/AudioBooksScreen/AudioBooksScreen"
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator<BottomTabParamList>()
@@ -24,6 +25,7 @@ const BottomNavigation = () => {
       <Tabs.Screen name={ESCREEN.HOME_SCREEN} component={HomeScreen} />
       <Tabs.Screen name={ESCREEN.SEARCH_SCREEN} component={SearchScreen} />
       <Tabs.Screen name={ESCREEN.SETTING_SCREEN} component={SettingScreen} />
+      <Tabs.Screen name={ESCREEN.AUDIO_BOOKS_SCREEN} component={AudioBooksScreen} />
     </Tabs.Navigator>
   )
 }

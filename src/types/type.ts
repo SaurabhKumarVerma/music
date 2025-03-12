@@ -18,6 +18,7 @@ export const enum ESCREENICON {
   SETTING = "cog",
   OUTLINE_LOGIN = "people-outline",
   LOGIN = "people-sharp",
+  AUDIOBOOKS = "book-outline",
 }
 export interface ITokenCache {
   getToken: (key: string) => Promise<string | undefined | null>

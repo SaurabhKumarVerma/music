@@ -9,6 +9,7 @@ export type BottomTabParamList = {
   [ESCREEN.HOME_SCREEN]: undefined
   [ESCREEN.SEARCH_SCREEN]: undefined
   [ESCREEN.SETTING_SCREEN]: undefined
+  [ESCREEN.AUDIO_BOOKS_SCREEN]: undefined
 }
 
 export type PlaceHomeTabProps = BottomTabScreenProps<BottomTabParamList, ESCREEN.BOTTOM_MAIN>
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   [ESCREEN.SONG_LIST_DETAIL]: { artistId: string; artistName: string }
   [ESCREEN.PLAYTRACK_SCREEN]: { songId: string }
   [ESCREEN.PLAYING_TRACK]: undefined
+  [ESCREEN.ARTIST_SCREEN]: undefined
 }
 
 export type SongParamList = {

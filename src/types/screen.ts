@@ -12,4 +12,6 @@ export const enum ESCREEN {
   "BOTTOM_SEARCH" = "BOTTOM_SEARCH",
   "BOTTOM_SETTING" = "BOTTOM_SETTING",
   "SONG_LIST_DETAIL" = "songDetailList",
+  "ARTIST_SCREEN" = "artist",
+  "AUDIO_BOOKS_SCREEN" = "audioBooks",
 }

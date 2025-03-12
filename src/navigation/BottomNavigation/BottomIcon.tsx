@@ -14,19 +14,21 @@ interface IBottomIcon {
   index: number
 }
 
-type RouteNames = "Home" | "Setting" | "Search"
+type RouteNames = "Home" | "Setting" | "Search" | "AudioBooks"
 
 const BottomIcon = (props: IBottomIcon) => {
   const routeMap: Record<RouteNames, ESCREENICON> = {
     Home: ESCREENICON.OUTLINE_PLAY,
     Setting: ESCREENICON.OUTLINE_SETTING,
     Search: ESCREENICON.SEARCH,
+    AudioBooks: ESCREENICON.AUDIOBOOKS,
   }
 
   const selectedRouteMap: Record<RouteNames, ESCREENICON> = {
     Home: ESCREENICON.PLAY,
     Setting: ESCREENICON.SETTING,
     Search: ESCREENICON.SEARCH,
+    AudioBooks: ESCREENICON.AUDIOBOOKS,
   }
 
   const routeName = (name: string): string => {
@@ -57,7 +59,7 @@ const BottomIcon = (props: IBottomIcon) => {
             preset="medium"
             style={{
               color: props.isFocused ? color.selectedColor : color.mediumGray,
-              fontSize: 12,
+              fontSize: 10,
               fontWeight: "700",
               overflow: "hidden",
               textAlign: "center",

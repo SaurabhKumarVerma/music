@@ -4,6 +4,7 @@ import { ESCREEN } from "@music/types/screen"
 import PlayTrackModal from "./StackNavigation/HomeStack"
 import { RootStackParamList } from "./NavigationTypes/types"
 import SongListDetail from "@music/component/SongListDetail/SongListDetail"
+import ArtistScreen from "@music/screen/ArtistScreen/ArtistScreen"
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -27,6 +28,7 @@ const RootNavigator = () => {
         }}
       />
       <Stack.Screen name={ESCREEN.SONG_LIST_DETAIL} component={SongListDetail} />
+      <Stack.Screen name={ESCREEN.ARTIST_SCREEN} component={ArtistScreen} />
     </Stack.Navigator>
   )
 }

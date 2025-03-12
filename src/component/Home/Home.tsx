@@ -47,7 +47,7 @@ export default function Home() {
   }
 
   const showData = (section: any) => {
-    if (section.title === ETITLE_NAME.RECENTLY_PLAYED) {
+    if (section?.title === ETITLE_NAME?.RECENTLY_PLAYED) {
       return (
         <View>
           <View
@@ -74,11 +74,11 @@ export default function Home() {
         </View>
       )
     }
-    if (section.title === ETITLE_NAME.TOP_PICKS) {
+    if (section?.title === ETITLE_NAME?.TOP_PICKS) {
       return (
         <>
           <MusicText text={section.title} preset="bold" size="lg" style={styles.titleStyle} />
-          <TopPick data={section.data} />
+          <TopPick data={section?.data} />
         </>
       )
     }
@@ -88,7 +88,7 @@ export default function Home() {
     <View style={styles.container}>
       <HomeHeader />
       <SectionList
-        sections={listenData}
+        sections={listenData ?? []}
         stickySectionHeadersEnabled={false}
         keyExtractor={(item, index) => item + index}
         renderItem={() => {
