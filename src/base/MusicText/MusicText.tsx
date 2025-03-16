@@ -33,18 +33,18 @@ export function MusicText(props: TextProps) {
 
   const $presets: Record<Presets, StyleProp<TextStyle>> = {
     default: $baseStyle,
-    semiBold: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.semibold],
-    thin: [$baseStyle, $fontWeightStyles.light],
-    light: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.light],
-    heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.bold],
-    normal: [$baseStyle, $sizeStyles.xs, $fontWeightStyles.regular, { color: color.white }],
-    medium: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.medium],
-    largeHeading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.extraBold],
-    formLabel: [$baseStyle, $fontWeightStyles.medium],
-    formHelper: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.light],
-    subHeading: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.medium],
-    bold: [$baseStyle, $sizeStyles.bold, $fontWeightStyles.bold],
-    subheading: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.medium],
+    semiBold: [$baseStyle, $sizeStyles.lg, { fontWeight: "600" }],
+    thin: [$baseStyle, { fontWeight: "200" }],
+    light: [$baseStyle, $sizeStyles.sm, { fontWeight: "300" }],
+    heading: [$baseStyle, $sizeStyles.xxl, { fontWeight: "700" }],
+    normal: [$baseStyle, $sizeStyles.xs, { fontWeight: "400" }, { color: color.white }],
+    medium: [$baseStyle, $sizeStyles.sm, { fontWeight: "500" }],
+    largeHeading: [$baseStyle, $sizeStyles.xxl, { fontWeight: "800" }],
+    formLabel: [$baseStyle, { fontWeight: "500" }],
+    formHelper: [$baseStyle, $sizeStyles.sm, { fontWeight: "300" }],
+    subHeading: [$baseStyle, $sizeStyles.lg, { fontWeight: "500" }],
+    bold: [$baseStyle, $sizeStyles.bold, { fontWeight: "700" }],
+    subheading: [$baseStyle, $sizeStyles.lg, { fontWeight: "500" }],
   }
 
   const content = text || children
@@ -55,7 +55,7 @@ export function MusicText(props: TextProps) {
     styles.filter(Boolean) as StyleProp<TextStyle>
 
   const $styles = combineStyles(
-    ...$presets[preset],
+    ...($presets[preset] as TextStyle[]),
     weight ? $fontWeightStyles[weight] : undefined,
     size ? $sizeStyles[size] : undefined,
     $styleOverride,
@@ -79,12 +79,21 @@ const $sizeStyles = {
   xxs: { fontSize: 12, lineHeight: 18 } as TextStyle,
 }
 
-const $fontWeightStyles = Object.fromEntries(
-  Object.entries(appFonts.primary).map(([weight, fontFamily]) => [weight, { fontFamily }]),
-) as Record<Weights, TextStyle>
+const $fontWeightStyles = {
+  ultraLight: { fontWeight: "200" },
+  thin: { fontWeight: "300" },
+  light: { fontWeight: "300" },
+  regular: { fontWeight: "400" },
+  medium: { fontWeight: "500" },
+  semibold: { fontWeight: "600" },
+  bold: { fontWeight: "700" },
+  heavy: { fontWeight: "800" },
+  black: { fontWeight: "900" },
+  extraBold: { fontWeight: "800" },
+} as Record<Weights, TextStyle>
 
 const $baseStyle: StyleProp<TextStyle> = [
   $sizeStyles.sm,
-  $fontWeightStyles.ultraLight,
+  { fontWeight: "200" },
   { color: color.white },
 ]

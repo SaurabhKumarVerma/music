@@ -123,6 +123,9 @@ export interface IAuthRefreshTokenResponse {
 export const enum ETITLE_NAME {
   TOP_PICKS = "Top Picks",
   RECENTLY_PLAYED = "Recently Played",
+  ARTIST_DETAIL = "Artist Detail",
+  ARTIST_ALBUM = "Album Detail",
+  ARTIST_TOP_TRACKS = "Artist Top Tracks",
 }
 
 export interface IMenuData {
@@ -132,5 +135,5 @@ export interface IMenuData {
   onClick: () => void
 }
 
-export const BLUR_HASH = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj["
-
+export const BLUR_HASH =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj["

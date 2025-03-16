@@ -1,47 +1,72 @@
-import { IArtistSpotifyTrack } from "@music/models/artist.interface"
-import { artistService } from "@music/service/service/artist.service"
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { artist } from "./artistTopTrackSlice"
+import { artistDetails } from "./artistDetailsSlice"
+import { artistAlbum } from "./artistAlbumSlice"
+import { RootState } from "../store"
+import { ETITLE_NAME } from "@music/types/type"
 
-interface IArtistStore {
+export const artistData = createAsyncThunk(
+  "artist/getArtist-details",
+  async (params: string, { dispatch, getState, rejectWithValue }) => {
+    try {
+      await Promise.allSettled([
+        dispatch(artist(params)),
+        dispatch(artistDetails(params)),
+        dispatch(artistAlbum(params)),
+      ])
+      const state = getState() as RootState
+      const artistDetailData = state.artistDetailStore.artistData || []
+      const artistTopTrackData = state.artistTopTrackSlice.artistData || []
+      const artistAlbumData = state.artistAlbumSlice.artistAlbum || []
+
+      if (artistDetailData || artistTopTrackData || artistAlbumData) {
+        return [
+          { title: ETITLE_NAME.ARTIST_DETAIL, data: artistDetailData },
+          { title: ETITLE_NAME.ARTIST_TOP_TRACKS, data: artistTopTrackData },
+          { title: ETITLE_NAME.ARTIST_ALBUM, data: artistAlbumData },
+        ]
+      } else {
+        return []
+      }
+    } catch (error) {
+      return rejectWithValue("Failed To Fetch Value")
+    }
+  },
+)
+
+interface IArtist {
+  artist: any[]
   isArtistLoading: boolean
-  isError: boolean
-  artistData: IArtistSpotifyTrack[]
+  isArtistError: boolean
 }
 
-const initialState: IArtistStore = {
+const initialState: IArtist = {
+  artist: [],
   isArtistLoading: false,
-  isError: false,
-  artistData: [],
+  isArtistError: false,
 }
 
-export const artist = createAsyncThunk("song/artist", async (param: string) => {
-  try {
-    const response = await artistService(param)
-    return response.data
-  } catch (error) {
-    return []
-  }
-})
-
-const artistStore = createSlice({
-  name: "artistStore",
+const artistSlice = createSlice({
+  name: "artistSlice",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(artist.pending, (state) => {
+    builder.addCase(artistData.pending, (state) => {
       state.isArtistLoading = true
-      state.isError = false
+      state.isArtistError = false
+      state.artist = []
     })
-    builder.addCase(artist.fulfilled, (state, action: PayloadAction<IArtistSpotifyTrack>) => {
-      state.artistData = action.payload as unknown as IArtistSpotifyTrack[]
+    builder.addCase(artistData.fulfilled, (state, action) => {
       state.isArtistLoading = false
+      state.isArtistError = false
+      state.artist = action.payload as any
     })
-    builder.addCase(artist.rejected, (state) => {
+    builder.addCase(artistData.rejected, (state) => {
       state.isArtistLoading = false
-      state.isError = true
-      state.artistData = []
+      state.isArtistError = true
+      state.artist = []
     })
   },
 })
 
-export default artistStore.reducer
+export default artistSlice.reducer

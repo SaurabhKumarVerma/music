@@ -13,13 +13,16 @@ interface ISmallCard {
   artistName?: string
   // artist: string
   showMenuToggle?: (data: GestureResponderEvent | undefined) => void
+  onArtistClick?: () => void
 }
 
 const SmallCard = (props: ISmallCard) => {
   const onClickThreeDot = (data: GestureResponderEvent) => {
-    console.log("data", data.nativeEvent.touches)
-
     props.showMenuToggle && props.showMenuToggle(data)
+  }
+
+  const artistNameClick = () => {
+    props.onArtistClick && props.onArtistClick()
   }
 
   return (
@@ -33,12 +36,14 @@ const SmallCard = (props: ISmallCard) => {
         <View style={styles.iconStyle}>
           <View>
             <MusicText text={formatString(props.artistSongName)} size="rg" preset="semiBold" />
-            <MusicText
-              text={props?.artistName}
-              preset="formLabel"
-              size="sm"
-              style={{ color: color.dustyGray }}
-            />
+            <Pressable onPress={artistNameClick}>
+              <MusicText
+                text={props?.artistName}
+                preset="formLabel"
+                size="sm"
+                style={{ color: color.dustyGray }}
+              />
+            </Pressable>
           </View>
         </View>
       </View>

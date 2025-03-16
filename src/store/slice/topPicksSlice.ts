@@ -14,7 +14,7 @@ const initialState: ITopPicks = {
 }
 
 export const topPicks = createAsyncThunk(
-  "song/toppicks",
+  "song/topPicks",
   async (param: EUSER_TOP_ITEM = EUSER_TOP_ITEM.TRACKS, thunkAPI: GetThunkAPI<any>) => {
     try {
       const response = await apiService.get<ISpotifyTopTracksResponse>(

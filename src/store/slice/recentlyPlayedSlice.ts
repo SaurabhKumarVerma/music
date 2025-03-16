@@ -3,12 +3,12 @@ import apiService from "@music/service/api/api"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 interface IRecentPlayed {
-  data: IRecentPlayedTrack[] | null
+  data: IRecentPlayedTrack[]
   isRecentlyPlayedLoading: boolean
 }
 
 const initialState: IRecentPlayed = {
-  data: null,
+  data: [],
   isRecentlyPlayedLoading: false,
 }
 
@@ -31,7 +31,7 @@ const recentlyPlayedSlice = createSlice({
       state.isRecentlyPlayedLoading = true
     })
     builder.addCase(recentlyPlayed.fulfilled, (state, action) => {
-      state.data = action.payload || undefined
+      state.data = action.payload || []
       state.isRecentlyPlayedLoading = false
     })
     builder.addCase(recentlyPlayed.rejected, (state, action) => {

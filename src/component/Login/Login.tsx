@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet, ScrollView } from "react-native"
 import { useWarmUpBrowser } from "@music/hook/useWarmUpBrowser"
 import * as WebBrowser from "expo-web-browser"
 
@@ -13,7 +13,7 @@ const Login = () => {
   // const insets = useSafeAreaInsets()
 
   return (
-    <View>
+    <ScrollView>
       {/* <Button title="Sign in with apple" /> */}
       <View>
         <LoginBackgroundImage />
@@ -23,10 +23,10 @@ const Login = () => {
         <LoginHeaderImage />
       </View>
 
-      <View style={styles.body}>
+      <ScrollView style={styles.body}>
         <LoginBody />
-      </View>
-    </View>
+      </ScrollView>
+    </ScrollView>
   )
 }
 export default Login

@@ -5,16 +5,17 @@ import SmallCard from "@music/base/SmallCard/SmallCard"
 import { DEVICE_HEIGHT } from "@music/constant/constant"
 import { useAppDispatch, useAppSelector } from "@music/hook/hook"
 import { IArtistSpotifyTrack } from "@music/models/artist.interface"
-import { artist } from "@music/store/slice/artistSlice"
+import { artist } from "@music/store/slice/artistTopTrackSlice"
 import { setIsMenuActive, setMenuData, setMenuPosition } from "@music/store/slice/menuSlice"
+import { ESCREEN } from "@music/types/screen"
 import { IMenuData } from "@music/types/type"
-import { useRoute } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { BlurView } from "expo-blur"
 import { useEffect } from "react"
 import { FlatList, GestureResponderEvent, StyleSheet, View } from "react-native"
 import Animated from "react-native-reanimated"
 
-const MenuData: IMenuData = [
+const MenuData: IMenuData[] = [
   {
     id: 0,
     icon: "alert-circle-outline",
@@ -52,7 +53,10 @@ const MenuData: IMenuData = [
 const SongListDetail = () => {
   const props = useRoute()
   const dispatch = useAppDispatch()
-  const { artistData, isArtistLoading, isError } = useAppSelector((state) => state.artist)
+  const { artistData, isArtistLoading, isError } = useAppSelector(
+    (state) => state.artistTopTrackSlice,
+  )
+  const { navigate } = useNavigation()
 
   useEffect(() => {
     dispatch(setMenuData(MenuData as any))
@@ -89,6 +93,10 @@ const SongListDetail = () => {
     return <Error isError={isError} retry={retry} />
   }
 
+  const navigateToArtist = (id: string) => {
+    if (id) navigate(ESCREEN.ARTIST_SCREEN, { artistId: id })
+  }
+
   const renderItem = (item: IArtistSpotifyTrack) => {
     return (
       <Animated.View style={styles.cardStyle}>
@@ -97,6 +105,7 @@ const SongListDetail = () => {
           artistSongName={item.name}
           artistName={item?.artists[0]?.name}
           showMenuToggle={(data: GestureResponderEvent | undefined) => data && showMenu(data)}
+          onArtistClick={() => navigateToArtist(item?.artists[0]?.id)}
         />
       </Animated.View>
     )

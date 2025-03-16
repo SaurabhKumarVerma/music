@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    backgroundColor: "transparent",
+    // backgroundColor: "transparent",
     flexDirection: "row",
     // backgroundColor: "rgba(0, 0, 0, 0.9)",
     // opacity: 1
