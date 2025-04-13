@@ -1,16 +1,22 @@
-import { SectionList, StyleSheet, Text, View } from "react-native"
+import { Pressable, ScrollView, StyleSheet, View } from "react-native"
 import { useEffect } from "react"
-import { useRoute } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { useAppDispatch, useAppSelector } from "@music/hook/hook"
 import MusicImage from "@music/base/MusicImage/MusicImage"
 import Loading from "@music/base/Loading/Loading"
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
+import { DEVICE_WIDTH } from "@music/constant/constant"
 import { artistData } from "@music/store/slice/artistSlice"
-import { ETITLE_NAME } from "@music/types/type"
+import { MusicText } from "@music/base/MusicText/MusicText"
+import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
+import { color } from "@music/theme/color"
+import Animated, { FadeInLeft } from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 const Artist = () => {
   const route = useRoute()
   const dispatched = useAppDispatch()
+  const inset = useSafeAreaInsets()
+  const navigation = useNavigation()
   const { artist, isArtistError, isArtistLoading } = useAppSelector((state) => state.artist)
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
@@ -24,95 +30,125 @@ const Artist = () => {
     )
   }
 
-  console.log("this is artist", artist[0]?.data?.images[1]?.url)
-
   const header = () => {
     return (
       <MusicImage
-        source={artist !== undefined ? artist[0]?.data?.images[1]?.url : ""}
-        style={{
-          width: DEVICE_WIDTH,
-          height: DEVICE_HEIGHT * 0.4,
-          borderBottomLeftRadius: 10,
-          borderBottomRightRadius: 10,
-        }}
-        contentFit="fill"
+        source={{ uri: artist[0]?.data?.images[1]?.url }}
+        style={styles.authorImageStyle}
+        contentFit="cover"
       />
     )
   }
 
+  const navigateBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack()
+    }
+  }
+
   return (
-    <View>
-      {/* <MusicImage
-        source={artistData?.images !== undefined ? (artistData?.images[1]?.url as string) : ""}
-        style={{
-          width: DEVICE_WIDTH,
-          height: DEVICE_HEIGHT * 0.4,
-          borderBottomLeftRadius: 10,
-          borderBottomRightRadius: 10,
-        }}
-        contentFit="fill"
-      /> */}
+    <ScrollView stickyHeaderHiddenOnScroll showsVerticalScrollIndicator={false}>
+      <View>
+        {header()}
 
-      {/* <View style={{ marginTop: 12 }}>
-        <MusicText text={artistData?.name} style={styles.textStyle} preset="bold" size="rg" />
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 10,
-          }}
+        {artist[0]?.data?.images[1]?.url ? (
+          <Animated.View
+            entering={FadeInLeft.delay(2000)}
+            style={{ position: "absolute", bottom: 0 }}
+          >
+            <MusicText
+              numberOfLines={3}
+              text={artist[0]?.data?.name}
+              style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
+              preset="heading"
+            />
+          </Animated.View>
+        ) : null}
+
+        <Pressable
+          onPress={navigateBack}
+          style={[styles.onBackNavigationContainer, { top: inset.top + 5 }]}
         >
-          <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-            <SimpleLineIcons name="user-following" size={16} color={color.white} />
-            <MusicText text="Followers" size="xs" preset="light" style={{ marginLeft: 10 }} />
+          <AntDesign name="arrowleft" size={24} color="black" />
+        </Pressable>
+      </View>
+
+      <View style={{ marginTop: 12 }}>
+        <View style={styles.followerContainer}>
+          <View style={styles.followingContainer}>
+            <SimpleLineIcons name="user-following" size={20} color={color.white} />
           </View>
 
           <MusicText
-            text={` ${artistData?.followers?.total}`}
+            text={` ${artist[0]?.data?.followers?.total}`}
             style={[styles.textStyle, {}]}
             preset="semiBold"
             size="xs"
           />
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 10,
-          }}
-        >
-          <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-            <AntDesign name="linechart" size={16} color={color.white} />
-            <MusicText text="Popularity" size="xs" preset="light" style={{ marginLeft: 10 }} />
+        <View style={styles.popularityContainer}>
+          <View style={styles.popularityContainer}>
+            <AntDesign name="linechart" size={20} color={color.white} />
           </View>
 
           <MusicText
-            text={` ${artistData?.popularity}`}
+            text={` ${artist[0]?.data?.popularity}`}
             style={[styles.textStyle, {}]}
             preset="semiBold"
             size="xs"
           />
         </View>
-      </View> */}
-    </View>
+      </View>
+    </ScrollView>
   )
 }
 
 export default Artist
 
 const styles = StyleSheet.create({
+  authorImageStyle: {
+    aspectRatio: 1,
+    width: DEVICE_WIDTH,
+  },
+  followerContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  followingContainer: {
+    alignContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  onBackNavigationContainer: {
+    alignContent: "center",
+    alignItems: "center",
+    backgroundColor: color.white,
+    borderRadius: 15,
+    height: 30,
+    justifyContent: "center",
+    left: 10,
+    position: "absolute",
+    width: 30,
+    zIndex: 10,
+  },
+  popularityContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  // sectionHeader: {
+  //   backgroundColor: color.grey1,
+  //   padding: 10,
+  // },
+  // sectionTitle: {
+  //   color: "#fff",
+  //   fontWeight: "bold",
+  // },
+
   textStyle: {
     textAlign: "center",
   },
-  sectionHeader: {
-    padding: 10,
-    backgroundColor: '#333',
-  },
-  sectionTitle: {
-    color: '#fff',
-    fontWeight: 'bold',
-  }
 })

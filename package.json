@@ -42,6 +42,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
     "react-native-airplay-button": "^1.1.0",
+    "react-native-animated-numbers": "^0.6.3",
     "react-native-app-auth": "^8.0.0",
     "react-native-awesome-slider": "1",
     "react-native-gesture-handler": "~2.16.1",
