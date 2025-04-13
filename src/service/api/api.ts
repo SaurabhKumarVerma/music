@@ -47,7 +47,8 @@ class ApiService {
             return this.axiosInstance(originalRequest)
           }
         } else if (error.response?.status === ERESPONSESTATUSCODE.FORBIDDEN) {
-          this.logout()
+          // this.logout()
+          this.getRefreshToken()
         }
         return Promise.reject(error)
       },

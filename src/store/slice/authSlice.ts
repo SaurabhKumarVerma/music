@@ -15,7 +15,7 @@ interface AuthState extends IAuth {
 const initialState: AuthState = {
   isAuthenticated: false,
   access_token: null,
-  isLoading: false,
+  isLoading: true,
   refresh_token: null,
 }
 
