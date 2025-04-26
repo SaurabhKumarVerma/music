@@ -35,9 +35,7 @@ const Artist = () => {
   const inset = useSafeAreaInsets()
   const navigation = useNavigation()
   const { artist, isArtistLoading } = useAppSelector((state) => state.artist)
-  const { imageColors } = usePlayerBackground(
-    artist[0]?.data?.images[1]?.url || images.variousArtisit1,
-  )
+  const { imageColors } = usePlayerBackground(artist[0]?.data?.images[1]?.url || "")
 
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
