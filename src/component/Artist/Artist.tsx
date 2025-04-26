@@ -1,22 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native"
+import { Platform, Pressable, ScrollView, StyleSheet, View } from "react-native"
 import { useEffect, useRef } from "react"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useAppDispatch, useAppSelector } from "@music/hook/hook"
 import MusicImage from "@music/base/MusicImage/MusicImage"
 import Loading from "@music/base/Loading/Loading"
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
+import { DEVICE_WIDTH } from "@music/constant/constant"
 import { artistData } from "@music/store/slice/artistSlice"
 import { MusicText } from "@music/base/MusicText/MusicText"
-import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
+import { AntDesign } from "@expo/vector-icons"
 import { color } from "@music/theme/color"
 import Animated, {
   FadeInLeft,
@@ -25,33 +17,25 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withTiming,
 } from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { LinearGradient } from "expo-linear-gradient"
 import { images } from "assets"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import LottieView from "lottie-react-native"
-import { Gesture, GestureDetector } from "react-native-gesture-handler"
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 const AnimatedImage = Animated.createAnimatedComponent(MusicImage)
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
+const AnimatedText = Animated.createAnimatedComponent(MusicText)
 
 const Artist = () => {
   const route = useRoute()
   const dispatched = useAppDispatch()
   const translateY = useSharedValue(4)
-  const height = useSharedValue(0)
-
-  const ref = useRef<ScrollView>(null)
   const inset = useSafeAreaInsets()
   const navigation = useNavigation()
-  const { artist, isArtistError, isArtistLoading } = useAppSelector((state) => state.artist)
-
-  const { imageColors } = usePlayerBackground(
-    artist[0]?.data?.images[1]?.url || images.variousArtisit1,
-  )
+  const { artist, isArtistLoading } = useAppSelector((state) => state.artist)
 
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
@@ -73,9 +57,6 @@ const Artist = () => {
 
     return {
       opacity,
-      // width,
-      // height,
-      // aspectRatio,
     }
   })
 
@@ -97,10 +78,29 @@ const Artist = () => {
     }
   })
 
-  const animatedPressableContainer = useAnimatedStyle(() => {
-    const opacity = interpolate(translateY.value, [0, 10, 12, 20], [1, 0.2, 0.1, 0], "clamp")
+  const animatedArtistName = useAnimatedStyle(() => {
+    const opacity = interpolate(translateY.value, [0, 100, 150, 200], [1, 0.1, 0.1, 0], "clamp")
 
     return {
+      opacity,
+    }
+  })
+
+  const animatedPressableContainer = useAnimatedStyle(() => {
+    const opacity = interpolate(translateY.value, [60, 100, 200], [0, 0.7, 1], "clamp")
+
+    return {
+      opacity,
+    }
+  })
+
+  const animatedHeader = useAnimatedStyle(() => {
+    const translY = interpolate(translateY.value, [60, 200], [0, 1], "clamp")
+
+    const opacity = interpolate(translateY.value, [60, 200], [0, 1], "clamp")
+
+    return {
+      transform: [{ translateX: translY }],
       opacity,
     }
   })
@@ -116,18 +116,23 @@ const Artist = () => {
   const header = () => {
     return (
       <Animated.View>
-        <AnimatedImage
-          source={{ uri: artist[0]?.data?.images[1]?.url }}
-          style={[styles.authorImageStyle, animatedImageHeight]}
-          contentFit="cover"
-        />
+        <LinearGradient
+          colors={["rgba(255,255,255, 0.1)", "rgba(191,191,191, 0.6)"]}
+          style={styles.artistImageContainer}
+        >
+          <AnimatedImage
+            source={{ uri: artist[0]?.data?.images[1]?.url }}
+            style={[styles.authorImageStyle, animatedImageHeight]}
+            contentFit="cover"
+          />
+        </LinearGradient>
         <Animated.View>
           {artist[0]?.data?.images[1]?.url ? (
-            <Animated.View entering={FadeInLeft.delay(2000)} style={{ marginTop: 20 }}>
-              <MusicText
+            <Animated.View style={{ marginTop: 20 }}>
+              <AnimatedText
                 numberOfLines={3}
                 text={artist[0]?.data?.name}
-                style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
+                style={[styles.textStyle, animatedArtistName]}
                 preset="semiBold"
                 size="lg"
               />
@@ -138,7 +143,7 @@ const Artist = () => {
             <View style={styles.popularityContainer}>
               <LottieView
                 source={require("../../../assets/lottie/active.json")}
-                style={{ height: 50, width: 50 }}
+                style={styles.activeIndicator}
                 autoPlay={true}
                 loop
               />
@@ -162,20 +167,51 @@ const Artist = () => {
     }
   }
 
-  const measure = (data) => {
-    console.log("measure ===>", data)
-  }
-
-  const androidGradientColor = [
-    // imageColors?.average,
-    imageColors?.darkMuted,
-    imageColors?.darkVibrant,
-    // imageColors?.dominant,
-    imageColors?.lightVibrant,
-  ]
-
   return (
     <>
+      <Animated.View
+        style={[
+          styles.onBackNavigationContainer,
+          { top: inset.top + 5, width: DEVICE_WIDTH },
+          animatedHeader,
+        ]}
+      >
+        <LinearGradient
+          colors={["#FF375F", "rgba(0, 0, 0, 0.9)"]}
+          style={
+            (StyleSheet.absoluteFill,
+            { position: "absolute", width: DEVICE_WIDTH, paddingVertical: 34 })
+          }
+        >
+          <View style={styles.headerContainer}>
+            <AnimatedPressable onPress={navigateBack}>
+              <AntDesign
+                name="arrowleft"
+                size={24}
+                color={color.white}
+                style={styles.leftArrowStyle}
+              />
+            </AnimatedPressable>
+
+            <View>
+              <AnimatedText
+                numberOfLines={3}
+                text={artist[0]?.data?.name}
+                style={[styles.textStyle, animatedPressableContainer]}
+                preset="semiBold"
+                size="lg"
+              />
+            </View>
+
+            <AnimatedImage
+              source={{ uri: artist[0]?.data?.images[1]?.url }}
+              style={[styles.sideArtistStyle, animatedPressableContainer]}
+              contentFit="cover"
+            />
+          </View>
+        </LinearGradient>
+      </Animated.View>
+
       <Animated.ScrollView
         stickyHeaderHiddenOnScroll
         showsVerticalScrollIndicator={false}
@@ -184,9 +220,7 @@ const Artist = () => {
       >
         <Animated.View>
           <AnimatedLinearGradient
-            colors={
-              Platform.OS === "android" ? androidGradientColor : ["#2A7B9B", "#57C785", "#EDDD53"]
-            }
+            colors={["#FF375F", "rgba(0, 0, 0, 0.9)"]}
             style={[
               styles.authorImageContainer,
               {
@@ -197,180 +231,7 @@ const Artist = () => {
           >
             {header()}
           </AnimatedLinearGradient>
-
-          <AnimatedPressable
-            onPress={navigateBack}
-            style={[
-              styles.onBackNavigationContainer,
-              { top: inset.top + 5 },
-              animatedPressableContainer,
-            ]}
-          >
-            <AntDesign name="arrowleft" size={24} color="black" />
-          </AnimatedPressable>
         </Animated.View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
-
-        <View style={{ height: 100 }}>
-          <MusicText
-            numberOfLines={3}
-            text={artist[0]?.data?.name}
-            style={[styles.textStyle, { flexShrink: 1, justifyContent: "flex-start" }]}
-            preset="heading"
-          />
-        </View>
       </Animated.ScrollView>
     </>
   )
@@ -379,39 +240,45 @@ const Artist = () => {
 export default Artist
 
 const styles = StyleSheet.create({
-  authorImageStyle: {
-    alignSelf: "center",
-    borderRadius: 120,
-    height: 200,
-    width: 200,
+  activeIndicator: {
+    height: 50,
+    width: 50,
+  },
+  artistImageContainer: {
+    borderRadius: 102,
+    height: 204,
+    justifyContent: "center",
+    width: 204,
   },
   authorImageContainer: {
     alignItems: "center",
     aspectRatio: 1,
     justifyContent: "center",
   },
-  followerContainer: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 10,
+  authorImageStyle: {
+    alignSelf: "center",
+    borderRadius: 120,
+    height: 200,
+    width: 200,
   },
-  followingContainer: {
+  headerContainer: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+  },
+  leftArrowStyle: {
     alignContent: "center",
     alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
   },
   onBackNavigationContainer: {
     alignContent: "center",
     alignItems: "center",
-    backgroundColor: color.white,
-    borderRadius: 15,
-    height: 30,
     justifyContent: "center",
-    left: 10,
+    paddingVertical: 10,
     position: "absolute",
-    width: 30,
+    width: DEVICE_WIDTH,
     zIndex: 10,
   },
   popularityContainer: {
@@ -419,15 +286,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  // sectionHeader: {
-  //   backgroundColor: color.grey1,
-  //   padding: 10,
-  // },
-  // sectionTitle: {
-  //   color: "#fff",
-  //   fontWeight: "bold",
-  // },
-
+  sideArtistStyle: { borderRadius: 15, height: 30, width: 30 },
   textStyle: {
     textAlign: "center",
   },

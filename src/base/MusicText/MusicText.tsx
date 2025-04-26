@@ -1,3 +1,4 @@
+import React, { forwardRef } from "react"
 import { color } from "@music/theme/color"
 import { appFonts } from "@music/theme/typography"
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle } from "react-native"
@@ -28,7 +29,7 @@ export interface TextProps extends RNTextProps {
   children?: React.ReactNode
 }
 
-export function MusicText(props: TextProps) {
+export const MusicText = forwardRef<RNText, TextProps>((props, ref) => {
   const { weight, size, text, children, style: $styleOverride, ...rest } = props
 
   const $presets: Record<Presets, StyleProp<TextStyle>> = {
@@ -62,11 +63,11 @@ export function MusicText(props: TextProps) {
   )
 
   return (
-    <RNText {...rest} style={$styles}>
+    <RNText {...rest} ref={ref} style={$styles}>
       {content}
     </RNText>
   )
-}
+})
 
 const $sizeStyles = {
   xxl: { fontSize: 48, lineHeight: 55 } as TextStyle,
