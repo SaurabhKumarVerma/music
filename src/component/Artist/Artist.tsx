@@ -258,6 +258,7 @@ const Artist = () => {
           share={artist[0]?.data?.external_urls?.spotify}
           artistImage={artist[0]?.data?.images[1]?.url}
           artistName={artist[0]?.data?.name}
+          id={route.params?.artistId}
         />
       </Animated.ScrollView>
     </View>

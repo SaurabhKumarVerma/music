@@ -47,9 +47,11 @@ const SmallCard = (props: ISmallCard) => {
           </View>
         </View>
       </View>
-      <Pressable onPress={onClickThreeDot} hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-        <Entypo name="dots-three-vertical" size={20} color={color.grey5} />
-      </Pressable>
+      {props.showMenuToggle ? (
+        <Pressable onPress={onClickThreeDot} hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
+          <Entypo name="dots-three-vertical" size={20} color={color.grey5} />
+        </Pressable>
+      ) : null}
     </View>
   )
 }

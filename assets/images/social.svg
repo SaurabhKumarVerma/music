@@ -1,0 +1,66 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Background with rounded corners and shadow -->
+  <filter id="bgShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+  </filter>
+
+  <rect x="10" y="10" width="480" height="480" rx="40" ry="40" fill="url(#bgGradient)" filter="url(#bgShadow)" />
+
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#74ebd5"/>
+      <stop offset="100%" stop-color="#ACB6E5"/>
+    </linearGradient>
+    <linearGradient id="buttonGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d4d4d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Phone Shape with stylized shadow -->
+  <filter id="phoneShadow" x="-50%" y="-50%" width="200%" height="200%">
+    <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.25"/>
+  </filter>
+
+  <rect x="140" y="100" rx="40" ry="40" width="220" height="320" fill="white" stroke="#bbb" stroke-width="3" filter="url(#phoneShadow)"/>
+
+  <!-- Screen with subtle inner shadow -->
+  <rect x="155" y="120" width="190" height="280" rx="25" ry="25" fill="#e0f7fa" stroke="#a0d7d7" stroke-width="2"/>
+
+  <!-- Icons with small shadows -->
+  <filter id="iconShadow" x="-50%" y="-50%" width="200%" height="200%">
+    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.2"/>
+  </filter>
+
+  <!-- Facebook Icon -->
+  <circle cx="200" cy="170" r="24" fill="#3b5998" stroke="#2d4373" stroke-width="2" filter="url(#iconShadow)"/>
+  <text x="192" y="178" font-size="28" fill="white" font-family="Arial" font-weight="bold">f</text>
+
+  <!-- Instagram Icon -->
+  <circle cx="300" cy="170" r="24" fill="#e1306c" stroke="#b02856" stroke-width="2" filter="url(#iconShadow)"/>
+  <text x="291" y="178" font-size="24" fill="white" font-family="Arial" font-weight="bold">I</text>
+
+  <!-- Twitter Icon -->
+  <circle cx="200" cy="270" r="24" fill="#1DA1F2" stroke="#0d8de0" stroke-width="2" filter="url(#iconShadow)"/>
+  <text x="191" y="278" font-size="26" fill="white" font-family="Arial" font-weight="bold">t</text>
+
+  <!-- LinkedIn Icon -->
+  <circle cx="300" cy="270" r="24" fill="#0077B5" stroke="#005983" stroke-width="2" filter="url(#iconShadow)"/>
+  <text x="290" y="278" font-size="22" fill="white" font-family="Arial" font-weight="bold">in</text>
+
+  <!-- Floating Like Heart with stylized shadow -->
+  <path d="M90,320 Q90,290 120,300 Q150,290 150,320 Q150,350 120,370 Q90,350 90,320 Z" fill="#ff5e5e" stroke="#e53935" stroke-width="2" filter="url(#iconShadow)"/>
+
+  <!-- Floating Chat Bubble more rounded with shadow -->
+  <rect x="360" y="90" width="60" height="40" rx="20" ry="20" fill="#ff7043" stroke="#f4511e" stroke-width="2" filter="url(#iconShadow)"/>
+  <circle cx="375" cy="110" r="4" fill="white" />
+  <circle cx="390" cy="110" r="4" fill="white" />
+  <circle cx="405" cy="110" r="4" fill="white" />
+
+  <!-- Notification Bubble with shadow -->
+  <circle cx="155" cy="110" r="12" fill="#ff3d00" stroke="#bf360c" stroke-width="2" filter="url(#iconShadow)"/>
+  <text x="150" y="116" font-size="12" fill="white" font-family="Arial" font-weight="bold">1</text>
+
+  <!-- Share Icon stylized -->
+  <path d="M380 390 L410 360 L440 390 M410 360 L410 420" stroke="#42a5f5" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#iconShadow)"/>
+</svg>

@@ -1,15 +1,16 @@
 import MusicButton from "@music/base/MusicButton/MusicButton"
 import { color } from "@music/theme/color"
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
+import { Pressable, StyleSheet, View } from "react-native"
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5"
 import FontAwesome from "@expo/vector-icons/FontAwesome"
 import Share from "react-native-share"
-import { ActivityItemSource } from "react-native-share/lib/typescript/types"
+import TrackScreen from "@music/screen/TrackScreen/TrackScreen"
 
 interface IArtistPopular {
   share: string
   artistName: string
   artistImage: string
+  id: string
 }
 
 const ArtistPopular = (props: IArtistPopular) => {
@@ -53,6 +54,10 @@ const ArtistPopular = (props: IArtistPopular) => {
         <Pressable style={styles.playContainer} onPress={onShare}>
           <FontAwesome name="share" size={14} color="black" />
         </Pressable>
+      </View>
+
+      <View>
+        <TrackScreen id={props?.id} />
       </View>
     </View>
   )
