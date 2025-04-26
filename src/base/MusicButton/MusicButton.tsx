@@ -1,15 +1,17 @@
 import { DEVICE_WIDTH } from "@music/constant/constant"
 import { color } from "@music/theme/color"
 import { useRef } from "react"
-import { Pressable, StyleSheet, View, Animated } from "react-native"
+import { Pressable, StyleSheet, View, Animated, StyleProp, ViewStyle } from "react-native"
 import { MusicText } from "../MusicText/MusicText"
 
 interface IMusicButton {
   onPress: () => void
-  buttonWidth: number
+  buttonWidth?: number | string
   buttonCta: string
   buttonColor?: string
   buttonRippleColor?: string
+  borderRadius?: number
+  buttonStyle?: StyleProp<ViewStyle>
 }
 
 const MusicButton = (props: IMusicButton) => {
@@ -36,7 +38,15 @@ const MusicButton = (props: IMusicButton) => {
       onPress={props.onPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      style={[styles.button, { width: props.buttonWidth, backgroundColor: props.buttonColor }]}
+      style={[
+        styles.button,
+        props.buttonStyle,
+        {
+          width: props.buttonWidth || 0,
+          backgroundColor: props.buttonColor,
+          borderRadius: props.borderRadius || 0,
+        },
+      ]}
     >
       <View style={styles.rippleContainer}>
         <Animated.View

@@ -22,6 +22,7 @@ import { artistProfileData } from "@music/store/slice/artistDetailsSlice"
 import Entypo from "@expo/vector-icons/Entypo"
 import { images } from "assets"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
+import ArtistPopular from "./ArtistPopular"
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 const AnimatedImage = Animated.createAnimatedComponent(MusicImage)
@@ -188,7 +189,7 @@ const Artist = () => {
   }
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
       <Animated.View
         style={[
           styles.onBackNavigationContainer,
@@ -233,10 +234,10 @@ const Artist = () => {
       </Animated.View>
 
       <Animated.ScrollView
-        stickyHeaderHiddenOnScroll
         showsVerticalScrollIndicator={false}
         onScrollBeginDrag={onScroll}
         scrollEventThrottle={16}
+        style={{ flex: 1 }}
       >
         <Animated.View>
           <AnimatedLinearGradient
@@ -252,8 +253,14 @@ const Artist = () => {
             {header()}
           </AnimatedLinearGradient>
         </Animated.View>
+
+        <ArtistPopular
+          share={artist[0]?.data?.external_urls?.spotify}
+          artistImage={artist[0]?.data?.images[1]?.url}
+          artistName={artist[0]?.data?.name}
+        />
       </Animated.ScrollView>
-    </>
+    </View>
   )
 }
 
