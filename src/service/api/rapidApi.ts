@@ -14,16 +14,18 @@ class RapidApi {
     })
   }
 
-  public async RapidApiGet<T = any>(id: string): Promise<AxiosResponse<T>> {
+  public async RapidApiGet<T = any>(id: any): Promise<AxiosResponse<T>> {
     return this.axiosInstance.get<T>(id)
   }
 
   public async RapidApiPost<T = IArtistUnion>(
     url: string = process.env.EXPO_PUBLIC_RAPID_API_URL || "",
-    data: IArtistPostData,
+    data: any,
   ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post<T>(url, data)
+    return this.axiosInstance.post<T>(url, { data })
   }
 }
 
-export default RapidApi
+const rapidApi = new RapidApi()
+
+export default rapidApi

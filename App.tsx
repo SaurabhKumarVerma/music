@@ -16,6 +16,7 @@ import { appTheme } from "@music/theme/appTheme"
 import Main from "@music/app"
 import { ActivityIndicator } from "react-native"
 import { color } from "@music/theme/color"
+import SplashScreen from "@music/screen/SplashScreen"
 
 Splash.preventAutoHideAsync()
 WebBrowser.maybeCompleteAuthSession()
@@ -64,7 +65,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
-        {/* <SplashScreen /> */}
+        <SplashScreen />
 
         <Main appTheme={appTheme} linking={linking} navigationRef={navigationRef} />
         {/*  */}

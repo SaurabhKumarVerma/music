@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Platform, Pressable, ScrollView, StyleSheet, View } from "react-native"
-import { useEffect, useRef } from "react"
+import { FlatList, Pressable, StyleSheet, View } from "react-native"
+import { useEffect } from "react"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useAppDispatch, useAppSelector } from "@music/hook/hook"
 import MusicImage from "@music/base/MusicImage/MusicImage"
@@ -11,18 +11,16 @@ import { MusicText } from "@music/base/MusicText/MusicText"
 import { AntDesign } from "@expo/vector-icons"
 import { color } from "@music/theme/color"
 import Animated, {
-  FadeInLeft,
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { LinearGradient } from "expo-linear-gradient"
-import { images } from "assets"
-import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import LottieView from "lottie-react-native"
+import { artistProfileData } from "@music/store/slice/artistDetailsSlice"
+import Entypo from '@expo/vector-icons/Entypo';
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 const AnimatedImage = Animated.createAnimatedComponent(MusicImage)
@@ -39,6 +37,7 @@ const Artist = () => {
 
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
+    dispatched(artistProfileData((route.params as { artistId: string }).artistId))
   }, [])
 
   const onScroll = useAnimatedScrollHandler({
@@ -113,50 +112,69 @@ const Artist = () => {
     )
   }
 
-  const header = () => {
+  console.log("route.params", artist[0]?.data?.genres)
+
+  const genres = ({ item }) => {
+    console.log("genres", item)
+
     return (
       <Animated.View>
-        <LinearGradient
+        <AnimatedText style={{ paddingHorizontal: 6 }}>{item}</AnimatedText>
+      </Animated.View>
+    )
+  }
+
+  const header = () => {
+    return (
+      <Animated.View style={{ flex: 1, paddingTop: inset.top }}>
+        <AnimatedLinearGradient
           colors={["rgba(255,255,255, 0.1)", "rgba(191,191,191, 0.6)"]}
-          style={styles.artistImageContainer}
+          style={[styles.artistImageContainer, animatedImageHeight]}
         >
           <AnimatedImage
             source={{ uri: artist[0]?.data?.images[1]?.url }}
             style={[styles.authorImageStyle, animatedImageHeight]}
             contentFit="cover"
           />
-        </LinearGradient>
+        </AnimatedLinearGradient>
         <Animated.View>
           {artist[0]?.data?.images[1]?.url ? (
             <Animated.View style={{ marginTop: 20 }}>
               <AnimatedText
-                numberOfLines={3}
+                numberOfLines={1}
                 text={artist[0]?.data?.name}
                 style={[styles.textStyle, animatedArtistName]}
-                preset="semiBold"
-                size="lg"
+                preset="heading"
+                size={"xxl"}
+                // size="lg"
               />
             </Animated.View>
           ) : null}
 
           <Animated.View style={[styles.popularityContainer, animatedTextContainer]}>
             <View style={styles.popularityContainer}>
-              <LottieView
-                source={require("../../../assets/lottie/active.json")}
-                style={styles.activeIndicator}
-                autoPlay={true}
-                loop
-              />
+            <Entypo name="users" size={14} color={color.white} />
             </View>
-
-            <MusicText
-              text={` 987438274320840932`}
-              style={[styles.textStyle, {}]}
-              preset="semiBold"
-              size="xs"
-            />
+            {artist[0]?.data?.followers?.total ? (
+              <MusicText
+                text={artist[0]?.data?.followers?.total}
+                style={[styles.textStyle, {}]}
+                preset="semiBold"
+                size="rg"
+              />
+            ) : null}
           </Animated.View>
         </Animated.View>
+        {artist[0]?.data?.genres?.length >= 1 ? (
+          <>
+            <FlatList
+            scrollEnabled={false}
+              data={artist[0]?.data?.genres}
+              renderItem={genres}
+              contentContainerStyle={{ flexDirection: "row", alignSelf: "center" }}
+            />
+          </>
+        ) : null}
       </Animated.View>
     )
   }
@@ -245,9 +263,9 @@ const styles = StyleSheet.create({
     width: 50,
   },
   artistImageContainer: {
+    alignSelf: "center",
     borderRadius: 102,
     height: 204,
-    justifyContent: "center",
     width: 204,
   },
   authorImageContainer: {
@@ -258,8 +276,8 @@ const styles = StyleSheet.create({
   authorImageStyle: {
     alignSelf: "center",
     borderRadius: 120,
-    height: 200,
-    width: 200,
+    height: 180,
+    width: 180,
   },
   headerContainer: {
     alignItems: "center",
@@ -285,6 +303,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
+    marginRight: 8,
+    marginVertical: 4,
   },
   sideArtistStyle: { borderRadius: 15, height: 30, width: 30 },
   textStyle: {

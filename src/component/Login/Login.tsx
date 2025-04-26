@@ -23,9 +23,9 @@ const Login = () => {
         <LoginHeaderImage />
       </View>
 
-      <ScrollView style={styles.body}>
+      <View style={styles.body}>
         <LoginBody />
-      </ScrollView>
+      </View>
     </ScrollView>
   )
 }
