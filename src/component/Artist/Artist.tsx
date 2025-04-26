@@ -18,9 +18,10 @@ import Animated, {
 } from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { LinearGradient } from "expo-linear-gradient"
-import LottieView from "lottie-react-native"
 import { artistProfileData } from "@music/store/slice/artistDetailsSlice"
-import Entypo from '@expo/vector-icons/Entypo';
+import Entypo from "@expo/vector-icons/Entypo"
+import { images } from "assets"
+import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 const AnimatedImage = Animated.createAnimatedComponent(MusicImage)
@@ -34,6 +35,9 @@ const Artist = () => {
   const inset = useSafeAreaInsets()
   const navigation = useNavigation()
   const { artist, isArtistLoading } = useAppSelector((state) => state.artist)
+  const { imageColors } = usePlayerBackground(
+    artist[0]?.data?.images[1]?.url || images.variousArtisit1,
+  )
 
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
@@ -153,12 +157,12 @@ const Artist = () => {
 
           <Animated.View style={[styles.popularityContainer, animatedTextContainer]}>
             <View style={styles.popularityContainer}>
-            <Entypo name="users" size={14} color={color.white} />
+              <Entypo name="users" size={10} color={color.white} />
             </View>
             {artist[0]?.data?.followers?.total ? (
               <MusicText
                 text={artist[0]?.data?.followers?.total}
-                style={[styles.textStyle, {}]}
+                style={[styles.textStyle, { color: color.gainsboro }]}
                 preset="semiBold"
                 size="rg"
               />
@@ -168,7 +172,7 @@ const Artist = () => {
         {artist[0]?.data?.genres?.length >= 1 ? (
           <>
             <FlatList
-            scrollEnabled={false}
+              scrollEnabled={false}
               data={artist[0]?.data?.genres}
               renderItem={genres}
               contentContainerStyle={{ flexDirection: "row", alignSelf: "center" }}
@@ -195,7 +199,7 @@ const Artist = () => {
         ]}
       >
         <LinearGradient
-          colors={["#FF375F", "rgba(0, 0, 0, 0.9)"]}
+          colors={[imageColors?.background as string, "rgba(0, 0, 0, 0.9)"]}
           style={
             (StyleSheet.absoluteFill,
             { position: "absolute", width: DEVICE_WIDTH, paddingVertical: 34 })
@@ -238,7 +242,7 @@ const Artist = () => {
       >
         <Animated.View>
           <AnimatedLinearGradient
-            colors={["#FF375F", "rgba(0, 0, 0, 0.9)"]}
+            colors={[imageColors?.background as string, "rgba(0, 0, 0, 0.9)"]}
             style={[
               styles.authorImageContainer,
               {
