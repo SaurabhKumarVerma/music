@@ -48,10 +48,10 @@ const TrackScreen = (props: ITrackScreen) => {
       />
 
       <MusicButton
-        buttonCta="See All"
+        buttonCta="See More"
         onPress={() => console.log("See")}
-        buttonStyle={{ borderColor: color.grey, borderWidth: 1, paddingVertical: 6, alignSelf: 'center'}}
-        buttonWidth={"20%"}
+        buttonStyle={{ borderColor: color.grey, borderWidth: 1, paddingVertical: 6, alignSelf: 'center', paddingHorizontal: 16}}
+        buttonWidth={"30%"}
         borderRadius={20}
       />
     </View>

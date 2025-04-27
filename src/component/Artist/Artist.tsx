@@ -300,18 +300,18 @@ const Artist = () => {
           </View>
         )}
 
-        <MusicText
+        {/* <MusicText
           text="About"
           size="bold"
           preset="subHeading"
           style={{ marginTop: 18, marginLeft: 16, marginBottom: 20 }}
-        />
+        /> */}
 
-        {route.params?.artistId && (
+        {/* {route.params?.artistId && (
           <View style={{ marginLeft: 16 }}>
             <AboutArtist id={route.params?.artistId} />
           </View>
-        )}
+        )} */}
       </Animated.ScrollView>
       <View style={{ position: "absolute", bottom: 30, right: 50 }}>
         <MusicFloatingAction />

@@ -47,7 +47,7 @@ const LoginBody = () => {
         size="bold"
         style={styles.headingStyle}
       />
-      <MusicText text="Free Forever. No Ads" preset="bold" size="xxs" style={styles.cta} />
+      <MusicText text="Ads" preset="bold" size="xxs" style={styles.cta} />
 
       <View style={styles.loginTextContainer}>
         <Left width={150} height={2} />

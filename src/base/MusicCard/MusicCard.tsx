@@ -41,10 +41,12 @@ const MusicCard = (props: IMusicCard) => {
           preset={props.titleTextPreset || "default"}
           size={props.titleTextSize || "md"}
           style={props.textStyle}
+          numberOfLines={1}
         />
 
         {props.subTitleText && (
           <MusicText
+            numberOfLines={1}
             text={props.subTitleText}
             preset={props.subtitlePreset || "default"}
             size={props.subTitleSize || "md"}

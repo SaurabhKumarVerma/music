@@ -20,7 +20,7 @@ const RecentlyPlayed = (props: IRecentlyPlayed) => {
           source={item.track.album.images[1].url}
           style={[styles.imageStyle, { width: DEVICE_WIDTH * 0.5, height: DEVICE_HEIGHT * 0.2 }]}
         />
-        <MusicText preset="semiBold" size="rg" text={item.track.name} style={styles.textStyle} />
+        <MusicText preset="semiBold" size="rg" text={item.track.name} style={styles.textStyle} numberOfLines={1} />
       </View>
     )
   }
@@ -55,5 +55,6 @@ const styles = StyleSheet.create({
   textStyle: {
     marginLeft: 10,
     marginTop: 10,
+    width: 80,
   },
 })

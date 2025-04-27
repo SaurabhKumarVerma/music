@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp://</string>
+          <string>myapp</string>
           <string>com.anonymous.music</string>
         </array>
       </dict>
@@ -37,11 +37,21 @@
           <string>com.googleusercontent.apps.409902478458-kmg9qq13vhg7druji1s7l6f4difshjbj</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+music</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
+      <string>fb</string>
+      <string>instagram</string>
+      <string>twitter</string>
+      <string>tiktoksharesdk</string>
       <string>fb</string>
       <string>instagram</string>
       <string>twitter</string>

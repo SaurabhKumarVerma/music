@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "myapp://",
+    "scheme": "myapp",
     "name": "Music",
     "slug": "music",
     "version": "1.0.0",
@@ -19,7 +19,14 @@
       "backgroundColor": "#000000",
       "infoPlist": {
         "UIBackgroundModes": [
+          "audio",
           "audio"
+        ],
+        "LSApplicationQueriesSchemes": [
+          "fb",
+          "instagram",
+          "twitter",
+          "tiktoksharesdk"
         ]
       },
       "splash": {
@@ -74,13 +81,13 @@
             "fb",
             "instagram",
             "twitter",
-            "tiktoksharesdk",
+            "tiktoksharesdk"
           ],
           "android": [
             "com.facebook.katana",
             "com.instagram.android",
             "com.twitter.android",
-            "com.zhiliaoapp.musically",
+            "com.zhiliaoapp.musically"
           ]
         }
       ]
@@ -91,5 +98,9 @@
       }
     },
     "owner": "saurabh7071",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/a821b92a-fed7-4078-a050-bb94e34c6adf"
+    }
   }
 }

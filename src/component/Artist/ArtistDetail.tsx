@@ -25,7 +25,8 @@ const ArtistDetail = (props: IArtistDetail) => {
           titleText={item?.name}
           titleTextPreset="medium"
           subTitleText={item?.release_date}
-          subTextStyle={{marginTop: 4}}
+          subTextStyle={{marginTop: 4, width: 80}}
+          textStyle={{width: 80}}
         />
       </View>
     )

@@ -17,6 +17,7 @@ import Main from "@music/app"
 import { ActivityIndicator } from "react-native"
 import { color } from "@music/theme/color"
 import SplashScreen from "@music/screen/SplashScreen"
+import * as Updates from "expo-updates"
 
 Splash.preventAutoHideAsync()
 WebBrowser.maybeCompleteAuthSession()
@@ -27,6 +28,23 @@ export default function App() {
     typography,
   })
 
+  useEffect(() => {
+    onFetchUpdateAsync()
+  }, [])
+
+  async function onFetchUpdateAsync() {
+    try {
+      const update = await Updates.checkForUpdateAsync()
+
+      if (update.isAvailable) {
+        await Updates.fetchUpdateAsync()
+        await Updates.reloadAsync()
+      }
+    } catch (error) {
+      // You can also add an alert() to see the error message in case of an error when fetching updates.
+      alert(`Error fetching latest Expo update: ${error}`)
+    }
+  }
 
   useEffect(() => {
     if (loaded || error) {
@@ -36,7 +54,7 @@ export default function App() {
   }, [loaded, error])
 
   if (!loaded && !error && !navigationRef.isReady()) {
-    return <ActivityIndicator color={color.selectedColor}/>
+    return <ActivityIndicator color={color.selectedColor} />
   }
 
   // if () {

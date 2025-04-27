@@ -18,11 +18,29 @@ class RapidApi {
     return this.axiosInstance.get<T>(id)
   }
 
-  public async RapidApiPost<T = IArtistUnion>(
-    url: string = process.env.EXPO_PUBLIC_RAPID_API_URL || "",
-    data: any,
-  ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post<T>(url, { data })
+  public async RapidApiPost<T = IArtistUnion>(url: string, id: any): Promise<AxiosResponse<T>> {
+    //     console.log(this.axiosInstance.defaults.baseURL)
+    //     const fullUrl = `${this.axiosInstance.defaults.baseURL}${url}`
+    //     console.log('tissss', fullUrl);
+
+    // // return this.axiosInstance.post<T>(fullUrl, { id })
+    //       return this.axiosInstance.post<T>(fullUrl, {
+    //       id,
+    //     })
+    const options = {
+      method: "POST",
+      url: `https://spotify-web-api3.p.rapidapi.com/v1/social/spotify/${url}`,
+      headers: {
+        "x-rapidapi-key": "70661dcbebmshb25f32d32490cbap11d8d6jsnd551abd8ee70",
+        "x-rapidapi-host": "spotify-web-api3.p.rapidapi.com",
+        "Content-Type": "application/json",
+      },
+      data: {
+        id,
+      },
+    }
+
+    return await axios.request(options)
   }
 }
 
