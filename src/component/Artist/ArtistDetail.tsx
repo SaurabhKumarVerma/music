@@ -42,6 +42,7 @@ const ArtistDetail = (props: IArtistDetail) => {
         data={artistAlbumList?.items}
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   )

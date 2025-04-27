@@ -64,6 +64,14 @@ const Artist = () => {
     }
   })
 
+  const opacityStyleArrow = useAnimatedStyle(() => {
+    const opacity = interpolate(translateY.value, [0, 20], [1, 0], "clamp")
+
+    return {
+      opacity,
+    }
+  })
+
   const animatedImageHeight = useAnimatedStyle(() => {
     const height = interpolate(translateY.value, [0, 100, 200], [200, 100, 0], "clamp")
     const width = interpolate(translateY.value, [0, 100, 200], [200, 100, 0], "clamp")
@@ -258,6 +266,18 @@ const Artist = () => {
           >
             {header()}
           </AnimatedLinearGradient>
+
+          <AnimatedPressable
+            onPress={navigateBack}
+            style={[styles.onBackArrow, { marginTop: inset.top }, opacityStyleArrow]}
+          >
+            <AntDesign
+              name="arrowleft"
+              size={24}
+              color={color.white}
+              style={styles.leftArrowStyle}
+            />
+          </AnimatedPressable>
         </Animated.View>
 
         <ArtistPopular
@@ -312,6 +332,12 @@ const styles = StyleSheet.create({
   leftArrowStyle: {
     alignContent: "center",
     alignItems: "center",
+  },
+  onBackArrow: {
+    bottom: 0,
+    marginLeft: 20,
+    position: "absolute",
+    top: 0,
   },
   onBackNavigationContainer: {
     alignContent: "center",
