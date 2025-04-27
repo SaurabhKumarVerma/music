@@ -93,7 +93,7 @@ const Artist = () => {
   })
 
   const animatedArtistName = useAnimatedStyle(() => {
-    const opacity = interpolate(translateY.value, [0, 100, 150, 200], [1, 0.1, 0.1, 0], "clamp")
+    const opacity = interpolate(translateY.value, [0, 100, 150, 200], [1, 0, 0, 0], "clamp")
 
     return {
       opacity,
