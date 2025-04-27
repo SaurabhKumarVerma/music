@@ -3,13 +3,13 @@ import { artistAlbumService } from "@music/service/service/artistAlbum.service"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 interface IArtistAlbum {
-  artistAlbum: ISpotifyArtistAlbums | undefined
+  artistAlbumList: ISpotifyArtistAlbums[] | undefined
   isLoading: boolean
   isError: boolean
 }
 
 const initialState: IArtistAlbum = {
-  artistAlbum: undefined,
+  artistAlbumList: [],
   isLoading: false,
   isError: false,
 }
@@ -33,11 +33,11 @@ const artistAlbumSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(artistAlbum.fulfilled, (state, payload) => {
-      state.artistAlbum = payload.payload as ISpotifyArtistAlbums
+      state.artistAlbumList = payload.payload as ISpotifyArtistAlbums[]
       state.isLoading = false
     })
     builder.addCase(artistAlbum.rejected, (state) => {
-      state.artistAlbum = undefined
+      state.artistAlbumList = []
       state.isLoading = false
     })
   },

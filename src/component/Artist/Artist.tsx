@@ -23,6 +23,8 @@ import Entypo from "@expo/vector-icons/Entypo"
 import { images } from "assets"
 import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import ArtistPopular from "./ArtistPopular"
+import MusicCard from "@music/base/MusicCard/MusicCard"
+import ArtistDetail from "./ArtistDetail"
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 const AnimatedImage = Animated.createAnimatedComponent(MusicImage)
@@ -73,7 +75,7 @@ const Artist = () => {
   })
 
   const animatedTextContainer = useAnimatedStyle(() => {
-    const opacity = interpolate(translateY.value, [0, 100, 150, 200], [1, 0.4, 0.3, 0], "clamp")
+    const opacity = interpolate(translateY.value, [0, 100, 150, 200], [1, 0.2, 0.1, 0], "clamp")
 
     return {
       opacity,
@@ -118,7 +120,9 @@ const Artist = () => {
   const genres = ({ item }) => {
     return (
       <Animated.View>
-        <AnimatedText style={{ paddingHorizontal: 6 }}>{item}</AnimatedText>
+        <AnimatedText style={[{ paddingHorizontal: 6 }, animatedTextContainer]}>
+          {item}
+        </AnimatedText>
       </Animated.View>
     )
   }
@@ -155,9 +159,9 @@ const Artist = () => {
               <Entypo name="users" size={10} color={color.white} />
             </View>
             {artist[0]?.data?.followers?.total ? (
-              <MusicText
+              <AnimatedText
                 text={artist[0]?.data?.followers?.total}
-                style={[styles.textStyle, { color: color.gainsboro }]}
+                style={[styles.textStyle, { color: color.gainsboro }, animatedTextContainer]}
                 preset="semiBold"
                 size="rg"
               />
@@ -187,11 +191,7 @@ const Artist = () => {
   return (
     <View style={{ flex: 1 }}>
       <Animated.View
-        style={[
-          styles.onBackNavigationContainer,
-          { top: inset.top + 5, width: DEVICE_WIDTH },
-          animatedHeader,
-        ]}
+        style={[styles.onBackNavigationContainer, { width: DEVICE_WIDTH }, animatedHeader]}
       >
         <LinearGradient
           colors={[
@@ -202,10 +202,10 @@ const Artist = () => {
           ]}
           style={
             (StyleSheet.absoluteFill,
-            { position: "absolute", width: DEVICE_WIDTH, paddingVertical: 34 })
+            { position: "absolute", width: DEVICE_WIDTH, paddingTop: inset.top })
           }
         >
-          <View style={styles.headerContainer}>
+          <View style={[styles.headerContainer, { paddingTop: inset.top + 30, paddingBottom: 20 }]}>
             <AnimatedPressable onPress={navigateBack}>
               <AntDesign
                 name="arrowleft"
@@ -266,6 +266,17 @@ const Artist = () => {
           artistName={artist[0]?.data?.name}
           id={route.params?.artistId}
         />
+        <MusicText
+          text="Albums"
+          size="bold"
+          preset="subHeading"
+          style={{ marginVertical: 12, marginLeft: 16 }}
+        />
+        {route.params?.artistId && (
+          <View style={{ marginLeft: 16 }}>
+            <ArtistDetail id={route.params?.artistId} />
+          </View>
+        )}
       </Animated.ScrollView>
     </View>
   )
@@ -274,10 +285,6 @@ const Artist = () => {
 export default Artist
 
 const styles = StyleSheet.create({
-  activeIndicator: {
-    height: 50,
-    width: 50,
-  },
   artistImageContainer: {
     alignSelf: "center",
     borderRadius: 102,

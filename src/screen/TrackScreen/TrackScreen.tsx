@@ -54,8 +54,6 @@ const TrackScreen = (props: ITrackScreen) => {
         buttonWidth={"20%"}
         borderRadius={20}
       />
-
-      <MusicText text="Albums" preset="heading" style={{marginTop: 12, marginLeft: 16}}/>
     </View>
   )
 }
