@@ -38,8 +38,6 @@ const Artist = () => {
   const { artist, isArtistLoading } = useAppSelector((state) => state.artist)
   const { imageColors } = usePlayerBackground(artist[0]?.data?.images[1]?.url || "")
 
-  console.log("imageColors", imageColors)
-
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
     dispatched(artistProfileData((route.params as { artistId: string }).artistId))
@@ -117,11 +115,7 @@ const Artist = () => {
     )
   }
 
-  console.log("route.params", artist[0]?.data?.genres)
-
   const genres = ({ item }) => {
-    console.log("genres", item)
-
     return (
       <Animated.View>
         <AnimatedText style={{ paddingHorizontal: 6 }}>{item}</AnimatedText>
