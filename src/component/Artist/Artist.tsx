@@ -25,6 +25,8 @@ import { usePlayerBackground } from "@music/hook/usePlayerBackground"
 import ArtistPopular from "./ArtistPopular"
 import MusicCard from "@music/base/MusicCard/MusicCard"
 import ArtistDetail from "./ArtistDetail"
+import AboutArtist from "./AboutArtist"
+import MusicFloatingAction from "@music/base/FloatingAction/MusicFloatingAction"
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
 const AnimatedImage = Animated.createAnimatedComponent(MusicImage)
@@ -290,14 +292,30 @@ const Artist = () => {
           text="Albums"
           size="bold"
           preset="subHeading"
-          style={{ marginVertical: 12, marginLeft: 16 }}
+          style={{ marginVertical: 12, marginLeft: 16, marginBottom: 20 }}
         />
         {route.params?.artistId && (
           <View style={{ marginLeft: 16 }}>
             <ArtistDetail id={route.params?.artistId} />
           </View>
         )}
+
+        <MusicText
+          text="About"
+          size="bold"
+          preset="subHeading"
+          style={{ marginTop: 18, marginLeft: 16, marginBottom: 20 }}
+        />
+
+        {route.params?.artistId && (
+          <View style={{ marginLeft: 16 }}>
+            <AboutArtist id={route.params?.artistId} />
+          </View>
+        )}
       </Animated.ScrollView>
+      <View style={{ position: "absolute", bottom: 30, right: 50 }}>
+        <MusicFloatingAction />
+      </View>
     </View>
   )
 }
