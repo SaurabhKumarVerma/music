@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { StyleSheet, View } from "react-native"
+import { Platform, StyleSheet, View } from "react-native"
 import MusicImage from "../MusicImage/MusicImage"
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from "@music/constant/constant"
 import { MusicText } from "../MusicText/MusicText"
@@ -31,7 +31,12 @@ const Card = (props: ICard) => {
         transition={2000}
       />
       <LinearGradient
-        colors={imageColors ? [imageColors?.background, imageColors.secondary] : [color.background]}
+        colors={[
+          Platform.OS === "android"
+            ? (imageColors?.average as string)
+            : (imageColors?.background as string),
+          "rgba(0, 0, 0, 0.9)",
+        ]}
         style={styles.textContainerStyle}
       >
         <MusicText
@@ -67,7 +72,7 @@ export default Card
 const styles = StyleSheet.create({
   container: {
     overflow: "hidden",
-    width: DEVICE_WIDTH * 0.5
+    width: DEVICE_WIDTH * 0.5,
   },
   imageStyle: {
     borderTopLeftRadius: 20,

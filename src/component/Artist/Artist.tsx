@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { FlatList, Pressable, StyleSheet, View } from "react-native"
+import { FlatList, Platform, Pressable, StyleSheet, View } from "react-native"
 import { useEffect } from "react"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useAppDispatch, useAppSelector } from "@music/hook/hook"
@@ -37,6 +37,8 @@ const Artist = () => {
   const navigation = useNavigation()
   const { artist, isArtistLoading } = useAppSelector((state) => state.artist)
   const { imageColors } = usePlayerBackground(artist[0]?.data?.images[1]?.url || "")
+
+  console.log("imageColors", imageColors)
 
   useEffect(() => {
     dispatched(artistData((route.params as { artistId: string }).artistId))
@@ -198,7 +200,12 @@ const Artist = () => {
         ]}
       >
         <LinearGradient
-          colors={[imageColors?.background as string, "rgba(0, 0, 0, 0.9)"]}
+          colors={[
+            Platform.OS === "android"
+              ? (imageColors?.average as string)
+              : (imageColors?.background as string),
+            "rgba(0, 0, 0, 0.9)",
+          ]}
           style={
             (StyleSheet.absoluteFill,
             { position: "absolute", width: DEVICE_WIDTH, paddingVertical: 34 })
@@ -241,7 +248,12 @@ const Artist = () => {
       >
         <Animated.View>
           <AnimatedLinearGradient
-            colors={[imageColors?.background as string, "rgba(0, 0, 0, 0.9)"]}
+            colors={[
+              Platform.OS === "android"
+                ? (imageColors?.average as string)
+                : (imageColors?.background as string),
+              "rgba(0, 0, 0, 0.9)",
+            ]}
             style={[
               styles.authorImageContainer,
               {
